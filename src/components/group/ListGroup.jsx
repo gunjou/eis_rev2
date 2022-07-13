@@ -32,46 +32,48 @@ const ListGroup = () => {
 						<div className="flip-box-back p-2 cursor-pointer">
 							<h2 className='font-bold'>{img.nama}</h2>
 							<table className='text-left font-semibold'>
-								<tr className='hidden'>
-									<th>Type</th>
-									<th>Value</th>
-									<th>Status</th>
+								<span className="text-[10pt] pl-1">
+								<tr className=''>
+									<th className=''>Type</th>
+									<th className=''>Trend</th>
+									<th className=''>Predict</th>
 								</tr>
 								<tr>
 									<td>Service</td>
 									<td></td>
 									<td></td>
 								</tr>
-								<tr className='text-sm'>
+								<tr className='text-[9pt]'>
 									<td className='pl-4'>Pelayanan</td>
-									<td>24.5%</td>
-									<td><BiUpArrowAlt /></td>
+									<td className='flex'>24.5% ➚</td>
+									<td>10.3% ▲</td>
 								</tr>
-								<tr className='text-sm'>
-									<td className='pl-4 pb-1.5'>Kunjungan</td>
-									<td>32.3%</td>
-									<td><BiUpArrowAlt /></td>
+								<tr className='text-[9pt]'>
+									<td className='pl-4 pb-1'>Kunjungan</td>
+									<td className='flex'>32.3% ➚</td>
+									<td>12.0% ▲</td>
 								</tr>
 								<tr>
 									<td>Inventory</td>
-									<td>17.9%</td>
-									<td><BiDownArrowAlt /></td>
+									<td className='flex pr-3'>17.9% ➘</td>
+									<td>2.7% ▲</td>
 								</tr>
 								<tr>
 									<td>Medical Record</td>
-									<td>22.4%</td>
-									<td><BiUpArrowAlt /></td>
+									<td className='flex'>22.4% ➚</td>
+									<td>5.8% ▼</td>
 								</tr>
 								<tr>
 									<td>Finance</td>
-									<td>13.9%</td>
-									<td><BiUpArrowAlt /></td>
+									<td className='flex'>13.9% ➚</td>
+									<td>3.4% ▲</td>
 								</tr>
 								<tr>
 									<td><pre>Human Resource{'  '}</pre></td>
-									<td>0.0%</td>
-									<td><CgArrowsExchange /></td>
+									<td className='flex'>0.0% ⇋</td>
+									<td>0.0% ⇋</td>
 								</tr>
+								</span>
 							</table>
 						</div>
 					</div>

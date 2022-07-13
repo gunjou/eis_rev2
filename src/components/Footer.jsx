@@ -5,7 +5,7 @@ import { MdOutlineCall, MdOutlineEmail, MdOutlineLocationOn } from "react-icons/
 
 const Footer = () => {
   return (
-    <div className="Footer bg-gradient-to-t from-teal-700 to-[#eeeff1] ">
+    <div className="Footer bg-gradient-to-t from-teal-700 to-[#eeeff1] text-gray-800">
       <div className="Address grid grid-cols-6">
         {/* Left */}
         <div className="Left text-left m-5 pl-8 pb-5 col-span-4">

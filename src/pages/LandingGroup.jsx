@@ -22,7 +22,7 @@ const LandingGroup = () => {
         </div>
       </div>
 
-			<div className="GroupList pt-4">
+			<div className="GroupList pt-4 text-gray-800">
 				<div className="title text-left">
 				  <p className="font-bold text-xl m-10">
 						List Grup RS A

@@ -26,7 +26,7 @@ const Home = () => {
 			</div>
 
 			{/* Recent Partners */}
-			<div className="PartnerTerbaru text-left m-5 ml-12 mr-12">
+			<div className="PartnerTerbaru text-left m-5 ml-12 mr-12 text-gray-800">
 				<div className="partnerBaru pb-12">
 					<p className="font-bold text-2xl pb-5">
 						Partner Terbaru
