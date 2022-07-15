@@ -23,7 +23,7 @@ const CardSummary = ({type}) => {
     case "finance":
         card = { title: "Finance", icon: <FaMoneyCheckAlt className="text-[#55caaf]"/>, value: 709, trend: 18.5, predict: 9.7, fill: "bg-[#55caaf]/90 p-2 rounded-md drop-shadow-lg"}; break;
     case "human-resource":
-        card = { title: "Human Resource", icon: <BsFillFileEarmarkPersonFill className="text-[#ea94ff]"/>, value: 14, trend: 4.8, predict: 0., fill: "bg-[#ea94ff]/90 p-2 rounded-md drop-shadow-lg"}; break;
+        card = { title: "Human Resource", icon: <BsFillFileEarmarkPersonFill className="text-[#ea94ff]"/>, value: 14, trend: 4.8, predict: 1.0, fill: "bg-[#ea94ff]/90 p-2 rounded-md drop-shadow-lg"}; break;
     default:
         break;
 }
@@ -39,16 +39,16 @@ const CardSummary = ({type}) => {
         <div className="text-2xl p-2 font-semibold">{card.value}</div>
         <div className="flex gap-4">
           <div className="flex">
-            <span className="text-xs pr-1.5">Trend</span>
-            <span className="flex text-xs">
-              {card.trend}
+            <span className="text-[10px] pr-1.5">Trend</span>
+            <span className="flex text-[10px]">
+              {card.trend}%
               <HiOutlineChevronDoubleUp className="text-sm"/>
             </span>
           </div>
           <div className="flex">
-            <span className="text-xs pr-1.5">Predict</span>
-            <span className="flex text-xs">
-              {card.predict}
+            <span className="text-[10px] pr-1.5">Predict</span>
+            <span className="flex text-[10px]">
+              {card.predict}%
               <HiOutlineChevronDoubleDown className="text-sm"/>
             </span>
           </div>

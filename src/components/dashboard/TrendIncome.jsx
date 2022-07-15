@@ -3,7 +3,6 @@ import {
   AreaChart,
   Area,
   XAxis,
-  YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
@@ -11,18 +10,19 @@ import {
 } from "recharts";
 
 const data = [
-  { month: "Jan", past: 656, now: 428 },
-  { month: "Feb", past: 295, now: 536 },
-  { month: "Mar", past: 350, now: 216 },
-  { month: "Apr", past: 497, now: 550 },
-  { month: "Mei", past: 561, now: 394 },
-  { month: "Jun", past: 419, now: 340 },
-  { month: "Jul", past: 380, now: 486 },
+  { month: "Jan", past: 393, now: 543 },
+  { month: "Feb", past: 631, now: 323 },
+  { month: "Mar", past: 463, now: 445 },
+  { month: "Apr", past: 584, now: 588 },
+  { month: "Mei", past: 462, now: 334 },
+  { month: "Jun", past: 310, now: 643 },
+  { month: "Jul", past: 235, now: 512 },
 ];
 
 const TrendIncome = () => {
-  return <div className="TrendIncome">
-    <ResponsiveContainer width="99%" height={250}>
+  return (
+    <div className="TrendIncome">
+      <ResponsiveContainer width="99%" height={250}>
         <AreaChart
           width={500}
           height={400}
@@ -64,7 +64,8 @@ const TrendIncome = () => {
           />
         </AreaChart>
       </ResponsiveContainer>
-  </div>;
+    </div>
+  );
 };
 
 export default TrendIncome;

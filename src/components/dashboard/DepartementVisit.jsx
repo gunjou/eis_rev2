@@ -31,7 +31,7 @@ const DepartementVisit = () => {
           ))}
         </Pie>
           <Tooltip />
-          <Legend layout="vertical" verticalAlign="middle" align="right" />
+          <Legend layout="vertical" verticalAlign="middle" align="right" iconType="circle" />
         </PieChart>
     </div>
   )
