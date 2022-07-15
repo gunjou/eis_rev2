@@ -6,6 +6,7 @@ import LandingGroup from "./pages/LandingGroup";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
+
 function App() {
   return (
     <div className="App bg-[#eeeff1]">
