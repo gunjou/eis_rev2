@@ -48,7 +48,7 @@ const Login = () => {
               <input
                 id="remember"
                 type="checkbox"
-                className="w-6 h-6 rounded accent-green-700"
+                className="w-5 h-5 rounded accent-green-700"
               />
             </div>
             <label

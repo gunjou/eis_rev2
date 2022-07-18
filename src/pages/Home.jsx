@@ -6,7 +6,7 @@ import PartnerList from "../components/home/PartnerList";
 
 const Home = () => {
   return (
-    <div className="Home ">
+    <div className="Home bg-[#eeeff1]">
       {/* Navbar */}
       <NavbarHome />
 

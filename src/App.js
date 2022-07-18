@@ -9,7 +9,7 @@ import SignUp from "./pages/SignUp";
 
 function App() {
   return (
-    <div className="App bg-[#eeeff1]">
+    <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" >

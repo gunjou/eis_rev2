@@ -5,7 +5,7 @@ import ListGroup from "../components/group/ListGroup";
 
 const LandingGroup = () => {
   return (
-    <div className="LandingGroup">
+    <div className="LandingGroup bg-[#eeeff1]">
       {/* Navbar */}
       <NavbarHome />
 

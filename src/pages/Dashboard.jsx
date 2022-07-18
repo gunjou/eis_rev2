@@ -46,7 +46,7 @@ const Dashboard = () => {
                 </p>
                 <AvgPatientVisit className="pt-3" />
               </div>
-              <div className="right col-span-1 mt-10">
+              <div className="right col-span-1 mt-12">
                 <CardAvgVisit />
               </div>
             </div>
@@ -61,7 +61,7 @@ const Dashboard = () => {
                 </p>
                 <GenderVisit className="pt-3" />
               </div>
-              <div className="right col-span-1 mt-10 pr-3">
+              <div className="right col-span-1 mt-12 pr-3">
                 <CardGenderTotal />
               </div>
             </div>
