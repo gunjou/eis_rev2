@@ -6,7 +6,8 @@ const SignUp = () => {
   return (
     <div className="Login flex m-auto mt-36 grid-col-3 gap-4 bg-white">
       <div className="form m-auto ml-56">
-        <form className="w-80 mb-12 h-[24rem] pl-5 pr-5 justify-center border border-white bg-gray-50 rounded drop-shadow-2xl">
+        {/* <form className="w-80 mb-12 h-[24rem] pl-5 pr-5 justify-center border border-white bg-gray-50 rounded drop-shadow-2xl"> */}
+        <div className="w-80 mb-12 h-[24rem] pl-5 pr-5 justify-center border border-white bg-gray-50 rounded drop-shadow-2xl">
           <div className="logo pb-6 pt-5 text-xl">
             <img
               src={process.env.PUBLIC_URL + "images/logo.svg"}
@@ -57,7 +58,7 @@ const SignUp = () => {
               />
             </label>
           </div>
-          <a href="/">
+          <a href="/login">
             <div className="submit h-8 mb-3 rounded w-full pt-1 text-white bg-[#04ac49] hover:bg-[#026e2e] text-md">
               <button type="submit">SIGN UP</button>
             </div>
@@ -70,7 +71,8 @@ const SignUp = () => {
               </a>
             </span>
           </div>
-        </form>
+        </div>
+        {/* </form> */}
         <span className="text-xs">© 2022, PT. Jasamedika Saranatama</span>
       </div>
       <div className="picture m-auto mr-56">
