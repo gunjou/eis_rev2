@@ -31,7 +31,7 @@ const Inventory = () => {
         </div>
         <div className="grow m-3 bg-[#eeeff1] rounded-lg p-3">
           <p className="font-semibold text-gray-700 pb-1 text-left pl-1">
-            Rata-rata Kunjungan
+            Trend Stock
           </p>
           <TrendStock />
         </div>
