@@ -37,32 +37,32 @@ const Sidebar = () => {
 				<div className="items text-gray-700 ">
           <ul>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/#/dashboard" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/dashboard" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <MdOutlineDashboard className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/#/service" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/service" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <MdBarChart className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/#/inventory" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/inventory" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <MdOutlineInventory2 className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3] pl-0.5" >
-              <NavLink to="/#/medical-record" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/medical-record" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <FaFileMedical className="text-[20px]" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/#/finance" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/finance" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <TbFileDollar className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3] pl-1" >
-               <NavLink to="/#/human-resource" style={({ isActive }) => (isActive ? active : nonactive)}>
+               <NavLink to="/human-resource" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <ImProfile className="text-xl" />
               </NavLink>
             </li>
@@ -82,37 +82,37 @@ const Sidebar = () => {
 				<div className="items text-gray-700 ">
           <ul>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/#/dashboard" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/dashboard" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <MdOutlineDashboard className="text-2xl" />
                 <span className="pl-2">Dashboard</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/#/service" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/service" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <MdBarChart className="text-2xl" />
                 <span className="pl-2">Service</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/#/inventory" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/inventory" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <MdOutlineInventory2 className="text-2xl" />
                 <span className="pl-2">Inventory</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3] pl-0.5" >
-              <NavLink to="/#/medical-record" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/medical-record" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <FaFileMedical className="text-[20px]" />
                 <span className="pl-2.5">Medical Record</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/#/finance" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to="/finance" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <TbFileDollar className="text-2xl" />
                 <span className="pl-2">Finance</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3] pl-1" >
-               <NavLink to="/#/human-resource" style={({ isActive }) => (isActive ? active : nonactive)}>
+               <NavLink to="/human-resource" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <ImProfile className="text-xl" />
                 <span className="pl-2">Human Resource</span>
               </NavLink>
