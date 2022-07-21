@@ -58,7 +58,7 @@ const SignUp = () => {
               />
             </label>
           </div>
-          <a href="/login">
+          <a href="/#/login">
             <div className="submit h-8 mb-3 rounded w-full pt-1 text-white bg-[#04ac49] hover:bg-[#026e2e] text-md">
               <button type="submit">SIGN UP</button>
             </div>
@@ -66,7 +66,7 @@ const SignUp = () => {
           <div className="text-xs">
             <span>
               Sudah punya akun?{" "}
-              <a href="/login" className="text-blue-700">
+              <a href="/#/login" className="text-blue-700">
                 Login Disini
               </a>
             </span>

@@ -1,12 +1,35 @@
 import React, {useState} from 'react'
 import { IoMdSearch } from 'react-icons/io'
-import { BsPersonCircle } from 'react-icons/bs'
+import { BsPersonCircle, } from 'react-icons/bs'
+import { BiFullscreen, BiExitFullscreen } from 'react-icons/bi'
 import { FiBell } from 'react-icons/fi'
 import { RiArrowDownSLine } from 'react-icons/ri'
+
+function getFullscreenElement() {
+	return document.fullscreenElement   //standard property
+	|| document.webkitFullscreenElement //safari/opera support
+	|| document.mozFullscreenElement    //firefox support
+	|| document.msFullscreenElement;    //ie/edge support
+}
+
+function toggleFullscreen() {
+	if(getFullscreenElement()) {
+		 document.exitFullscreen();
+	}else {
+document.documentElement.requestFullscreen().catch(console.log);
+	}
+}
 
 const NavbarContents = () => {
 	const [isDropdown1, setisDropdown1] = useState(false);
 	const [isDropdown2, setisDropdown2] = useState(false);
+	const [isFull, setIsFull] = useState(false);
+
+	function fullScreen(event) {
+		toggleFullscreen();
+		setIsFull(!isFull);
+	}
+
   return (
 	<div className="NavbarContents bg-white flex">
 		{/* Search */}
@@ -23,8 +46,15 @@ const NavbarContents = () => {
 		</div>
 
 		<div className="Right flex m-5 pr-3">
+			{/* Full Screen */}
+			{!isFull ? 
+				<BiFullscreen onClick={fullScreen} className="cursor-pointer text-2xl mr-3 hover:text-[#42a7b3]" />
+			: 
+				<BiExitFullscreen onClick={fullScreen} className="cursor-pointer text-2xl mr-3 hover:text-[#42a7b3]" />
+			}
+
 			{/* Notif */}
-			<div className="notif text-2xl pr-6 flex">
+			<div className="notif text-2xl pr-4 flex">
 				{!isDropdown1 ? 
 				<>
 				<FiBell onClick={() => setisDropdown1(!isDropdown1)} className='hover:text-[#42a7b3] cursor-pointer'/>
@@ -56,7 +86,7 @@ const NavbarContents = () => {
 				<div className="dropdown text-left p-2 absolute z-10 text-base text-gray-700 mt-7 bg-white rounded-lg drop-shadow-xl">
 					<ul>
 						<li className='p-1 cursor-pointer'>Edit Profile</li>
-						<a href="/login">
+						<a href="/#/login">
 							<li className='p-1 cursor-pointer'>Logout</li>
 						</a>
 					</ul>

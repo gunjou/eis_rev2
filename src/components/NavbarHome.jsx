@@ -8,7 +8,7 @@ const NavbarHome = () => {
           <img src={process.env.PUBLIC_URL + "images/logo.svg"} alt="Jasamedika" />
         </div>
         <div className="Login col-span-1 text-right p-6">
-          <a href="/login">
+          <a href="/#/login">
             <button type="button" class="text-white bg-[#42a7b3] hover:bg-teal-800 font-medium rounded-lg text-sm px-3 py-1 text-center inline-flex items-center mr-2 mb-2" >
               <FiLogIn className="mr-3 text-lg" />
               Login

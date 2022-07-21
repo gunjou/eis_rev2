@@ -7,36 +7,36 @@ const PartnerList = ({type}) => {
 	switch (type) {
 		case "partnerBaru":
 			hospital = [
-                { src: "logo_hospital/hospital09.png", alt: "hospital01", nama: "Rumah Sakit 01", url: "/dashboard" },
-                { src: "logo_hospital/hospital02.png", alt: "hospital02", nama: "Rumah Sakit 02", url: "/dashboard" },
-                { src: "logo_hospital/hospital03.png", alt: "hospital03", nama: "Rumah Sakit 03", url: "/dashboard" },
-                { src: "logo_hospital/hospital04.png", alt: "hospital04", nama: "Rumah Sakit 04", url: "/dashboard" },
-                { src: "logo_hospital/hospital05.png", alt: "hospital05", nama: "Rumah Sakit 05", url: "/dashboard" },
-                { src: "logo_hospital/hospital06.png", alt: "hospital06", nama: "Rumah Sakit 06", url: "/dashboard" },
+                { src: "logo_hospital/hospital09.png", alt: "hospital01", nama: "Rumah Sakit 01", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital02.png", alt: "hospital02", nama: "Rumah Sakit 02", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital03.png", alt: "hospital03", nama: "Rumah Sakit 03", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital04.png", alt: "hospital04", nama: "Rumah Sakit 04", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital05.png", alt: "hospital05", nama: "Rumah Sakit 05", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital06.png", alt: "hospital06", nama: "Rumah Sakit 06", url: "/#/dashboard" },
               ]; break;
 		case "partnerLama":
 			hospital = [
-                { src: "logo_hospital/hospital36.png", alt: "hospital01", nama: "Rumah Sakit 07", url: "/dashboard" },
-                { src: "logo_hospital/hospital08.png", alt: "hospital02", nama: "Rumah Sakit 08", url: "/dashboard" },
-                { src: "logo_hospital/hospital10.png", alt: "hospital03", nama: "Rumah Sakit 09", url: "/dashboard" },
-                { src: "logo_hospital/hospital11.png", alt: "hospital03", nama: "Rumah Sakit 10", url: "/dashboard" },
-                { src: "logo_hospital/hospital12.png", alt: "hospital03", nama: "Rumah Sakit 11", url: "/dashboard" },
-                { src: "logo_hospital/hospital13.png", alt: "hospital03", nama: "Rumah Sakit 12", url: "/dashboard" },
-                { src: "logo_hospital/hospital14.png", alt: "hospital03", nama: "Rumah Sakit 13", url: "/dashboard" },
-                { src: "logo_hospital/hospital15.png", alt: "hospital03", nama: "Rumah Sakit 14", url: "/dashboard" },
-                { src: "logo_hospital/hospital16.png", alt: "hospital03", nama: "Rumah Sakit 15", url: "/dashboard" },
-                { src: "logo_hospital/hospital17.png", alt: "hospital03", nama: "Rumah Sakit 16", url: "/dashboard" },
-                { src: "logo_hospital/hospital18.png", alt: "hospital03", nama: "Rumah Sakit 17", url: "/dashboard" },
-                { src: "logo_hospital/hospital19.png", alt: "hospital03", nama: "Rumah Sakit 18", url: "/dashboard" },
+                { src: "logo_hospital/hospital36.png", alt: "hospital01", nama: "Rumah Sakit 07", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital08.png", alt: "hospital02", nama: "Rumah Sakit 08", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital10.png", alt: "hospital03", nama: "Rumah Sakit 09", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital11.png", alt: "hospital03", nama: "Rumah Sakit 10", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital12.png", alt: "hospital03", nama: "Rumah Sakit 11", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital13.png", alt: "hospital03", nama: "Rumah Sakit 12", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital14.png", alt: "hospital03", nama: "Rumah Sakit 13", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital15.png", alt: "hospital03", nama: "Rumah Sakit 14", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital16.png", alt: "hospital03", nama: "Rumah Sakit 15", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital17.png", alt: "hospital03", nama: "Rumah Sakit 16", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital18.png", alt: "hospital03", nama: "Rumah Sakit 17", url: "/#/dashboard" },
+                { src: "logo_hospital/hospital19.png", alt: "hospital03", nama: "Rumah Sakit 18", url: "/#/dashboard" },
               ]; break;
 		case "partnerGroup":
 			hospital = [
-                { src: "logo_hospital/hospital20.png", alt: "hospital03", nama: "Rumah Sakit 19", url: "/group" },
-                { src: "logo_hospital/hospital21.png", alt: "hospital03", nama: "Rumah Sakit 20", url: "/group" },
-                { src: "logo_hospital/hospital22.png", alt: "hospital03", nama: "Rumah Sakit 21", url: "/group" },
-                { src: "logo_hospital/hospital23.png", alt: "hospital03", nama: "Rumah Sakit 22", url: "/group" },
-                { src: "logo_hospital/hospital24.png", alt: "hospital03", nama: "Rumah Sakit 23", url: "/group" },
-                { src: "logo_hospital/hospital25.png", alt: "hospital03", nama: "Rumah Sakit 24", url: "/group" },
+                { src: "logo_hospital/hospital20.png", alt: "hospital03", nama: "Rumah Sakit 19", url: "/#/group" },
+                { src: "logo_hospital/hospital21.png", alt: "hospital03", nama: "Rumah Sakit 20", url: "/#/group" },
+                { src: "logo_hospital/hospital22.png", alt: "hospital03", nama: "Rumah Sakit 21", url: "/#/group" },
+                { src: "logo_hospital/hospital23.png", alt: "hospital03", nama: "Rumah Sakit 22", url: "/#/group" },
+                { src: "logo_hospital/hospital24.png", alt: "hospital03", nama: "Rumah Sakit 23", url: "/#/group" },
+                { src: "logo_hospital/hospital25.png", alt: "hospital03", nama: "Rumah Sakit 24", url: "/#/group" },
               ]; break;
 		default:
 			break;

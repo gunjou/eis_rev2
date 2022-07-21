@@ -15,17 +15,17 @@ function App() {
         <Routes>
           <Route path="/" >
           <Route index element={<Home />} />
-          <Route path="group" element={<LandingGroup />} />
-          <Route path="login" element={<Login />} />
-          <Route path="sign-up" element={<SignUp />} />
-          <Route path="dashboard" element={<Contents type='dashboard' />} />
-          <Route path="service" element={<Contents type='service' />} />
-          <Route path="inventory" element={<Contents type='inventory' />} />
-          <Route path="medical-record" element={<Contents type='medical-record' />} />
-          <Route path="finance" element={<Contents type='finance' />} />
-          <Route path="human-resource" element={<Contents type='human-resource' />} />
-          <Route path='/404' element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/404" />} />
+          <Route path="/#/group" element={<LandingGroup />} />
+          <Route path="/#/login" element={<Login />} />
+          <Route path="/#/sign-up" element={<SignUp />} />
+          <Route path="/#/dashboard" element={<Contents type='dashboard' />} />
+          <Route path="/#/service" element={<Contents type='service' />} />
+          <Route path="/#/inventory" element={<Contents type='inventory' />} />
+          <Route path="/#/medical-record" element={<Contents type='medical-record' />} />
+          <Route path="/#/finance" element={<Contents type='finance' />} />
+          <Route path="/#/human-resource" element={<Contents type='human-resource' />} />
+          <Route path='/#/404' element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/#/404" />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -69,7 +69,7 @@ const Login = () => {
           <div className="text-xs">
             <span>
               Belum punya akun?{" "}
-              <a href="/sign-up" className="text-blue-700">
+              <a href="/#/sign-up" className="text-blue-700">
                 Daftar Disini
               </a>
             </span>
