@@ -4,6 +4,7 @@ import { FaFileMedical } from "react-icons/fa";
 import { TbFileDollar } from "react-icons/tb";
 import { ImProfile } from "react-icons/im";
 import { NavLink } from "react-router-dom";
+import { Tooltip } from "@mui/material";
 
 
 const active = {
@@ -23,7 +24,7 @@ const nonactive = {
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(true);
   return (
-    <div className="Sidebar bg-white">
+    <div className="Sidebar bg-white h-96 sticky top-0 z-30">
 			{!isOpen ? 
       <div className="header pl-3 pr-3">
 				<div className="logo pt-3 pb-1">
@@ -31,9 +32,11 @@ const Sidebar = () => {
 					<img src={process.env.PUBLIC_URL + "images/loader.svg"} alt="Jasamedika" />
 				</a>
 				</div>
-				<div onClick={() => setIsOpen(!isOpen)} className="flex items-center text-lg before:content-[''] before:flex-1 before:border-b-2 text-gray-700 cursor-pointer">
-          <MdArrowForwardIos className="hover:text-[#42a7b3]"/>
-        </div>
+        <Tooltip title="Expand" placement="right">
+          <div onClick={() => setIsOpen(!isOpen)} className="flex items-center text-lg before:content-[''] before:flex-1 before:border-b-2 text-gray-700 cursor-pointer">
+            <MdArrowForwardIos className="hover:text-[#42a7b3]"/>
+          </div>
+        </Tooltip>
 				<div className="items text-gray-700 ">
           <ul>
             <li className="item-center hover:text-[#42a7b3]" >
@@ -76,9 +79,11 @@ const Sidebar = () => {
 					<img src={process.env.PUBLIC_URL + "images/logo.svg"} alt="Jasamedika" />
 				</a>
 				</div>
-				<div onClick={() => setIsOpen(!isOpen)} className="flex items-center text-lg before:content-[''] before:flex-1 before:border-b-2 text-gray-700 cursor-pointer">
-          <MdArrowBackIosNew className="hover:text-[#42a7b3]"/>
-        </div>
+          <div className="flex items-center text-lg before:content-[''] before:flex-1 before:border-b-2 text-gray-700 ">
+            <Tooltip title="Collapse" placement="right">
+              <MdArrowBackIosNew className="hover:text-[#42a7b3] cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
+            </Tooltip>
+          </div>
 				<div className="items text-gray-700 ">
           <ul>
             <li className="item-center hover:text-[#42a7b3]" >

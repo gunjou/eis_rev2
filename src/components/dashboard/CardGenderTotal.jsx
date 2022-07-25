@@ -5,6 +5,7 @@ import {
 } from "react-icons/hi";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { FaFemale, FaMale } from "react-icons/fa";
+import { Tooltip } from "@mui/material";
 
 const CardGenderTotal = () => {
   return (
@@ -16,17 +17,21 @@ const CardGenderTotal = () => {
             <FaMale />
           </div>
           <span className="pl-3 p-1">Laki-laki</span>
-          <span className="flex text-sm">
-            <HiOutlineChevronDoubleUp />
-            18.7%
-          </span>
+          <Tooltip title="Predict" placement="top">
+            <p className="flex text-sm absolute right-5">
+              <HiOutlineChevronDoubleDown />
+              18.7%
+            </p>
+          </Tooltip>
         </div>
         <div className="pl-5 text-2xl flex">
           2817
-          <span className="flex pr-4 text-sm">
-            <IoMdArrowDropup className="text-base" />
-            21.4%
-          </span>
+          <Tooltip title="Trend" placement="top">
+            <span className="flex pr-4 text-sm">
+              <IoMdArrowDropdown className="text-base" />
+              21.4%
+            </span>
+          </Tooltip>          
         </div>
       </div>
 
@@ -37,17 +42,21 @@ const CardGenderTotal = () => {
             <FaFemale />
           </div>
           <span className="pl-3 p-1">Perempuan</span>
-          <span className="flex text-sm">
-            <HiOutlineChevronDoubleDown />
-            7.5%
-          </span>
+          <Tooltip title="Predict" placement="top">
+            <p className="flex text-sm absolute right-5">
+              <HiOutlineChevronDoubleUp />
+              7.5%
+            </p>
+          </Tooltip>
         </div>
         <div className="pl-5 text-2xl flex">
           3137
-          <span className="flex pr-4 text-sm">
-            <IoMdArrowDropdown className="text-base" />
-            4.0%
-          </span>
+          <Tooltip title="Trend" placement="top">
+            <span className="flex pr-4 text-sm">
+              <IoMdArrowDropup className="text-base" />
+              4.0%
+            </span>
+          </Tooltip>
         </div>
       </div>
     </div>

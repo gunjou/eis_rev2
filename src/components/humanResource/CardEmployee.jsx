@@ -1,6 +1,8 @@
 import React from "react";
 import { HiOutlineChevronDoubleUp, } from "react-icons/hi";
+import { IoMdArrowDropup } from "react-icons/io";
 import { CgArrowsExchange } from "react-icons/cg";
+import { Tooltip } from "@mui/material";
 
 const CardEmployee = ({type}) => {
 	let card;
@@ -26,20 +28,25 @@ const CardEmployee = ({type}) => {
         <div className="flex ">
           <div className="text-lg flex text-left font-semibold">
 						{card.title}
-            <span className="flex text-sm absolute right-2">
-              {card.trend}%
-              <HiOutlineChevronDoubleUp className="text-sm"/>
-            </span>
+            <Tooltip title="Trend" placement="top">
+              <span className="flex text-sm absolute right-2">
+                <IoMdArrowDropup className="text-base"/>
+                {card.trend}%
+              </span>
+            </Tooltip>
 					</div>
         </div>
         <div className="text-3xl p-2 font-semibold">{card.value}</div>
         <div className="flex gap-4">
           <div className="flex pb-0.5">
-            <span className="text-sm pr-1.5">Predict</span>
-            <span className="flex text-sm">
-              {card.predict}%
-              <CgArrowsExchange className="text-sm"/>
-            </span>
+            <p className="text-xs text-left font-normal cursor-pointer">details ⟶</p>
+            <p className="absolute right-2 bottom-2 flex">
+              <span className="text-sm pr-1.5">Predict :</span>
+              <span className="flex text-sm">
+                <CgArrowsExchange className="text-base"/>
+                {card.predict}%
+              </span>
+            </p>
           </div>
         </div>
       </div>

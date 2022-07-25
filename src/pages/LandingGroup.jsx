@@ -2,6 +2,7 @@ import React from "react";
 import NavbarHome from "../components/NavbarHome";
 import Footer from "../components/Footer";
 import ListGroup from "../components/group/ListGroup";
+import ToTop from "../ToTop";
 
 const LandingGroup = () => {
   return (
@@ -20,6 +21,7 @@ const LandingGroup = () => {
 
       {/* Footer */}
       <Footer />
+      <ToTop />
     </div>
   );
 };

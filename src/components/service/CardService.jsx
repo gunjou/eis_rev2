@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import React from "react";
 import {
   HiOutlineChevronDoubleUp,
@@ -50,18 +51,23 @@ const CardService = ({type}) => {
           <p className="title text-sm pb-2.5 font-semibold">{data.title}</p>
           <div className="value text-3xl pb-1.5 font-semibold flex">
 						{data.value}
-						<sup className="flex text-base font-normal">
-						<IoMdArrowDropup className="text=lg" />
-							12.3%
-						</sup>
+            <Tooltip title="Trend" placement="right">
+              <sup className="flex text-base font-normal cursor-default">
+              <IoMdArrowDropup className="text=lg" />
+                12.3%
+              </sup>
+            </Tooltip>
 					</div>
           <span className="text-xs text-left cursor-pointer">details ⟶</span>
         </div>
-				<div className="col-span-1 pl-3 m-auto ">
-					<img className="w-16 pb-2.5" src={process.env.PUBLIC_URL + data.img} alt="icon" />
-					<p className="text-xs flex">
-						predict : <HiOutlineChevronDoubleUp />20%
-					</p>
+				<div className="col-span-1 pl-3 m-auto">
+					<img className="w-16 pb-2.5 absolute top-2 right-2" src={process.env.PUBLIC_URL + data.img} alt="icon" />
+					<p className="padding w-20"></p>
+          <Tooltip title="Predict" placement="left">
+		  			<p className="flex text-xs absolute bottom-2 right-5 cursor-default">
+	  					<HiOutlineChevronDoubleUp />20%
+  					</p>
+          </Tooltip>
 				</div>
       </div>
     </div>

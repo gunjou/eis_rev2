@@ -23,10 +23,10 @@ const CustomTooltip = ({ active, payload, label }) => {
 		return (
 		<div className="custom-tooltip text-left bg-gray-100/90 border p-3">
 				<p className="label pb-2 text-sm font-bold">{`${label} : ${total}`}</p>
+				<p className="text-sm text-[#f54531]">{`Besar : ${payload[3].value}`}</p>
+				<p className="text-sm text-[#ff7021]">{`Sedang : ${payload[2].value}`}</p>
+				<p className="text-sm text-[#ffbe5c]">{`Kecil : ${payload[1].value}`}</p>
 				<p className="text-sm text-[#6e9ffe]">{`Khusus : ${payload[0].value}`}</p>
-				<p className="text-sm text-[#ffba94]">{`Kecil : ${payload[3].value}`}</p>
-				<p className="text-sm text-[#ff94aa]">{`Sedang : ${payload[2].value}`}</p>
-				<p className="text-sm text-[#f54531]">{`Besar : ${payload[1].value}`}</p>
 		</div>
 		);
 }
@@ -56,7 +56,7 @@ const Surgery = () => {
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{fontWeight: "bold"}} />
           <Bar dataKey="khusus" name='Khusus' stackId={'a'} fill="#6e9ffe" barSize={30} />
-          <Bar dataKey="kecil" name='Kecil' stackId={'a'} fill="#FF9A00" barSize={30} />
+          <Bar dataKey="kecil" name='Kecil' stackId={'a'} fill="#ffbe5c" barSize={30} />
           <Bar dataKey="sedang" name='Sedang' stackId={'a'} fill="#FF7021" barSize={30} />
           <Bar dataKey="besar" name='Besar' stackId={'a'} fill="#f54531" barSize={30} />
         </BarChart>

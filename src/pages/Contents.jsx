@@ -1,6 +1,7 @@
 import React from 'react'
 import NavbarContents from '../components/NavbarContents';
 import Sidebar from '../components/Sidebar';
+import ToTop from '../ToTop';
 import Dashboard from './Dashboard';
 import Finance from './Finance';
 import HumanResource from './HumanResource';
@@ -36,11 +37,12 @@ const Contents = ({type}) => {
 
   return (
     <div className='Contents flex'>
-        <Sidebar />
+        <Sidebar className='sticky'/>
         <div className="container">
             <NavbarContents />
             {page.src}
         </div>
+		<ToTop />
     </div>
   )
 }
