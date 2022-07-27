@@ -1,5 +1,5 @@
-import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import Contents from "./pages/Contents";
 import Home from "./pages/Home";
 import LandingGroup from "./pages/LandingGroup";
