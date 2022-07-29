@@ -1,10 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { IoMdSearch } from 'react-icons/io'
+import { IoMdSearch, IoMdCalendar } from 'react-icons/io'
+import { BiCurrentLocation } from 'react-icons/bi'
 import { BsPersonCircle, } from 'react-icons/bs'
 import { BiFullscreen, BiExitFullscreen } from 'react-icons/bi'
 import { FiBell } from 'react-icons/fi'
 import { RiArrowDownSLine } from 'react-icons/ri'
 import { Tooltip } from "@mui/material";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./navbarContents.css";
+import { registerLocale } from  "react-datepicker";
+import id from 'date-fns/locale/id';
+registerLocale('id', id)
+
 
 function getFullscreenElement() {
 	return document.fullscreenElement   //standard property
@@ -27,6 +35,9 @@ const NavbarContents = () => {
 	const [isDropdown1, setisDropdown1] = useState(false);
 	const [isDropdown2, setisDropdown2] = useState(false);
 	const [isFull, setIsFull] = useState(false);
+	// Date Picker
+	const [dateRange, setDateRange] = useState([null, null]);
+  	const [startDate, endDate] = dateRange;
 	
 	
 	function useOutsideAlerter(ref) {
@@ -59,7 +70,7 @@ useOutsideAlerter(wrapperRef);
   return (
 	<div className="NavbarContents bg-white flex sticky top-0 z-30">
 		{/* Search */}
-		<div class="flex-1 flex justify-center px-2 lg:ml-6 lg:justify-start p-2 pt-3 pb-3">
+		<div class="flex-1 flex justify-center px-2 lg:ml-2 lg:justify-start p-2 pt-3 pb-3">
 			<div class="max-w-lg w-full lg:max-w-xs">
 				<label for="search" class="sr-only">Search </label>
 				<form methode="get" action="#" class="relative z-50">
@@ -69,6 +80,37 @@ useOutsideAlerter(wrapperRef);
 					<input type="text" name="s" id="s" class="block w-full pl-10 py-2 border-2 border-[#eeeff1] rounded-md leading-5 bg-[#eeeff1] text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-700 sm:text-sm transition duration-150 ease-in-out" placeholder="Search"/>
 				</form>
 			</div>
+		{/* Date Range Picker */}
+			<div className="flex-1 flex justify-center px-2 lg:ml-2 lg:justify-start gap-4">
+				<div className="flex bg-[#eeeff1] rounded-lg text-gray-700 pr-2">
+					<IoMdCalendar className="text-xl m-auto ml-3 mr-1"/>
+					<ReactDatePicker
+						locale="id"
+						selectsRange={true}
+						startDate={startDate}
+						endDate={endDate}
+						onChange={(update) => {
+							setDateRange(update);
+						}}
+						withPortal
+						isClearable={true}
+						placeholderText="Masukkan rentang tanggal"
+						dateFormat="dd/MM/yyyy"
+						className="block w-full pl-1 py-2 border-2 rounded-lg bg-[#eeeff1] border-[#eeeff1] focus:outline-none sm:text-sm transition duration-150 ease-in-out"
+						/>
+				</div>
+				{/* Filter Wilayah */}
+				<div className="flex bg-[#eeeff1] rounded-lg pr-2">
+					<BiCurrentLocation className="text-xl m-auto ml-3 mr-1 "/>
+					<select required className="text-sm focus:outline-none text-gray-700 bg-[#eeeff1]">
+						<option value="semua" selected>Semua Wilayah</option>
+						<option value="balikpapan">Balikpapan</option>
+						<option value="samarinda">Samarinda</option>
+						<option value="kutai-barat">Kutai Barat</option>
+					</select>
+				</div>
+			</div>
+
 		</div>
 
 		<div className="Right flex m-5 pr-3">

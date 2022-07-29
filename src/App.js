@@ -18,12 +18,15 @@ function App() {
           <Route path="/group" element={<LandingGroup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/dashboard" element={<Contents type='dashboard' />} />
-          <Route path="/service" element={<Contents type='service' />} />
+          <Route path="/live-reports" element={<Contents type='live-reports' />} />
+          <Route path="/kunjungan" element={<Contents type='kunjungan' />} />
+          <Route path="/pelayanan" element={<Contents type='pelayanan' />} />
+          <Route path="/pendapatan" element={<Contents type='pendapatan' />} />
+          <Route path="/pengeluaran" element={<Contents type='pengeluaran' />} />
           <Route path="/inventory" element={<Contents type='inventory' />} />
-          <Route path="/medical-record" element={<Contents type='medical-record' />} />
-          <Route path="/finance" element={<Contents type='finance' />} />
-          <Route path="/human-resource" element={<Contents type='human-resource' />} />
+          <Route path="/kepegawaian" element={<Contents type='kepegawaian' />} />
+          <Route path="/indikator-pelayanan" element={<Contents type='indikator-pelayanan' />} />
+          <Route path="/kepustakaan" element={<Contents type='kepustakaan' />} />
           <Route path='/404' element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" />} />
           </Route>

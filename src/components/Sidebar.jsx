@@ -1,10 +1,14 @@
-import React, {useState} from "react";
-import { MdArrowBackIosNew, MdArrowForwardIos, MdOutlineDashboard, MdBarChart, MdOutlineInventory2 } from "react-icons/md";
-import { FaFileMedical } from "react-icons/fa";
-import { TbFileDollar } from "react-icons/tb";
-import { ImProfile } from "react-icons/im";
-import { NavLink } from "react-router-dom";
 import { Tooltip } from "@mui/material";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+// icons
+import { AiOutlineDownload, AiOutlineUpload } from "react-icons/ai";
+import { BsFileEarmarkPerson } from "react-icons/bs";
+import { FaHospitalUser } from "react-icons/fa";
+import { GoDashboard } from "react-icons/go";
+import { IoLibraryOutline } from "react-icons/io5";
+import { MdArrowBackIosNew, MdArrowForwardIos, MdOutlineInventory2 } from "react-icons/md";
+import { RiStethoscopeLine } from "react-icons/ri";
 
 
 const active = {
@@ -40,13 +44,32 @@ const Sidebar = () => {
 				<div className="items text-gray-700 ">
           <ul>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/dashboard" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <MdOutlineDashboard className="text-2xl" />
+              <NavLink to="/live-reports" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <div>
+                  <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 ml-1.5 hover:bg-[#42a7b3]">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  </span>
+                </div>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/service" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <MdBarChart className="text-2xl" />
+              <NavLink to="/kunjungan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <FaHospitalUser className="text-[23px]" />
+              </NavLink>
+            </li>
+            <li className="item-center hover:text-[#42a7b3]" >
+              <NavLink to="/pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <RiStethoscopeLine className="text-2xl" />
+              </NavLink>
+            </li>
+            <li className="item-center hover:text-[#42a7b3]" >
+              <NavLink to="/pendapatan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <AiOutlineDownload className="text-2xl" />
+              </NavLink>
+            </li>
+            <li className="item-center hover:text-[#42a7b3]" >
+              <NavLink to="/pengeluaran" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <AiOutlineUpload className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
@@ -55,18 +78,18 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3] pl-0.5" >
-              <NavLink to="/medical-record" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <FaFileMedical className="text-[20px]" />
+               <NavLink to="/kepegawaian" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <BsFileEarmarkPerson className="text-xl" />
               </NavLink>
             </li>
-            <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/finance" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <TbFileDollar className="text-2xl" />
+            <li className="item-center hover:text-[#42a7b3] pl-0.5" >
+              <NavLink to="/indikator-pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <GoDashboard className="text-[20px]" />
               </NavLink>
             </li>
-            <li className="item-center hover:text-[#42a7b3] pl-1" >
-               <NavLink to="/human-resource" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <ImProfile className="text-xl" />
+            <li className="item-center hover:text-[#42a7b3] pl-0.5" >
+              <NavLink to="/kepustakaan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <IoLibraryOutline className="text-[20px]" />
               </NavLink>
             </li>
           </ul>
@@ -87,15 +110,37 @@ const Sidebar = () => {
 				<div className="items text-gray-700 ">
           <ul>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/dashboard" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <MdOutlineDashboard className="text-2xl" />
-                <span className="pl-2">Dashboard</span>
+              <NavLink to="/live-reports" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <div>
+                  <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 ml-1.5 mr-1">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  </span>
+                </div>
+                <span className="pl-2">Live Reports</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/service" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <MdBarChart className="text-2xl" />
-                <span className="pl-2">Service</span>
+              <NavLink to="/kunjungan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <FaHospitalUser className="text-[23px]" />
+                <span className="pl-2">Kunjungan Pasien</span>
+              </NavLink>
+            </li>
+            <li className="item-center hover:text-[#42a7b3]" >
+              <NavLink to="/pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <RiStethoscopeLine className="text-2xl" />
+                <span className="pl-2">Pelayanan Pasien</span>
+              </NavLink>
+            </li>
+            <li className="item-center hover:text-[#42a7b3]" >
+              <NavLink to="/pendapatan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <AiOutlineDownload className="text-2xl" />
+                <span className="pl-2">Pendapatan</span>
+              </NavLink>
+            </li>
+            <li className="item-center hover:text-[#42a7b3]" >
+              <NavLink to="/pengeluaran" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <AiOutlineUpload className="text-2xl" />
+                <span className="pl-2">Pengeluaran</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
@@ -105,21 +150,21 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3] pl-0.5" >
-              <NavLink to="/medical-record" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <FaFileMedical className="text-[20px]" />
-                <span className="pl-2.5">Medical Record</span>
+               <NavLink to="/kepegawaian" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <BsFileEarmarkPerson className="text-xl" />
+                <span className="pl-2.5">Kepegawaian</span>
               </NavLink>
             </li>
-            <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/finance" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <TbFileDollar className="text-2xl" />
-                <span className="pl-2">Finance</span>
+            <li className="item-center hover:text-[#42a7b3] pl-0.5" >
+              <NavLink to="/indikator-pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <GoDashboard className="text-[20px]" />
+                <span className="pl-2.5">Indikator Pelayanan</span>
               </NavLink>
             </li>
-            <li className="item-center hover:text-[#42a7b3] pl-1" >
-               <NavLink to="/human-resource" style={({ isActive }) => (isActive ? active : nonactive)}>
-                <ImProfile className="text-xl" />
-                <span className="pl-2">Human Resource</span>
+            <li className="item-center hover:text-[#42a7b3] pl-0.5" >
+              <NavLink to="/kepustakaan" style={({ isActive }) => (isActive ? active : nonactive)}>
+                <IoLibraryOutline className="text-[20px]" />
+                <span className="pl-2.5">Kepustakaan</span>
               </NavLink>
             </li>
           </ul>

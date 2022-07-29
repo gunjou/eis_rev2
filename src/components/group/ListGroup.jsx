@@ -3,16 +3,16 @@ import "./listGroup.css";
 
 const ListGroup = () => {
   let hospital = [
-    { src: "logo_hospital/hospital26.png", alt: "hospital01", nama: "Rumah Sakit 01", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital27.png", alt: "hospital02", nama: "Rumah Sakit 02", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital28.png", alt: "hospital03", nama: "Rumah Sakit 03", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital29.png", alt: "hospital04", nama: "Rumah Sakit 04", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital30.png", alt: "hospital05", nama: "Rumah Sakit 05", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital31.png", alt: "hospital06", nama: "Rumah Sakit 06", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital32.png", alt: "hospital07", nama: "Rumah Sakit 07", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital33.png", alt: "hospital08", nama: "Rumah Sakit 08", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital34.png", alt: "hospital09", nama: "Rumah Sakit 09", url: "/#/dashboard", },
-    { src: "logo_hospital/hospital35.png", alt: "hospital10", nama: "Rumah Sakit 10", url: "/#/dashboard", },
+    { src: "logo_hospital/hospital26.png", alt: "hospital01", nama: "Rumah Sakit 01", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital27.png", alt: "hospital02", nama: "Rumah Sakit 02", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital28.png", alt: "hospital03", nama: "Rumah Sakit 03", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital29.png", alt: "hospital04", nama: "Rumah Sakit 04", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital30.png", alt: "hospital05", nama: "Rumah Sakit 05", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital31.png", alt: "hospital06", nama: "Rumah Sakit 06", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital32.png", alt: "hospital07", nama: "Rumah Sakit 07", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital33.png", alt: "hospital08", nama: "Rumah Sakit 08", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital34.png", alt: "hospital09", nama: "Rumah Sakit 09", url: "/#/live-reports", },
+    { src: "logo_hospital/hospital35.png", alt: "hospital10", nama: "Rumah Sakit 10", url: "/#/live-reports", },
     // { src: "logo_hospital/hospital36.png", alt: "hospital11", nama: "Rumah Sakit 11", url: "#" },
   ];
 
