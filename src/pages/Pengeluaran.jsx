@@ -2,7 +2,7 @@ import React from 'react'
 import CaraBayar from '../components/pengeluaran/diagram/CaraBayar'
 import InstalasiPengeluaran from '../components/pengeluaran/diagram/InstalasiPengeluaran'
 import JenisProdukPengeluaran from '../components/pengeluaran/diagram/JenisProdukPengeluaran'
-import KelasPengeluaran from '../components/pengeluaran/diagram/KelasPengeluaran'
+import KlaimAsuransi from '../components/pengeluaran/diagram/KlaimAsuransi'
 import TrendPengeluaran from '../components/pengeluaran/diagram/TrendPengeluaran'
 
 const Pengeluaran = () => {
@@ -27,17 +27,17 @@ const Pengeluaran = () => {
       {/* Row 1 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pengeluaran Berdasarkan Kelas</p>
-          <KelasPengeluaran />
+          <p className='pb-2'>Pengeluaran Berdasarkan Rekanan (Klaim Asuransi)</p>
+          <KlaimAsuransi />
         </div>
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
           <p className='pb-2'>Pengeluaran Berdasarkan Jenis Produk</p>       
           <JenisProdukPengeluaran />
         </div>
-        {/* <div className="grow basis-1/4 rounded-lg bg-[#eeeff1] p-2">
+        <div className="grow basis-1/5 rounded-lg bg-[#eeeff1] p-2">
           <p className='pb-2'>Pengeluaran Berdasarkan Cara bayar</p>
           <CaraBayar />
-        </div> */}
+        </div>
       </div>
 
     </div>

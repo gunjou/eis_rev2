@@ -21,7 +21,7 @@ const ListGroup = () => {
       {hospital.map((img) => (
         <>
           <a href={img.url}>
-            <div className="p-m pb-10">
+            <div className="pb-10">
               <div className="flip-box ">
                 <div className="flip-box-inner ">
                   <div className="flip-box-front cursor-pointer">

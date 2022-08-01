@@ -31,8 +31,8 @@ const Perkerjaan = () => {
           <CartesianGrid stroke="#f5f5f5" />
           <XAxis type="number" />
           <YAxis dataKey="name" type="category" interval={0} />
-          <Tooltip wrapperStyle={{fontSize: "14px"}} />
-          <Bar dataKey="value" name='Jumlah' barSize={12} radius={[0, 6, 6, 0]} fill="#6e9ffe" />
+          <Tooltip wrapperStyle={{fontSize: "16px"}} />
+          <Bar dataKey="value" name='Jumlah' barSize={12} radius={[0, 6, 6, 0]} fill="#ffba94" />
         </BarChart>
       </ResponsiveContainer>
     </div>

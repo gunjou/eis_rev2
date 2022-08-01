@@ -44,12 +44,12 @@ const PartnerList = ({type}) => {
 
   return (
     <div className="PartnerList">
-      <div className="grid grid-cols-6 ">
+      <div className="grid grid-cols-6 gap-4">
         {hospital.map((img) => (
           <div className="cardHospital pb-6 ">
             {/* <Link to={img.url}> */}
             <a href={img.url}>
-            <div className="rounded-xl w-36 md:w-48 lg:w-56 hover:rounded-2xl transform transition duration-500 hover:scale-110 hover:bg-teal-700 flex text-black/0 hover:text-white ">
+            <div className="rounded-xl hover:rounded-2xl transform transition duration-500 hover:scale-110 hover:bg-teal-700 flex text-black/0 hover:text-white ">
               <p className="block absolute ml-4 mb-3 font-semibold self-end ">{img.nama}
                 <p className="text-xs font-normal ">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
               </p>
