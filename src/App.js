@@ -25,8 +25,8 @@ function App() {
           <Route path="/pengeluaran" element={<Contents type='pengeluaran' />} />
           <Route path="/inventory" element={<Contents type='inventory' />} />
           <Route path="/kepegawaian" element={<Contents type='kepegawaian' />} />
-          <Route path="/indikator-pelayanan" element={<Contents type='indikator-pelayanan' />} />
-          <Route path="/kepustakaan" element={<Contents type='kepustakaan' />} />
+          {/* <Route path="/indikator-pelayanan" element={<Contents type='indikator-pelayanan' />} /> */}
+          {/* <Route path="/kepustakaan" element={<Contents type='kepustakaan' />} /> */}
           <Route path='/404' element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" />} />
           </Route>

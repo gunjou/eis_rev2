@@ -41,11 +41,21 @@ const KlaimAsuransi = () => {
 					className="text-xs"
         >
           <CartesianGrid strokeDasharray="3 3" />
+          <defs>
+            <linearGradient id="pengajuan" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#ffc658" stopOpacity={0.9} />
+              <stop offset="85%" stopColor="#ffc658" stopOpacity={0} />
+            </linearGradient>
+            <linearGradient id="realisasi" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.9} />
+              <stop offset="85%" stopColor="#82ca9d" stopOpacity={0} />
+            </linearGradient>
+          </defs>
           <XAxis dataKey="month" />
           <YAxis tickFormatter={DataFormater} />
-          <Tooltip formatter={(value) => "Rp"+new Intl.NumberFormat('id').format(value)+",00"} />
-          <Area type="monotone" name='Pengajuan' dataKey="pengajuan" stroke="#ffc658" fill="#ffc658" />
-          <Area type="monotone" name='Realisasi' dataKey="realisasi" stroke="#82ca9d" fill="#82ca9d" />
+          <Tooltip wrapperStyle={{fontSize: "14px"}} formatter={(value) => "Rp"+new Intl.NumberFormat('id').format(value)+",00"} />
+          <Area type="monotone" name='Pengajuan' dataKey="pengajuan" stroke="#ffc658" fill="url(#pengajuan)" />
+          <Area type="monotone" name='Realisasi' dataKey="realisasi" stroke="#82ca9d" fill="url(#realisasi)" />
         </AreaChart>
       </ResponsiveContainer>
 		</div>

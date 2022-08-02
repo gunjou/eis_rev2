@@ -1,6 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { RiArrowDropDownFill } from 'react-icons/ri'
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
 
 
 const data = [

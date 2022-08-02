@@ -1,13 +1,13 @@
 import React from 'react'
-import AgeGender from '../components/pelayananPasien/diagram/AgeGender'
 import CardKunjungan from '../components/pelayananPasien/diagram/CardKunjungan'
 import Education from '../components/pelayananPasien/diagram/Education'
 import KelasPasien from '../components/pelayananPasien/diagram/KelasPasien'
 import KelompokPasien from '../components/pelayananPasien/diagram/KelompokPasien'
 import Perkerjaan from '../components/pelayananPasien/diagram/Perkerjaan'
 import Dokter from '../components/pelayananPasien/diagram/Dokter'
-import StatusPulang from '../components/pelayananPasien/diagram/StatusPulang'
 import TopDiagnosa from '../components/pelayananPasien/diagram/TopDiagnosa'
+import CardStandarMutu from '../components/pelayananPasien/diagram/CardStandarMutu'
+import KepuasanPasien from '../components/pelayananPasien/diagram/KepuasanPasien'
 
 const PelayananPasien = () => {
   return (
@@ -32,21 +32,40 @@ const PelayananPasien = () => {
 
       {/* Row 1 */}
       <div className="flex flex-row gap-3 pb-3">
-        <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
+        <div className="grow basis-2/5 rounded-lg bg-[#eeeff1] p-2">
           <p className='pb-2'>Pelayanan Berdasarkan Kelas</p>       
-          <KelasPasien />
+          <div className="Card grid grid-cols-3 m-2 gap-2 pb-2">
+            <CardStandarMutu type={"bor"} />
+            <CardStandarMutu type={"alos"} />
+            <CardStandarMutu type={"toi"} />
+            <CardStandarMutu type={"bto"} />
+            <CardStandarMutu type={"ndr"} />
+            <CardStandarMutu type={"gdr"} />
+          </div>
         </div>
+        <div className="grow basis-1/2 rounded-lg bg-[#eeeff1] p-2">
+          <p className='pb-2'>Pelayanan Berdasarkan Kelas</p>       
+            <KelasPasien />
+          </div>
+        <div className="grow basis-1/5 rounded-lg bg-[#eeeff1] p-2">
+          <p className='pb-2'>Kepuasan Terhadap Pelayanan</p>       
+            <KepuasanPasien />
+        </div>
+      </div>
+
+      {/* Row 2 */}
+      <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
           <p className='pb-2'>Pelayanan Berdasarkan Kelompok</p>
           <KelompokPasien />
         </div>
-        <div className="grow basis-1/5 rounded-lg bg-[#eeeff1] p-2">
+        <div className="grow basis-2/5 rounded-lg bg-[#eeeff1] p-2">
           <p className='pb-2'>Pelayanan Berdasarkan Dokter</p>
           <Dokter />
+        </div>
       </div>
 
-      {/* Row 2 */}
-      </div>
+      {/* Row 3 */}
       <div className="flex gap-3 pb-3">
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
           <p className='pb-2'>Pelayanan Berdasarkan Top Diagnosa</p>

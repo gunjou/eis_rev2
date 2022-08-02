@@ -2,14 +2,14 @@ import React from 'react'
 import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
-  { name: "Rawat Inap", value: 22900000 },
-  { name: "IGD", value: 19550000 },
-  { name: "Rawat Jalan", value: 15260000 },
-  { name: "Radiologi", value: 4100000 },
-  { name: "Laboratorium", value: 8200000 },
-  { name: "Bedah", value: 6690000 },
-  { name: "Rehabilitasi", value: 11890000 },
-  { name: "Farmasi", value: 17900000 },
+  { name: "Rawat Inap", value: 2900000 },
+  { name: "IGD", value: 3000000 },
+  { name: "Rawat Jalan", value: 2770000 },
+  { name: "Radiologi", value: 1900000 },
+  { name: "Laboratorium", value: 2200000 },
+  { name: "Bedah", value: 2000000 },
+  { name: "Rehabilitasi", value: 1700000 },
+  { name: "Farmasi", value: 2300000 },
 ];
 
 const InstalasiPengeluaran = () => {

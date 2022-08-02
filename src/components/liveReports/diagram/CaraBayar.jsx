@@ -2,13 +2,13 @@ import React from 'react'
 import { PieChart, Pie, Tooltip, Cell, Legend, ResponsiveContainer } from "recharts";
 
 const data = [
-    { name: "Tunai", value: 3200000 },
-    { name: "Kartu Kredit", value: 2500000 },
-    { name: "Transfer Bank", value: 1300000 },
-    { name: "Penjamin", value: 500000 },
-    { name: "Piutang", value: 300000 },
-    { name: "Donasi", value: 1900000 },
-    { name: "Mix", value: 1800000 },
+    { name: "Tunai", value: 9300000 },
+    { name: "Kartu Kredit", value: 4300000 },
+    { name: "Transfer Bank", value: 9500000 },
+    { name: "Penjamin", value: 2200000 },
+    { name: "Piutang", value: 960000 },
+    { name: "Donasi", value: 1200000 },
+    { name: "Mix", value: 800000 },
   ];
   const COLORS = [
     "#ffba94",
@@ -22,8 +22,8 @@ const data = [
 
 const CaraBayar = () => {
   return (
-    <div className='CaraBayar'>
-			<ResponsiveContainer width="99%" height={270}>
+    <div className="CaraBayar">
+      <ResponsiveContainer width="99%" height={270}>
         <PieChart width={100} height={210}>
         <Pie
           data={data}
@@ -45,11 +45,12 @@ const CaraBayar = () => {
           // layout="vertical"
           // verticalAlign="middle"
           // align="right"
+          wrapperStyle={{fontSize: "11px"}}
           iconType="circle"
         />
       </PieChart>
     </ResponsiveContainer>
-		</div>
+    </div>
   )
 }
 

@@ -13,14 +13,14 @@ const DataFormater = (number) => {
 }
 
 const data = [
-	{ month: 'Jan', total: 14202882, past: 16202882, predict: 17702882, },
-	{ month: 'Feb', total: 20146509, past: 26146509, predict: 29246509, },
-	{ month: 'Mar', total: 35771764, past: 20771764, predict: 36771764, },
-	{ month: 'Apr', total: 39601230, past: 35601230, predict: 32901230, },
-	{ month: 'Mei', total: 59311801, past: 40311801, predict: 54311801, },
-	{ month: 'Jun', total: 74876029, past: 61876029, predict: 73476029, },
-	{ month: 'Jul', total: 68862412, past: 48862412, predict: 65162412, },
-	{ month: 'Agu', total: null, past: 50819624, predict: 56119624, },
+	{ month: 'Jan', total: 40000000, past: 33000000, predict: 44102882, },
+	{ month: 'Feb', total: 28000000, past: 32000000, predict: 24146509, },
+	{ month: 'Mar', total: 31000000, past: 34000000, predict: 30171764, },
+	{ month: 'Apr', total: 21000000, past: 25000000, predict: 24101230, },
+	{ month: 'Mei', total: 35000000, past: 30000000, predict: 30111801, },
+	{ month: 'Jun', total: 20000000, past: 22000000, predict: 18176029, },
+	{ month: 'Jul', total: 32000000, past: 20000000, predict: 30162412, },
+	{ month: 'Agu', total: null, past: 30819624, predict: 41119624, },
 	// { month: 'Sep', total: 64491394, past: 48491394, predict: 69191394, },
 	// { month: 'Okt', total: 63092388, past: 50092388, predict: 69492388, },
 	// { month: 'Nov', total: 76606814, past: 69606814, predict: 76406814, },

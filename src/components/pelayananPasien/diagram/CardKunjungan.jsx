@@ -1,10 +1,6 @@
 import { Tooltip } from "@mui/material";
-import React from "react";
-import {
-  HiOutlineChevronDoubleUp,
-  HiOutlineChevronDoubleDown,
-} from "react-icons/hi";
-import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+import { HiOutlineChevronDoubleUp } from "react-icons/hi";
+import { IoMdArrowDropup } from "react-icons/io";
 
 
 const CardKunjungan = ({type}) => {
@@ -21,9 +17,9 @@ const CardKunjungan = ({type}) => {
     case "pasien-rawat-jalan":
       data = { img: "images/icon-pasien-rawat-jalan.png", title: "Pasien Rawat Jalan", value: value[0], fill: "bg-[#b494ff]/90" }; break;
     case "pasien-radiologi":
-      data = { img: "images/icon-radiologi.png", title: "Pasien Radiologi", value: value[3], fill: "bg-[#94d9ff]/90" }; break;
+      data = { img: "images/icon-radiologi.png", title: "Pasien Radiologi", value: value[3], fill: "bg-[#aaca55]/90" }; break;
     case "pasien-laboratorium":
-      data = { img: "images/icon-laboratorium.png", title: "Pasien Laboratorium", value: value[4], fill: "bg-[#aaca55]/90" }; break;
+      data = { img: "images/icon-laboratorium.png", title: "Pasien Laboratorium", value: value[4], fill: "bg-[#94d9ff]/90" }; break;
     case "pasien-rehabilitasi":
       data = { img: "images/icon-pasien.png", title: "Pasien Rehabilitasi", value: value[5], fill: "bg-[#55caaf]/90" }; break;
     case "pasien-bedah":

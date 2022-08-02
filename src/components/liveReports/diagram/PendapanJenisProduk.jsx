@@ -14,18 +14,18 @@ const DataFormater = (number) => {
 }
 
 const data = [
-  { name: "Obat-obatan", value: 800000 },
-  { name: "Gas Medis", value: 1200000 },
-  { name: "Radiologi", value: 2500000 },
-  { name: "Laboratorium", value: 1300000 },
-  { name: "Injeksi", value: 500000 },
-  { name: "Lainnya", value: 2300000 },
+  { name: "Obat-obatan", value: 2290000 },
+  { name: "Gas Medis", value: 1955000 },
+  { name: "Radiologi", value: 1526000 },
+  { name: "Laboratorium", value: 410000 },
+  { name: "Injeksi", value: 820000 },
+  { name: "Lainnya", value: 669000 },
 ];
 
-const JenisProdukPengeluaran = () => {
+const PendapanJenisProduk = () => {
   return (
-    <div className='JenisProdukPengeluaran'>
-			<ResponsiveContainer width="99%" height={280}>
+    <div className="PendapanJenisProduk">
+			<ResponsiveContainer width="99%" height={270}>
 			<BarChart
           layout="vertical"
           width={600}
@@ -38,11 +38,11 @@ const JenisProdukPengeluaran = () => {
           <XAxis type="number" tickFormatter={DataFormater}/>
           <YAxis dataKey="name" type="category" interval={0} />
           <Tooltip wrapperStyle={{fontSize: "14px"}} formatter={(value) => "Rp"+new Intl.NumberFormat('id').format(value)+",00"} />
-          <Bar dataKey="value" name='Jumlah' barSize={20} radius={[0, 6, 6, 0]} fill="#6e9ffe" />
+          <Bar dataKey="value" name='Jumlah' barSize={20} radius={[0, 6, 6, 0]} fill="#b494ff" />
         </BarChart>
       </ResponsiveContainer>
 		</div>
   )
 }
 
-export default JenisProdukPengeluaran
+export default PendapanJenisProduk

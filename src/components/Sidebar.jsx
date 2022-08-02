@@ -5,8 +5,6 @@ import { NavLink } from "react-router-dom";
 import { AiOutlineDownload, AiOutlineUpload } from "react-icons/ai";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 import { FaHospitalUser } from "react-icons/fa";
-import { GoDashboard } from "react-icons/go";
-import { IoLibraryOutline } from "react-icons/io5";
 import { MdArrowBackIosNew, MdArrowForwardIos, MdOutlineInventory2 } from "react-icons/md";
 import { RiStethoscopeLine } from "react-icons/ri";
 
@@ -82,7 +80,7 @@ const Sidebar = () => {
                 <BsFileEarmarkPerson className="text-xl" />
               </NavLink>
             </li>
-            <li className="item-center hover:text-[#42a7b3] pl-0.5" >
+            {/* <li className="item-center hover:text-[#42a7b3] pl-0.5" >
               <NavLink to="/indikator-pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <GoDashboard className="text-[20px]" />
               </NavLink>
@@ -91,7 +89,7 @@ const Sidebar = () => {
               <NavLink to="/kepustakaan" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <IoLibraryOutline className="text-[20px]" />
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
 			</div>
@@ -155,7 +153,7 @@ const Sidebar = () => {
                 <span className="pl-2.5">Kepegawaian</span>
               </NavLink>
             </li>
-            <li className="item-center hover:text-[#42a7b3] pl-0.5" >
+            {/* <li className="item-center hover:text-[#42a7b3] pl-0.5" >
               <NavLink to="/indikator-pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <GoDashboard className="text-[20px]" />
                 <span className="pl-2.5">Indikator Pelayanan</span>
@@ -166,7 +164,7 @@ const Sidebar = () => {
                 <IoLibraryOutline className="text-[20px]" />
                 <span className="pl-2.5">Kepustakaan</span>
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
 			</div>

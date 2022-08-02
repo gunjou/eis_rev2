@@ -40,7 +40,7 @@ const Dokter = () => {
           <Table sx={{ minWidth: 400 }} size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
-                {/* <TableCell className="tableCell">No</TableCell> */}
+                <TableCell className="tableCell">No</TableCell>
                 <TableCell className="tableCell">Nama Dokter</TableCell>
                 <TableCell className="tableCell" align="right">Pasien</TableCell>
               </TableRow>
@@ -50,7 +50,7 @@ const Dokter = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <TableRow key={row.id}>
-                    {/* <TableCell className="tableCell">{row.id} </TableCell> */}
+                    <TableCell className="tableCell">{row.id} </TableCell>
                     <TableCell className="tableCell text-sm">{row.namaDokter}</TableCell>
                     <TableCell className="tableCell text-sm" align="right">{row.jumlah}</TableCell>
                   </TableRow>
