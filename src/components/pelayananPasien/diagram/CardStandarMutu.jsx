@@ -49,12 +49,12 @@ const CardStandarMutu = ({type}) => {
           </div> */}
           <p className="title pl-5 font-semibold">{data.title}</p>
             <Tooltip title={data.detail} placement="top-start">
-              <div className="absolute right-2">
+              <div className="absolute right-2 bottom-2">
                 <BsInfoCircleFill className="text-gray-700" />
               </div>
             </Tooltip>
         </div>
-        <div className="m-auto ml-8 flex pb-7 text-2xl font-semibold cursor-default">
+        <div className="m-auto ml-2 flex pb-7 text-2xl font-semibold cursor-default">
           {data.value}
           <Tooltip title="Trend" placement="top-start">
             <sup className="text-xs flex">
