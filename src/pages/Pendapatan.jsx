@@ -15,11 +15,11 @@ const Pendapatan = () => {
       {/* Row 1 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-2/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Tren Pendapatan</p>       
+          <p className='pb-2'>Tren Pendapatan</p>
           <TrendPendapatan />
         </div>
         <div className="grow basis-1/2 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pendapatan Berdasarkan Instalasi</p>
+        {/* Pendapatan Berdasarkan Instalasi */}
           <InstalasiPendapatan />
         </div>
       </div>
@@ -27,15 +27,15 @@ const Pendapatan = () => {
       {/* Row 1 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pendapatan Berdasarkan Kelas</p>
+        {/* Pendapatan Berdasarkan Kelas */}
           <KelasPendapatan />
         </div>
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pendapatan Berdasarkan Jenis Produk</p>       
+        {/* Pendapatan Berdasarkan Jenis Produk */}
           <JenisProdukPendapatan />
         </div>
         <div className="grow basis-1/4 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pendapatan Berdasarkan Cara bayar</p>
+        {/* Pendapatan Berdasarkan Cara bayar */}
           <CaraBayar />
         </div>
       </div>

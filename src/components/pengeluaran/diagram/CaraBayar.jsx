@@ -1,14 +1,17 @@
 import React from 'react'
 import { PieChart, Pie, Tooltip, Cell, Legend, ResponsiveContainer } from "recharts";
+import { Tooltip as Tlp } from '@mui/material';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 
 const data = [
-    { name: "Tunai", value: 3200000 },
-    { name: "Kartu Kredit", value: 2500000 },
-    { name: "Transfer Bank", value: 1300000 },
-    { name: "Penjamin", value: 500000 },
-    { name: "Piutang", value: 300000 },
-    { name: "Donasi", value: 1900000 },
-    { name: "Mix", value: 1800000 },
+    { name: "Tunai", value: 3200000, trend: -4.7, pred: 6.3 },
+    { name: "Kartu Kredit", value: 2500000, trend: 5.5, pred: 1.4 },
+    { name: "Transfer Bank", value: 1300000, trend: 2.7, pred: 7.8 },
+    { name: "Penjamin", value: 500000, trend: 1.6, pred: 5.2 },
+    { name: "Piutang", value: 300000, trend: 11.9, pred: 6.6 },
+    { name: "Donasi", value: 1900000, trend: -2.9, pred: 9.1 },
+    { name: "Mix", value: 1800000, trend: 3.6, pred: -0.2 },
   ];
   const COLORS = [
     "#ffba94",
@@ -20,9 +23,49 @@ const data = [
     "#aaca55",
   ];
 
+  var formatter = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
+  
+  function GetSymbol(value) {
+    if (value > 0) {
+      return ("↗"+Math.abs(value));
+    } else if (value < 0) {
+      return ("↘"+Math.abs(value));
+    } else {
+      return ("⇋"+Math.abs(value));
+    }
+  }
+  
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip bg-gray-100 border p-3">
+          <p className="label">{`${payload[0].payload.name} ${GetSymbol(payload[0].payload.trend)}%`}</p>
+          <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+          <p className="intro text-sm">{`Jumlah : ${formatter.format(payload[0].value)}`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
+  
 const CaraBayar = () => {
   return (
     <div className='CaraBayar'>
+      <div className="title flex">
+        <p className='pb-2'>Pengeluaran Berdasarkan Cara bayar</p>
+        <Tlp title="Trend" placement="right">
+          <sup className="flex text-sm pt-1 cursor-default">
+          <IoMdArrowDropdown className="text=lg" />
+            11.0%
+          </sup>
+        </Tlp>
+      </div>
+      <sup className="flex text-sm pl-2 cursor-default">
+        Predict : <HiOutlineChevronDoubleDown /> 9.6%
+      </sup>
 			<ResponsiveContainer width="99%" height={270}>
         <PieChart width={100} height={210}>
         <Pie
@@ -40,7 +83,8 @@ const CaraBayar = () => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip formatter={(value) => "Rp"+new Intl.NumberFormat('id').format(value)+",00"} />
+        <Tooltip content={<CustomTooltip />} /> 
+        {/*  formatter={(value) => "Rp"+new Intl.NumberFormat('id').format(value)+",00"} />*/}
         <Legend
           // layout="vertical"
           // verticalAlign="middle"

@@ -1,31 +1,69 @@
-import React, { useState, useRef, useEffect } from "react";
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, } from "recharts";
-import { RiArrowDropDownFill } from "react-icons/ri";
+import { HiOutlineChevronDoubleUp } from "react-icons/hi";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { Tooltip as Tlp } from '@mui/material';
+
 
 const data = [
-  { name: "Pulang Paksa", value: 187 },
-  { name: "Dipulangkan", value: 285 },
-  { name: "Dirujuk", value: 79 },
-  { name: "Dipindah", value: 121 },
-  { name: "Kabur", value: 8 },
-  { name: "Sembuh", value: 195 },
-  { name: "Belum Sembuh", value: 54 },
-  { name: "Meninggal", value: 68 },
+  { name: "Pulang Paksa", value: 187, trend: 4.1, pred: 2.1 },
+  { name: "Dipulangkan", value: 285, trend: 7.4, pred: -4.9 },
+  { name: "Dirujuk", value: 79, trend: 14.9, pred: 8.7 },
+  { name: "Dipindah", value: 121, trend: -14.7, pred: 7.7 },
+  { name: "Kabur", value: 8, trend: 11.7, pred: 12.4 },
+  { name: "Sembuh", value: 195, trend: -0.6, pred: 5.9 },
+  { name: "Belum Sembuh", value: 54, trend: 11.7, pred: 8.7 },
+  { name: "Meninggal", value: 68, trend: 11, pred: 15.1 },
 ];
 
-const Diagram = () => {
+function GetSymbol(value) {
+  if (value > 0) {
+    return ("↗"+Math.abs(value));
+  } else if (value < 0) {
+    return ("↘"+Math.abs(value));
+  } else {
+    return ("⇋"+Math.abs(value));
+  }
+}
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip bg-gray-100 border p-3">
+        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
+        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
+const StatusPulang = () => {
   return (
-    <ResponsiveContainer width="99%" height={100}>
+    <div className="StatusPulang">
+      <div className="title flex">
+        <p className='pb-2'>Status Pulang</p>
+        <Tlp title="Trend" placement="right">
+          <sup className="flex text-sm pt-1 cursor-default">
+          <IoMdArrowDropdown className="text=lg" />
+          3.9%
+          </sup>
+        </Tlp>
+      <p className="flex text-sm pl-5 cursor-default">
+        Predict : <HiOutlineChevronDoubleUp /> 4.0%
+      </p>
+      </div>
+      <ResponsiveContainer width="99%" height={100}>
       <BarChart
         width={500}
         height={300}
         data={data}
-        margin={{ top: 5, right: 10, left: 10, bottom: 5, }}
+        margin={{ top: 0, right: 10, left: 10, bottom: -10, }}
       >
         <CartesianGrid strokeDasharray="1 5" />
         <XAxis dataKey="name" interval={0} fontSize={10} />
         {/* <YAxis fontSize={9} /> */}
-        <Tooltip />
+        <Tooltip content={<CustomTooltip />} />
         <Bar
           dataKey="value"
           name="Jumlah"
@@ -35,72 +73,6 @@ const Diagram = () => {
         />
       </BarChart>
     </ResponsiveContainer>
-  );
-};
-
-const StatusPulang = () => {
-  // const [isDropdown, setisDropdown] = useState(false);
-
-  // function useOutsideAlerter(ref) {
-  //   useEffect(() => {
-  //     /**
-  //      * Alert if clicked on outside of element
-  //      */
-  //     function handleClickOutside(event) {
-  //       if (
-  //         (ref.current && !ref.current.contains(event.target)) ||
-  //         ref.current.contains(event.target)
-  //       ) {
-  //         // remove or
-  //         setisDropdown(false);
-  //       }
-  //     }
-  //     // Bind the event listener
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //     return () => {
-  //       // Unbind the event listener on clean up
-  //       document.removeEventListener("mousedown", handleClickOutside);
-  //     };
-  //   }, [ref]);
-  // }
-  // const wrapperRef = useRef(false);
-  // useOutsideAlerter(wrapperRef);
-
-  return (
-    <div className="StatusPulang">
-      {/* Filter */}
-      {/* <div className="text-sm flex">
-        <p className="pr-2">Kondisi Pasien : </p>
-        {!isDropdown ? (
-          <>
-            <button onClick={() => setisDropdown(!isDropdown)} type="button" class="flex justify-center rounded-md pl-1 bg-white text-sm font-medium hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true" >
-              Semua Kondisi
-              <RiArrowDropDownFill className="text-xl" />
-            </button>
-          </>
-        ) : (
-          <>
-            <button onClick={() => setisDropdown(!isDropdown)} type="button" class="flex justify-center rounded-md pl-1 bg-white text-sm font-medium hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true" >
-              Semua Kondisi
-              <RiArrowDropDownFill className="text-xl" />
-            </button>
-            <div
-              ref={wrapperRef}
-              className="dropdown absolute z-10 ml-24 text-base text-gray-700 mt-7 bg-white rounded-lg drop-shadow-xl"
-            >
-              <ul>
-                <li className="p-1 cursor-pointer hover:bg-gray-200 hover:rounded-lg">Semua Kondisi</li>
-                <hr />
-                <li className="p-1 cursor-pointer hover:bg-gray-200 hover:rounded-lg">Sembuh</li>
-                <li className="p-1 cursor-pointer hover:bg-gray-200 hover:rounded-lg">Belum Sembuh</li>
-                <li className="p-1 cursor-pointer hover:bg-gray-200 hover:rounded-lg">Meninggal Dunia</li>
-              </ul>
-            </div>
-          </>
-        )} */}
-      {/* </div> */}
-      {/* Diagram */}
-      <Diagram />
     </div>
   );
 };

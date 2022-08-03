@@ -32,15 +32,15 @@ const KunjunganPasien = () => {
       {/* Row 1 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Kunjungan Berdasarkan Kelas</p>       
+          {/* Kunjungan Berdasarkan Kelas */}
           <KelasPasien />
         </div>
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Kunjungan Berdasarkan Kelompok</p>
+          {/* Kunjungan Berdasarkan Kelompok */}
           <KelompokPasien />
         </div>
         <div className="grow basis-1/5 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Kunjungan Berdasarkan Rujukan</p>
+          {/* Kunjungan Berdasarkan Rujukan */}
           <Rujukan />
         </div>
       </div>
@@ -49,20 +49,20 @@ const KunjunganPasien = () => {
       <div className="flex gap-3 pb-3">
         <div className='grow  basis-1/3'>
           <div className="grow  rounded-lg mb-3 bg-[#eeeff1] p-4">
-            <p className='pb-2'>Status Pulang</p>
+            {/* Status Pulang */}
             <StatusPulang />
           </div>        
           <div className="grow  rounded-lg bg-[#eeeff1] p-2">
-            <p className='pb-2'>Kunjungan Umur dan Jenis Kelamin</p>
+          {/* Kunjungan Umur dan Jenis Kelamin */}
             <AgeGender />
           </div>        
         </div>
         <div className="grow basis-1/6 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Kunjungan Berdasarkan Pendidikan</p>
+          {/* Kunjungan Berdasarkan Pendidikan */}
           <Education />
         </div>        
         <div className="grow basis-1/4 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Kunjungan Berdasarkan Perkerjaan</p>
+          {/* Kunjungan Berdasarkan Perkerjaan */}
           <Perkerjaan />
         </div>        
         

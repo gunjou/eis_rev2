@@ -1,22 +1,48 @@
 import React from "react";
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { HiOutlineChevronDoubleDown, HiOutlineChevronDoubleUp } from "react-icons/hi";
+import { IoMdArrowDropup } from "react-icons/io";
+import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, } from 'recharts';
+import { Tooltip as Tlp } from '@mui/material';
 
 
 const data = [
-  { name: "Kelas III", value: 2290 },
-  { name: "Kelas II", value: 1955 },
-  { name: "Kelas I", value: 1526 },
-  { name: "VIP Madya", value: 410 },
-  { name: "VIP Utama", value: 820 },
-  { name: "VIP Super", value: 1189 },
-  { name: "Intensif", value: 669 },
-  { name: "Vip Standar", value: 1790 },
+  { name: "Kelas III", value: 2290, trend: 9.9, pred: 11.5, },
+  { name: "Kelas II", value: 1955, trend: -11.9, pred: 7.4, },
+  { name: "Kelas I", value: 1526, trend: 14.6, pred: 17.9, },
+  { name: "VIP Madya", value: 410, trend: 10.2, pred: -9.3, },
+  { name: "VIP Utama", value: 820, trend: 3.7, pred: 11.8, },
+  { name: "VIP Super", value: 1189, trend: 1.1, pred: 0, },
+  { name: "Intensif", value: 669, trend: -16.1, pred: -8.9, },
+  { name: "Vip Standar", value: 1790, trend: 6  , pred: 6.6, },
 ];
+
+function GetSymbol(value) {
+  if (value > 0) {
+    return ("↗"+Math.abs(value));
+  } else if (value < 0) {
+    return ("↘"+Math.abs(value));
+  } else {
+    return ("⇋"+Math.abs(value));
+  }
+}
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip bg-gray-100 border p-3">
+        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
+        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+  return null;
+};
 
 const KelasPasien = () => {
   return (
     <div className='KelasPasien'>
-      <label className="text-sm">
+      {/* <label className="text-sm">
         Kasus Penyakit : 
         <select className="ml-2 bg-white rounded-md p-0.5 focus:outline-none">
           <option value="all">Semua Penyakit</option>
@@ -24,18 +50,30 @@ const KelasPasien = () => {
           <option value="leptospirosis">Leptospirosis</option>
           <option value="pasteurellosis">Pasteurellosis</option>
         </select>
-      </label>
-			<ResponsiveContainer width="99%" height={230}>
+      </label> */}
+      <div className="title flex">
+        <p className='pb-2'>Kunjungan Berdasarkan Kelas</p>
+        <Tlp title="Trend" placement="right">
+          <sup className="flex text-sm pt-1 cursor-default">
+          <IoMdArrowDropup className="text=lg" />
+            12.3%
+          </sup>
+        </Tlp>
+      </div>
+      <sup className="flex text-sm pl-2 cursor-default">
+        Predict : <HiOutlineChevronDoubleDown /> 5.1%
+      </sup>
+			<ResponsiveContainer width="99%" height={240} >
         <BarChart
           width={500}
           height={300}
           data={data}
-          margin={{ top: 5, right: 10, left: 10, bottom: 5, }}
+          margin={{ top: 0, right: 10, left: 10, bottom: 0, }}
         >
           <CartesianGrid strokeDasharray="1 5" />
           <XAxis dataKey="name" interval={0} fontSize={12} />
-          {/* <YAxis fontSize={9} /> */}
-          <Tooltip />
+          {/* <YAxis domain={[0]} /> */}
+          <Tooltip content={<CustomTooltip />} />
           <Bar dataKey="value" name='Jumlah' fill="#55caaf" radius={[9, 9, 0, 0]} barSize={30} />
         </BarChart>
       </ResponsiveContainer>

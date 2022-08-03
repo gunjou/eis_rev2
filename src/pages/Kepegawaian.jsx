@@ -26,11 +26,11 @@ const Kepegawaian = () => {
       {/* Row 1 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-2/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Kategori Pegawai</p>       
+        {/* Kategori Pegawai */}
           <CategoryPegawai />
         </div>
         <div className="grow basis-1/4 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Status Pegawai</p>
+        {/* Status Pegawai */}
           <StatusEmployee />
         </div>
       </div>
@@ -38,11 +38,11 @@ const Kepegawaian = () => {
       {/* Row 2 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-1/6 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pendidikan dan Jenis Kelamin</p>
+        {/* Pendidikan dan Jenis Kelamin */}
           <EducationGender />
         </div>
         <div className="grow basis-1/2 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pegawai Berdasarkan Instalasi</p>       
+        {/* Pegawai Berdasarkan Instalasi */}
           <InstalasiPegawai />
         </div>
       </div>

@@ -26,11 +26,11 @@ const Inventory = () => {
       {/* Row 1 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-2/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'> Tren Stock Moving</p>       
+        {/* Tren Stock Moving */}
           <TrendStockMoving />
         </div>
         <div className="grow basis-1/4 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Stok Berdasarkan Supplier</p>
+        {/* Stok Berdasarkan Supplier */}
           <Supplier />
         </div>
       </div>
@@ -42,11 +42,11 @@ const Inventory = () => {
           <TopProduct />
         </div>
         <div className="grow basis-1/5 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Jenis Produk</p>       
+        {/* Jenis Produk */}
           <TypeProduct />
         </div>
         <div className="grow basis-1/4 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Jenis Aset</p>
+        {/* Jenis Aset */}
           <TypeAset />
         </div>
       </div>

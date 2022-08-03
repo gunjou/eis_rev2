@@ -44,11 +44,11 @@ const PelayananPasien = () => {
           </div>
         </div>
         <div className="grow basis-1/2 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pelayanan Berdasarkan Kelas</p>       
+          {/* Pelayanan Berdasarkan Kelas */}
             <KelasPasien />
           </div>
         <div className="grow basis-1/5 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Kepuasan Terhadap Pelayanan</p>       
+        {/* Kepuasan Terhadap Pelayanan */}
             <KepuasanPasien />
         </div>
       </div>
@@ -56,7 +56,7 @@ const PelayananPasien = () => {
       {/* Row 2 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pelayanan Berdasarkan Kelompok</p>
+        {/* Pelayanan Berdasarkan Kelompok */}
           <KelompokPasien />
         </div>
         <div className="grow basis-2/5 rounded-lg bg-[#eeeff1] p-2">
@@ -68,11 +68,11 @@ const PelayananPasien = () => {
       {/* Row 3 */}
       <div className="flex gap-3 pb-3">
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pelayanan Berdasarkan Top Diagnosa</p>
+          {/* Pelayanan Berdasarkan Top Diagnosa */}
           <TopDiagnosa />
         </div>
         <div className="grow basis-1/6 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pelayanan Berdasarkan Pendidikan</p>
+          {/* Pelayanan Berdasarkan Pendidikan */}
           <Education />
         </div>
         <div className="grow basis-1/4 rounded-lg bg-[#eeeff1] p-2">

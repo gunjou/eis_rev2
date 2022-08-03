@@ -19,7 +19,7 @@ const Pengeluaran = () => {
           <TrendPengeluaran />
         </div>
         <div className="grow basis-1/2 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pengeluaran Berdasarkan Instalasi</p>
+        {/* Pengeluaran Berdasarkan Instalasi */}
           <InstalasiPengeluaran />
         </div>
       </div>
@@ -27,15 +27,15 @@ const Pengeluaran = () => {
       {/* Row 1 */}
       <div className="flex flex-row gap-3 pb-3">
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pengeluaran Berdasarkan Rekanan (Klaim Asuransi)</p>
+        {/* Pengeluaran Berdasarkan Rekanan (Klaim Asuransi) */}
           <KlaimAsuransi />
         </div>
         <div className="grow basis-1/3 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pengeluaran Berdasarkan Jenis Produk</p>       
+        {/* Pengeluaran Berdasarkan Jenis Produk */}
           <JenisProdukPengeluaran />
         </div>
         <div className="grow basis-1/5 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pengeluaran Berdasarkan Cara bayar</p>
+        {/* Pengeluaran Berdasarkan Cara bayar */}
           <CaraBayar />
         </div>
       </div>

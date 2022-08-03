@@ -1,4 +1,7 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Tooltip as Tlp } from '@mui/material';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 
 const DataFormater = (number) => {
   if(number > 1000000000){
@@ -23,11 +26,50 @@ const data = [
   // { month: 'Agu', pengajuan: 35000000, realisasi: 28000000, },
 ];
 
+var formatter = new Intl.NumberFormat("id-ID", {
+	style: "currency",
+	currency: "IDR",
+});
+
+function GetSymbol(value) {
+  if (value > 0) {
+    return ("↗"+Math.abs(value));
+  } else if (value < 0) {
+    return ("↘"+Math.abs(value));
+  } else {
+    return ("⇋"+Math.abs(value));
+  }
+}
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip bg-gray-100 border p-3">
+        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
+        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        <p className="intro text-sm">{`Jumlah : ${formatter.format(payload[0].value)}`}</p>
+      </div>
+    );
+  }
+  return null;
+};
 
 const KlaimAsuransi = () => {
   return (
     <div className='KlaimAsuransi'>
-			<ResponsiveContainer width="99%" height={270}>
+      <div className="title flex">
+        <p className='pb-2'>Pengeluaran Berdasarkan Rekanan (Klaim Asuransi)</p>
+        <Tlp title="Trend" placement="right">
+          <sup className="flex text-sm pt-1 cursor-default">
+          <IoMdArrowDropdown className="text=lg" />
+            16.5%
+          </sup>
+        </Tlp>
+      </div>
+      <sup className="flex text-sm pl-2 cursor-default">
+        Predict : <HiOutlineChevronDoubleDown /> 15.4%
+      </sup>
+			<ResponsiveContainer width="99%" height={250}>
       <AreaChart
           width={500}
           height={400}

@@ -1,24 +1,27 @@
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import PropTypes from 'prop-types';
+import { Tooltip as Tlp } from '@mui/material';
+import { IoMdArrowDropup } from 'react-icons/io';
+import { CgArrowsExchange } from 'react-icons/cg';
 
 const data = [
-	{ name: 'Rawat Inap', total: 80 },
-	{ name: 'IGD', total: 60 },
-	{ name: 'Rawat Jalan', total: 64 },
-	{ name: 'Radiologi', total: 83 },
-	{ name: 'ICU', total: 32 },
-	{ name: 'Bedah', total: 55 },
-	{ name: 'Rehabilitasi', total: 88 },
-	{ name: 'Anestesi', total: 55 },
-	{ name: 'Ibu & Anak', total: 41 },
-	{ name: 'Farmasi', total: 24 },
-	{ name: 'Laboratorium', total: 59 },
-	{ name: 'Gizi', total: 38 },
-	{ name: 'SIMRS', total: 32 },
-	{ name: 'Tata Usaha', total: 41 },
-	{ name: 'HRD', total: 97 },
-	{ name: 'Keperawatan', total: 78 },
-	{ name: 'Apotek', total: 53 },
+	{ name: 'Rawat Inap', total: 80, trend: 0.5, pred: 0.0 },
+	{ name: 'IGD', total: 60, trend: 0.0, pred: 0.0 },
+	{ name: 'Rawat Jalan', total: 64, trend: 0.0, pred: 0.0 },
+	{ name: 'Radiologi', total: 83, trend: 0.0, pred: 0.0 },
+	{ name: 'ICU', total: 32, trend: 0.5, pred: 0.0 },
+	{ name: 'Bedah', total: 55, trend: 0.0, pred: 0.0 },
+	{ name: 'Rehabilitasi', total: 88, trend: 0.0, pred: 0.0 },
+	{ name: 'Anestesi', total: 55, trend: 0.0, pred: 0.0 },
+	{ name: 'Ibu & Anak', total: 41, trend: 0.0, pred: 0.0 },
+	{ name: 'Farmasi', total: 24, trend: 0.0, pred: 0.0 },
+	{ name: 'Laboratorium', total: 59, trend: 0.5, pred: 0.0 },
+	{ name: 'Gizi', total: 38, trend: 0.0, pred: 0.0 },
+	{ name: 'SIMRS', total: 32, trend: 0.0, pred: 0.0 },
+	{ name: 'Tata Usaha', total: 41, trend: 0.0, pred: 0.0 },
+	{ name: 'HRD', total: 97, trend: 0.0, pred: 0.0 },
+	{ name: 'Keperawatan', total: 78, trend: 0.0, pred: 0.0 },
+	{ name: 'Apotek', total: 53, trend: 0.0, pred: 0.0 },
 ];
 
 function CustomBarLabel(props) {
@@ -32,19 +35,54 @@ CustomBarLabel.propTypes = {
   payload: PropTypes.object,
 };
 
+function GetSymbol(value) {
+	if (value > 0) {
+	  return ("↗"+Math.abs(value));
+	} else if (value < 0) {
+	  return ("↘"+Math.abs(value));
+	} else {
+	  return ("⇋"+Math.abs(value));
+	}
+  }
+  
+  const CustomTooltip = ({ active, payload, label }) => {
+	if (active && payload && payload.length) {
+	  return (
+		<div className="custom-tooltip bg-gray-100 border p-3">
+		  <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
+		  <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+		  <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
+		</div>
+	  );
+	}
+	return null;
+  };
+  
 const InstalasiPegawai = () => {
   return (
     <div className="InstalasiPegawai">
-			<ResponsiveContainer width="99%" height={250}>
+			<div className="title flex">
+        <p className='pb-2'>Pegawai Berdasarkan Instalasi</p>
+        <Tlp title="Trend" placement="right">
+          <sup className="flex text-sm pt-1 cursor-default">
+          <IoMdArrowDropup className="text=lg" />
+            1.5%
+          </sup>
+        </Tlp>
+      </div>
+      <sup className="flex text-sm pl-2 cursor-default">
+        Predict : <CgArrowsExchange /> 0%
+      </sup>
+			<ResponsiveContainer width="99%" height={230}>
 				<BarChart
 					width={500}
 					height={300}
 					data={data}
-					margin={{ top: 10, right: 10, left: 10, bottom: 5, }}
+					margin={{ top: 0, right: 10, left: 10, bottom: 0, }}
 					className='text-[10px]'
 				>
 					<XAxis dataKey="name" interval={0} />
-					<Tooltip wrapperStyle={{fontSize: "15px"}} />
+					<Tooltip wrapperStyle={{fontSize: "15px"}} content={<CustomTooltip />} />
 					<Bar dataKey="total" name='Total' barSize={30} fill="#38b497" radius={[9, 9, 0, 0]} label={<CustomBarLabel />}/>
 				</BarChart>
 			</ResponsiveContainer>

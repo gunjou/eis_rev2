@@ -1,38 +1,65 @@
 import React from 'react'
+import { HiOutlineChevronDoubleUp } from 'react-icons/hi';
+import { IoMdArrowDropup } from 'react-icons/io';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, } from "recharts";
+import { Tooltip as Tlp } from '@mui/material';
   
 const data = [
-    { name: "< 5", laki_laki: 65, perempuan: 143, total: 208 },
-    { name: "5-11", laki_laki: 57, perempuan: 64, total: 111 },
-    { name: "12-16", laki_laki: 117, perempuan: 35, total: 142 },
-    { name: "17-25", laki_laki: 60, perempuan: 137, total: 197 },
-    { name: "26-35", laki_laki: 56, perempuan: 74, total: 130 },
-    { name: "36-45", laki_laki: 119, perempuan: 154, total: 273 },
-    { name: "46-55", laki_laki: 97, perempuan: 97, total: 194 },
-    { name: "56-65", laki_laki: 166, perempuan: 79, total: 245 },
-    { name: "65 >", laki_laki: 134, perempuan: 62, total: 196 },
+    { name: "< 5", laki_laki: 65, perempuan: 143, total: 208, trend: 3.5, pred: 6.7 },
+    { name: "5-11", laki_laki: 57, perempuan: 64, total: 111, trend: 6.9, pred: 9.8 },
+    { name: "12-16", laki_laki: 117, perempuan: 35, total: 142, trend: -1.9, pred: 6 },
+    { name: "17-25", laki_laki: 60, perempuan: 137, total: 197, trend: 5.9, pred: 11.5 },
+    { name: "26-35", laki_laki: 56, perempuan: 74, total: 130, trend: 7, pred: 10.9 },
+    { name: "36-45", laki_laki: 119, perempuan: 154, total: 273, trend: 0.3, pred: -5.8 },
+    { name: "46-55", laki_laki: 97, perempuan: 97, total: 194, trend: 4.4, pred: 3.7 },
+    { name: "56-65", laki_laki: 166, perempuan: 79, total: 245, trend: 7.1, pred: -2.4 },
+    { name: "65 >", laki_laki: 134, perempuan: 62, total: 196, trend: 9 , pred: 6.1 },
   ];
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip bg-gray-100 border p-3">
-          <p className="label pb-2">{`${label} Tahun : ${
-            payload[0].value + payload[1].value
-          }`}</p>
-          <p className="intro text-black text-sm">{`Laki-laki : ${payload[0].value}`}</p>
-          <p className="intro text-black text-sm">{`Perempuan : ${payload[1].value}`}</p>
-        </div>
-      );
+  function GetSymbol(value) {
+    if (value > 0) {
+      return ("↗"+Math.abs(value));
+    } else if (value < 0) {
+      return ("↘"+Math.abs(value));
+    } else {
+      return ("⇋"+Math.abs(value));
     }
-  
-    return null;
-  };
+  }
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip bg-gray-100 border p-3">
+        <p className="label pb-2">{`${label} Tahun : ${
+          payload[0].value + payload[1].value
+        }`}</p>
+        <p className="intro text-xs">{`Trend ${GetSymbol(payload[0].payload.trend)}%`}</p>
+        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        <p className="intro text-black text-sm">{`Laki-laki : ${payload[0].value}`}</p>
+        <p className="intro text-black text-sm">{`Perempuan : ${payload[1].value}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 const AgeGender = () => {
   return (
     <div className="AgeGender">
-        <ResponsiveContainer width="99%" height={100}>
+      <div className="title flex">
+        <p className='pb-2'>Kunjungan Umur dan Jenis Kelamin</p>
+        <Tlp title="Trend" placement="right">
+          <sup className="flex text-sm pt-1 cursor-default">
+          <IoMdArrowDropup className="text=lg" />
+          14.3%
+          </sup>
+        </Tlp>
+      <p className="flex text-sm pl-5 cursor-default">
+        Predict : <HiOutlineChevronDoubleUp /> 5.7%
+      </p>
+      </div>
+      <ResponsiveContainer width="99%" height={100}>
         <BarChart
           width={500}
           height={300}
