@@ -1,7 +1,26 @@
-import React from "react";
-import { IoMdArrowDropup } from "react-icons/io";
-import { CgArrowsExchange } from "react-icons/cg";
 import { Tooltip } from "@mui/material";
+import { HiOutlineChevronDoubleDown, HiOutlineChevronDoubleUp } from "react-icons/hi";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+
+function GetTrend(value) {
+  if (value > 0) {
+    return (<span className="text-green-300 flex"><IoMdArrowDropup/> {Math.abs(value)}%</span>);
+  } else if (value < 0) {
+    return (<span className="text-red-500 flex"><IoMdArrowDropdown/> {Math.abs(value)}%</span>);
+  } else {
+    return (<span className="text-white flex"> ⇋ {Math.abs(value)}%</span>);
+  }
+}
+
+function GetPredict(value) {
+  if (value > 0) {
+    return (<span className="text-green-300 flex"><HiOutlineChevronDoubleUp/> {Math.abs(value)}%</span>);
+  } else if (value < 0) {
+    return (<span className="text-red-500 flex"><HiOutlineChevronDoubleDown/> {Math.abs(value)}%</span>);
+  } else {
+    return (<span className="text-white flex"> ⇋ {Math.abs(value)}%</span>);
+  }
+}
 
 const CardEmployee = ({type}) => {
   let card;
@@ -9,7 +28,7 @@ const CardEmployee = ({type}) => {
 		case "semua":
 				card = { title: "Semua Pegawai", value: 1202, trend: 1.5, predict: 0.0, fill: "#b494ff"}; break;
     case "asn":
-        card = { title: "Aparatur Sipil Negara", value: 840, trend: 4.0, predict: 0.0, fill: "#df3493"}; break;
+        card = { title: "Aparatur Sipil Negara", value: 840, trend: 4.0, predict: 1.0, fill: "#F78983"}; break;
     case "pttd":
         card = { title: "Pegawai Tidak Tetap Daerah", value: 5, trend: 0.5, predict: 0.0, fill: "#6e9ffe"}; break;
     case "non-asn":
@@ -29,8 +48,7 @@ const CardEmployee = ({type}) => {
 						{card.title}
             <Tooltip title="Trend" placement="top">
               <span className="flex text-sm absolute right-2 top-10">
-                <IoMdArrowDropup className="text-base"/>
-                {card.trend}%
+                {GetTrend(card.trend)}
               </span>
             </Tooltip>
 					</div>
@@ -42,8 +60,7 @@ const CardEmployee = ({type}) => {
             <p className="absolute right-2 bottom-2 flex">
               <span className="text-sm pr-1.5">Predict :</span>
               <span className="flex text-sm">
-                <CgArrowsExchange className="text-base"/>
-                {card.predict}%
+                {GetPredict(card.predict)}
               </span>
             </p>
           </div>

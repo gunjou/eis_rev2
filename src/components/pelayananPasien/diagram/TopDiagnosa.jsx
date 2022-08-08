@@ -1,8 +1,6 @@
-import React from 'react'
-import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
-import { IoMdArrowDropdown } from 'react-icons/io';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, } from 'recharts';
 import { Tooltip as Tlp } from '@mui/material';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
 
 
 const dataTopDiagnosa = [
@@ -10,30 +8,20 @@ const dataTopDiagnosa = [
 	{ name: 'Necrosis of pulp', total: 26969, trend: -23.4, pred: -12.1, },
 	{ name: 'Chronic gingivitis', total: 13194, trend: -5.8, pred: -10.8, },
 	{ name: 'Ispa', total: 12608, trend: -4.2, pred: -10.2, },
-	{ name: 'perangkat ortodensi', total: 12273, trend: -12.5, pred: -0.1, },
-	{ name: 'Periapical abscess', total: 7788, trend: -7.2, pred: -8.5, },
+	{ name: 'perangkat ortodensi', total: 12273, trend: -12.5, pred: 0.1, },
+	{ name: 'Periapical abscess', total: 7788, trend: -7.2, pred: 8.5, },
 	{ name: 'Chronic periodontitis', total: 4813, trend: -23.8, pred: -27.4, },
 	{ name: 'Impacted teeth', total: 4371, trend: -12.2, pred: -25.1, },
 	{ name: 'Chronic apical periodontitis', total: 4365, trend: -9, pred: -15.2, },
 	{ name: 'Hipertensi Esensial', total: 4363, trend: -3.3, pred: -23.5, },
 ];
 
-function GetSymbol(value) {
-  if (value > 0) {
-    return ("↗"+Math.abs(value));
-  } else if (value < 0) {
-    return ("↘"+Math.abs(value));
-  } else {
-    return ("⇋"+Math.abs(value));
-  }
-}
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip bg-gray-100 border p-3">
-        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        {TlpTittle(payload[0].payload.trend, label)}
+        {TlpPredict(payload[0].payload.pred)}
         <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
       </div>
     );
@@ -48,13 +36,12 @@ const TopDiagnosa = () => {
         <p className='pb-2'>Pelayanan Berdasarkan Top Diagnosa</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropdown className="text=lg" />
-            12.3%
+            {GetTrend(-12.3)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <HiOutlineChevronDoubleDown /> 5.1%
+        Predict : {GetPredict(-5.1)}
       </sup>
       <ResponsiveContainer width="99%" height={300}>
         <BarChart

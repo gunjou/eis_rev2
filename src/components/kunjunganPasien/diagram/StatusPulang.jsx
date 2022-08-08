@@ -1,7 +1,6 @@
-import { HiOutlineChevronDoubleUp } from "react-icons/hi";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { Tooltip as Tlp } from '@mui/material';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
 
 
 const data = [
@@ -15,22 +14,12 @@ const data = [
   { name: "Meninggal", value: 68, trend: 11, pred: 15.1 },
 ];
 
-function GetSymbol(value) {
-  if (value > 0) {
-    return ("↗"+Math.abs(value));
-  } else if (value < 0) {
-    return ("↘"+Math.abs(value));
-  } else {
-    return ("⇋"+Math.abs(value));
-  }
-}
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip bg-gray-100 border p-3">
-        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        {TlpTittle(payload[0].payload.trend, label)}
+        {TlpPredict(payload[0].payload.pred)}
         <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
       </div>
     );
@@ -45,12 +34,11 @@ const StatusPulang = () => {
         <p className='pb-2'>Status Pulang</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropdown className="text=lg" />
-          3.9%
+            {GetTrend(-3.9)}
           </sup>
         </Tlp>
-      <p className="flex text-sm pl-5 cursor-default">
-        Predict : <HiOutlineChevronDoubleUp /> 4.0%
+      <p className="flex text-xs pl-5 cursor-default">
+        Predict : {GetPredict(4.0)}
       </p>
       </div>
       <ResponsiveContainer width="99%" height={100}>

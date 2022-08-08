@@ -1,8 +1,6 @@
-import React from 'react'
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Tooltip as Tlp } from '@mui/material';
-import { IoMdArrowDropdown } from 'react-icons/io';
-import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
 
 const data = [
   { name: "Rawat Inap", value: 2900000, trend: 0.1, pred: 16.4, },
@@ -20,22 +18,12 @@ var formatter = new Intl.NumberFormat("id-ID", {
 	currency: "IDR",
 });
 
-function GetSymbol(value) {
-  if (value > 0) {
-    return ("↗"+Math.abs(value));
-  } else if (value < 0) {
-    return ("↘"+Math.abs(value));
-  } else {
-    return ("⇋"+Math.abs(value));
-  }
-}
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip bg-gray-100 border p-3">
-        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        {TlpTittle(payload[0].payload.trend, label)}
+        {TlpPredict(payload[0].payload.pred)}
         <p className="intro text-sm">{`Jumlah : ${formatter.format(payload[0].value)}`}</p>
       </div>
     );
@@ -50,13 +38,12 @@ const InstalasiPengeluaran = () => {
         <p className='pb-2'>Pengeluaran Berdasarkan Instalasi</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropdown className="text=lg" />
-            5.9%
+            {GetTrend(-5.9)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <HiOutlineChevronDoubleDown /> 3.7%
+        Predict : {GetPredict(-3.7)}
       </sup>
 			<ResponsiveContainer width="99%" height={270}>
         <BarChart

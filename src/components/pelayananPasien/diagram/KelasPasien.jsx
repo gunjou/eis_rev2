@@ -1,7 +1,6 @@
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
 import { Tooltip as Tlp } from '@mui/material';
-import { IoMdArrowDropup } from 'react-icons/io';
-import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
 
 
 const data = [
@@ -15,22 +14,12 @@ const data = [
   { name: "Vip Standar", value: 1790, trend: 6  , pred: 6.6 , },
 ];
 
-function GetSymbol(value) {
-  if (value > 0) {
-    return ("↗"+Math.abs(value));
-  } else if (value < 0) {
-    return ("↘"+Math.abs(value));
-  } else {
-    return ("⇋"+Math.abs(value));
-  }
-}
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip bg-gray-100 border p-3">
-        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        {TlpTittle(payload[0].payload.trend, label)}
+        {TlpPredict(payload[0].payload.pred)}
         <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
       </div>
     );
@@ -51,16 +40,15 @@ const KelasPasien = () => {
         </select>
       </label> */}
       <div className="title flex">
-        <p className='pb-2'>Pelayanan Berdasarkan Kelas</p>
+        <p className='pb-2'>Pelayanan Berdasarkan Kelas Perawatan</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropup className="text=lg" />
-            12.3%
+            {GetTrend(12.3)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <HiOutlineChevronDoubleDown /> 5.1%
+        Predict : {GetPredict(-5.1)}
       </sup>
 			<ResponsiveContainer width="99%" height={230}>
         <BarChart

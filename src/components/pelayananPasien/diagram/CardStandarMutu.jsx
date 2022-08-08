@@ -1,11 +1,10 @@
 import Tooltip from '@mui/material/Tooltip';
 import { BsInfoCircleFill } from "react-icons/bs";
 import { FaBed, FaBookDead, FaPeopleArrows } from "react-icons/fa";
-import { HiOutlineChevronDoubleDown } from "react-icons/hi";
-import { IoMdArrowDropup } from "react-icons/io";
 import { IoTime } from "react-icons/io5";
 import { MdPersonOff } from "react-icons/md";
 import { RiArrowLeftRightFill } from "react-icons/ri";
+import { GetPredict, GetTrend } from '../../GetIndicator';
 
 const text = [
   `BOR (Bed Occupancy Ratio), BOR yang ideal adalah antara 60-85%`,
@@ -21,17 +20,17 @@ const CardStandarMutu = ({type}) => {
 
   switch (type) {
     case "bor":
-      data = { icon: <FaBed />, title: "BOR", value: "65.2", fill: "[#aaca55]", detail: text[0], }; break;
+      data = { icon: <FaBed />, title: "BOR", value: "65.2", trend: -10.6, predict: 2.6, fill: "[#aaca55]", detail: text[0], }; break;
     case "alos":
-      data = { icon: <IoTime />, title: "ALOS", value: "6.4", fill: "[#aaca55]", detail: text[1], }; break;
+      data = { icon: <IoTime />, title: "ALOS", value: "6.4", trend: -3.2, predict: -2.9, fill: "[#aaca55]", detail: text[1], }; break;
     case "toi":
-      data = { icon: <FaPeopleArrows />, title: "TOI", value: "2.8", fill: "[#aaca55]", detail: text[2], }; break;
+      data = { icon: <FaPeopleArrows />, title: "TOI", value: "2.8", trend: -8.4, predict: 5, fill: "[#aaca55]", detail: text[2], }; break;
     case "bto":
-      data = { icon: <RiArrowLeftRightFill />, title: "BTO", value: "40.0", fill: "[#aaca55]", detail: text[3], }; break;
+      data = { icon: <RiArrowLeftRightFill />, title: "BTO", value: "40.0", trend: 0.4, predict: -8.4, fill: "[#aaca55]", detail: text[3], }; break;
     case "ndr":
-      data = { icon: <MdPersonOff />, title: "NDR", value: "50.5", fill: "[#aaca55]", detail: text[4], }; break;
+      data = { icon: <MdPersonOff />, title: "NDR", value: "50.5", trend: -0.2, predict: -2.8, fill: "[#aaca55]", detail: text[4], }; break;
     case "gdr":
-      data = { icon: <FaBookDead />, title: "GDR", value: "90.3", fill: "[#aaca55]", detail: text[5], }; break;
+      data = { icon: <FaBookDead />, title: "GDR", value: "90.3", trend: -7.1, predict: 7.8, fill: "[#aaca55]", detail: text[5], }; break;
     default:
       break;
   }
@@ -58,12 +57,12 @@ const CardStandarMutu = ({type}) => {
           {data.value}
           <Tooltip title="Trend" placement="top-start">
             <sup className="text-xs flex">
-            <IoMdArrowDropup />10.2%
+              {GetTrend(data.trend)}
             </sup>
           </Tooltip>
         </div>
         <Tooltip title="Predict" placement="right">
-          <div className="text-xs text-left pl-3 pb-1 flex absolute bottom-0 cursor-default"><HiOutlineChevronDoubleDown />15.7%</div>
+          <div className="text-xs text-left pl-3 pb-1 flex absolute bottom-0 cursor-default">{GetPredict(data.predict)}</div>
         </Tooltip>
       </div>
     </div>

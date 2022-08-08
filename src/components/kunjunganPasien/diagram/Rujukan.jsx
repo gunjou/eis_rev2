@@ -1,8 +1,6 @@
-import React from 'react'
-import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
-import { IoMdArrowDropdown } from 'react-icons/io';
-import { PieChart, Pie, Tooltip, Cell, Legend, ResponsiveContainer } from "recharts";
 import { Tooltip as Tlp } from '@mui/material';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
 
 
 const data = [
@@ -29,22 +27,12 @@ const COLORS = [
   "#ca5570",
 ];
 
-function GetSymbol(value) {
-  if (value > 0) {
-    return ("↗"+Math.abs(value));
-  } else if (value < 0) {
-    return ("↘"+Math.abs(value));
-  } else {
-    return ("⇋"+Math.abs(value));
-  }
-}
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip bg-gray-100 border p-3">
-        <p className="label">{`${payload[0].payload.name} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        {TlpTittle(payload[0].payload.trend, payload[0].payload.name)}
+        {TlpPredict(payload[0].payload.pred)}
         <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
       </div>
     );
@@ -56,16 +44,15 @@ const Rujukan = () => {
   return (
     <div className="Rujukan">
       <div className="title flex">
-        <p className='pb-2'>Kunjungan Berdasarkan Kelompok</p>
+        <p className='pb-2'>Kunjungan Berdasarkan Rujukan</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropdown className="text=lg" />
-          10.4%
+            {GetTrend(-10.4)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <HiOutlineChevronDoubleDown /> 4.7%
+        Predict : {GetPredict(-10.7)}
       </sup>
       <ResponsiveContainer width="99%" height={240}>
         <PieChart width={100} height={210}>

@@ -1,7 +1,6 @@
-import React from "react";
-import { CgArrowsExchange } from "react-icons/cg";
-import { PieChart, Pie, Tooltip, Cell, Legend, ResponsiveContainer } from "recharts";
 import { Tooltip as Tlp } from '@mui/material';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
 
 const data1 = [
 	{ name: 'S1 Profesi', value: 210, trend: 0.0, pred: 0.0, },
@@ -10,12 +9,12 @@ const data1 = [
 	{ name: 'SLTA', value: 75, trend: 0.0, pred: 0.0, },
 	{ name: 'S2', value: 75, trend: 0.0, pred: 0.0, },
 	{ name: 'SPK', value: 60, trend: 0.0, pred: 0.0, },
-	{ name: 'NERS', value: 100, trend: 0.0, pred: 0.0, },
+	{ name: 'NERS', value: 100, trend: 1.0, pred: 0.0, },
 ];
 
 const data2 = [
   { name: "Laki-laki", value: 364, trend: 0.0, pred: 0.0, },
-  { name: "Perempuan", value: 510, trend: 0.0, pred: 0.0, },
+  { name: "Perempuan", value: 510, trend: 1.0, pred: 0.0, },
 ];
 
 const COLORS = [
@@ -33,23 +32,13 @@ const COLORS2 = [
 	"#3AB0FF",
 	"#F57CAC",
 ];
-
-function GetSymbol(value) {
-	if (value > 0) {
-	  return ("↗"+Math.abs(value));
-	} else if (value < 0) {
-	  return ("↘"+Math.abs(value));
-	} else {
-	  return ("⇋"+Math.abs(value));
-	}
-}
   
-  const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label }) => {
 	if (active && payload && payload.length) {
 	  return (
 		<div className="custom-tooltip bg-gray-100 border p-3">
-		  <p className="label">{`${payload[0].payload.name} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-		  <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+		  {TlpTittle(payload[0].payload.trend, payload[0].payload.name)}
+		  {TlpPredict(payload[0].payload.pred)}
 		  <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
 		</div>
 	  );
@@ -64,13 +53,12 @@ const EducationGender = () => {
         <p className='pb-2'>Pendidikan dan Jenis Kelamin</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <CgArrowsExchange className="text=lg" />
-            0.0%
+						{GetTrend(0.0)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <CgArrowsExchange /> 0.0%
+        Predict : {GetPredict(0.0)}
       </sup>
 			<ResponsiveContainer width="99%" height={240}>
 				<PieChart width={400} height={270}>

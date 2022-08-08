@@ -1,8 +1,6 @@
-import React from 'react'
-import { PieChart, Pie, Tooltip, Cell, Legend, ResponsiveContainer } from "recharts";
 import { Tooltip as Tlp } from '@mui/material';
-import { IoMdArrowDropup } from 'react-icons/io';
-import { HiOutlineChevronDoubleUp } from 'react-icons/hi';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
 
 
 const data = [
@@ -26,22 +24,12 @@ const COLORS = [
   "#94d9ff",
 ];
 
-function GetSymbol(value) {
-	if (value > 0) {
-	  return ("↗"+Math.abs(value));
-	} else if (value < 0) {
-	  return ("↘"+Math.abs(value));
-	} else {
-	  return ("⇋"+Math.abs(value));
-	}
-}
-  
   const CustomTooltip = ({ active, payload, label }) => {
 	if (active && payload && payload.length) {
 	  return (
 		<div className="custom-tooltip bg-gray-100 border p-3">
-		  <p className="label">{`${payload[0].payload.name} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-		  <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+		  {TlpTittle(payload[0].payload.trend, payload[0].payload.name)}
+		  {TlpPredict(payload[0].payload.pred)}
 		  <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
 		</div>
 	  );
@@ -56,13 +44,12 @@ const StatusEmployee = () => {
         <p className='pb-2'>Status Pegawai</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropup className="text=lg" />
-            1.3%
+            {GetTrend(1.3)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <HiOutlineChevronDoubleUp /> 2.1%
+        Predict : {GetPredict(2.1)}
       </sup>
 			<ResponsiveContainer width="99%" height={230}>
         <PieChart width={100} height={210}>

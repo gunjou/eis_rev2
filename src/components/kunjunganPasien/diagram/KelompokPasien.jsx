@@ -1,8 +1,6 @@
-import React from "react";
-import { HiOutlineChevronDoubleUp } from "react-icons/hi";
-import { IoMdArrowDropup } from "react-icons/io";
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, YAxis, } from "recharts";
 import { Tooltip as Tlp } from '@mui/material';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
 
 
 const data = [
@@ -15,22 +13,12 @@ const data = [
   { name: "JASA RAHARJA", value: 669, trend: -3.7, pred: -2.4, },
 ];
 
-function GetSymbol(value) {
-  if (value > 0) {
-    return ("↗"+Math.abs(value));
-  } else if (value < 0) {
-    return ("↘"+Math.abs(value));
-  } else {
-    return ("⇋"+Math.abs(value));
-  }
-}
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip bg-gray-100 border p-3">
-        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        {TlpTittle(payload[0].payload.trend, label)}
+        {TlpPredict(payload[0].payload.pred)}
         <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
       </div>
     );
@@ -42,16 +30,15 @@ const KelompokPasien = () => {
   return (
     <div className="KelompokPasien">
       <div className="title flex">
-        <p className='pb-2'>Kunjungan Berdasarkan Kelompok</p>
+        <p className='pb-2'>Kunjungan Berdasarkan Kelompok Pasien</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropup className="text=lg" />
-          10.4%
+          {GetTrend(10.4)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <HiOutlineChevronDoubleUp /> 4.7%
+        Predict : {GetPredict(4.7)}
       </sup>
       <ResponsiveContainer width="99%" height={240}>
 			<BarChart

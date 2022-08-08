@@ -1,8 +1,6 @@
-import React from 'react'
-import { HiOutlineChevronDoubleUp } from 'react-icons/hi';
-import { IoMdArrowDropup } from 'react-icons/io';
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, } from "recharts";
 import { Tooltip as Tlp } from '@mui/material';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { GetPredict, GetTrend, TlpTittle } from '../../GetIndicator';
   
 const data = [
     { name: "< 5", laki_laki: 65, perempuan: 143, total: 208, trend: 3.5, pred: 6.7 },
@@ -16,16 +14,6 @@ const data = [
     { name: "65 >", laki_laki: 134, perempuan: 62, total: 196, trend: 9 , pred: 6.1 },
   ];
 
-  function GetSymbol(value) {
-    if (value > 0) {
-      return ("↗"+Math.abs(value));
-    } else if (value < 0) {
-      return ("↘"+Math.abs(value));
-    } else {
-      return ("⇋"+Math.abs(value));
-    }
-  }
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
@@ -33,14 +21,13 @@ const CustomTooltip = ({ active, payload, label }) => {
         <p className="label pb-2">{`${label} Tahun : ${
           payload[0].value + payload[1].value
         }`}</p>
-        <p className="intro text-xs">{`Trend ${GetSymbol(payload[0].payload.trend)}%`}</p>
-        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        <span className="intro text-xs flex">Trend: {TlpTittle(payload[0].payload.trend)}</span>
+        <span className="intro text-xs flex">Predict: {TlpTittle(payload[0].payload.pred)}</span>
         <p className="intro text-black text-sm">{`Laki-laki : ${payload[0].value}`}</p>
         <p className="intro text-black text-sm">{`Perempuan : ${payload[1].value}`}</p>
       </div>
     );
   }
-
   return null;
 };
 
@@ -51,12 +38,11 @@ const AgeGender = () => {
         <p className='pb-2'>Kunjungan Umur dan Jenis Kelamin</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropup className="text=lg" />
-          14.3%
+            {GetTrend(14.3)}
           </sup>
         </Tlp>
-      <p className="flex text-sm pl-5 cursor-default">
-        Predict : <HiOutlineChevronDoubleUp /> 5.7%
+      <p className="flex text-xs pl-5 cursor-default">
+        Predict : {GetPredict(5.7)}
       </p>
       </div>
       <ResponsiveContainer width="99%" height={100}>

@@ -1,8 +1,6 @@
-import React from "react";
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, YAxis, } from "recharts";
 import { Tooltip as Tlp } from '@mui/material';
-import { HiOutlineChevronDoubleDown } from "react-icons/hi";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
 
 const data = [
   { name: "UMUM", value: 2290, trend: -2.9, pred: 7, },
@@ -14,22 +12,12 @@ const data = [
   { name: "JASA RAHARJA", value: 669, trend: -3.7, pred: -2.4, },
 ];
 
-function GetSymbol(value) {
-  if (value > 0) {
-    return ("↗"+Math.abs(value));
-  } else if (value < 0) {
-    return ("↘"+Math.abs(value));
-  } else {
-    return ("⇋"+Math.abs(value));
-  }
-}
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip bg-gray-100 border p-3">
-        <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-        <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+        {TlpTittle(payload[0].payload.trend, label)}
+        {TlpPredict(payload[0].payload.pred)}
         <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
       </div>
     );
@@ -41,16 +29,15 @@ const KelompokPasien = () => {
   return (
     <div className="KelompokPasien">
       <div className="title flex">
-        <p className='pb-2'>Pelayanan Berdasarkan Kelompok</p>
+        <p className='pb-2'>Pelayanan Berdasarkan Kelompok Pasien</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropdown className="text=lg" />
-            12.3%
+            {GetTrend(-12.3)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <HiOutlineChevronDoubleDown /> 5.1%
+        Predict : {GetPredict(-5.1)}
       </sup>
       <ResponsiveContainer width="99%" height={260}>
 			<BarChart

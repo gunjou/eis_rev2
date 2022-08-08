@@ -1,8 +1,7 @@
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import PropTypes from 'prop-types';
 import { Tooltip as Tlp } from '@mui/material';
-import { IoMdArrowDropup } from 'react-icons/io';
-import { CgArrowsExchange } from 'react-icons/cg';
+import PropTypes from 'prop-types';
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
 
 const data = [
 	{ name: 'Rawat Inap', total: 80, trend: 0.5, pred: 0.0 },
@@ -35,22 +34,12 @@ CustomBarLabel.propTypes = {
   payload: PropTypes.object,
 };
 
-function GetSymbol(value) {
-	if (value > 0) {
-	  return ("↗"+Math.abs(value));
-	} else if (value < 0) {
-	  return ("↘"+Math.abs(value));
-	} else {
-	  return ("⇋"+Math.abs(value));
-	}
-  }
-  
-  const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label }) => {
 	if (active && payload && payload.length) {
 	  return (
 		<div className="custom-tooltip bg-gray-100 border p-3">
-		  <p className="label">{`${label} ${GetSymbol(payload[0].payload.trend)}%`}</p>
-		  <p className="intro pb-2 text-xs">{`Predict : ${GetSymbol(payload[0].payload.pred)}%`}</p>
+		  {TlpTittle(payload[0].payload.trend, payload[0].payload.name)}
+		  {TlpPredict(payload[0].payload.pred)}
 		  <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
 		</div>
 	  );
@@ -65,13 +54,12 @@ const InstalasiPegawai = () => {
         <p className='pb-2'>Pegawai Berdasarkan Instalasi</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-          <IoMdArrowDropup className="text=lg" />
-            1.5%
+						{GetTrend(1.5)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : <CgArrowsExchange /> 0%
+        Predict : {GetPredict(0.0)}
       </sup>
 			<ResponsiveContainer width="99%" height={230}>
 				<BarChart
