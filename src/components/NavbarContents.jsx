@@ -96,7 +96,7 @@ useOutsideAlerter(wrapperRef);
 						isClearable={true}
 						placeholderText="Masukkan rentang tanggal"
 						dateFormat="dd/MM/yyyy"
-						className="block w-full pl-1 py-2 border-2 rounded-lg bg-[#eeeff1] border-[#eeeff1] focus:outline-none sm:text-sm transition duration-150 ease-in-out"
+						className="block w-42 pl-1 py-2 border-2 rounded-lg bg-[#eeeff1] border-[#eeeff1] focus:outline-none sm:text-sm transition duration-150 ease-in-out"
 						/>
 				</div>
 				{/* Filter Wilayah */}
