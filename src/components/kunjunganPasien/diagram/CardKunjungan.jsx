@@ -99,13 +99,23 @@ const CardKunjungan = ({type}) => {
             {data.title === "Pasien Rawat Jalan"
               ? 
               <div className="table-detail">
-              <Box sx={{ width: '100%', height: 400 }}>
+              <Box sx={{ width: '100%', height: 420 }}>
                 <DataGrid
                 rows={rows}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                components={{ Toolbar: GridToolbar, }}
+                // components={{ Toolbar: GridToolbar, }}
+                disableColumnFilter
+                disableColumnSelector
+                disableDensitySelector
+                disableExport
+                components={{ Toolbar: GridToolbar }}
+                componentsProps={{
+                  toolbar: {
+                    showQuickFilter: true,
+                    quickFilterProps: { debounceMs: 500 },
+                  },}}
                 disableVirtualization
                 />
               </Box>

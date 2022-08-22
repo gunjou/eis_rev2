@@ -3,40 +3,40 @@ export const columns = [
   {
     field: 'tgl_registrasi',
     headerName: 'Tgl Registrasi',
-    width: 140,
+    width: 180,
     type: 'date',
   },
   {
     field: 'no_registrasi',
     headerName: 'No Registrasi',
-    minWidth: 140,
+    minWidth: 180,
   },
   {
     field: 'no_rm',
     headerName: 'No RM',
-    width: 140,
+    width: 180,
   },
   {
     field: 'nama_pasien',
     headerName: 'Nama Pasien',
-    width: 220,
+    width: 350,
   },
   {
     field: 'ruangan',
     headerName: 'Ruangan',
     width: 280,
   },
-  {
-    field: 'tgl_pulang',
-    headerName: 'Tgl Pulang',
-    type: 'number',
-    width: 140,
-  },
-  {
-    field: 'lama_rawat',
-    headerName: 'Lama Rawat',
-    width: 110,
-  },
+  // {
+  //   field: 'tgl_pulang',
+  //   headerName: 'Tgl Pulang',
+  //   type: 'number',
+  //   width: 140,
+  // },
+  // {
+  //   field: 'lama_rawat',
+  //   headerName: 'Lama Rawat',
+  //   width: 110,
+  // },
 ];
 
 // export const rows = [
