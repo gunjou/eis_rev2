@@ -32,15 +32,15 @@ const ListGroup = () => {
                     />
                   </div>
                   <div className="flip-box-back p-2 cursor-pointer">
-                    <h2 className="font-bold">{img.nama}</h2>
+                    <h2 className="font-bold pb-1">{img.nama}</h2>
                     <table className="text-left font-semibold">
                       <span className="text-[10pt] pl-1">
-                        <tr className="">
+                        <tr className="text=[12pt] pb-1">
                           <th className="">Type</th>
                           <th className="">Trend</th>
                           <th className="">Predict</th>
                         </tr>
-                        <tr>
+                        {/* <tr>
                           <td>Service</td>
                           <td></td>
                           <td></td>
@@ -54,6 +54,26 @@ const ListGroup = () => {
                           <td className="pl-4 pb-1">Kunjungan</td>
                           <td className="flex">32.3% ➚</td>
                           <td>12.0% ▲</td>
+                        </tr> */}
+                        <tr>
+                          <td>Kunjungan</td>
+                          <td className="flex pr-3">32.3% ➚</td>
+                          <td>12.0% ▲</td>
+                        </tr>
+                        <tr>
+                          <td>Pelayanan</td>
+                          <td className="flex pr-3">24.5% ➚</td>
+                          <td>10.3% ▲</td>
+                        </tr>
+                        <tr>
+                          <td>Pendapatan</td>
+                          <td className="flex">22.4% ➚</td>
+                          <td>5.8% ▼</td>
+                        </tr>
+                        <tr>
+                          <td>Pengeluaran</td>
+                          <td className="flex">13.9% ➚</td>
+                          <td>3.4% ▲</td>
                         </tr>
                         <tr>
                           <td>Inventory</td>
@@ -61,18 +81,8 @@ const ListGroup = () => {
                           <td>2.7% ▲</td>
                         </tr>
                         <tr>
-                          <td>Medical Record</td>
-                          <td className="flex">22.4% ➚</td>
-                          <td>5.8% ▼</td>
-                        </tr>
-                        <tr>
-                          <td>Finance</td>
-                          <td className="flex">13.9% ➚</td>
-                          <td>3.4% ▲</td>
-                        </tr>
-                        <tr>
                           <td>
-                            <pre>Human Resource{"  "}</pre>
+                            <pre>Kepegawaian {"  "}</pre>
                           </td>
                           <td className="flex">0.0% ⇋</td>
                           <td>0.0% ⇋</td>
