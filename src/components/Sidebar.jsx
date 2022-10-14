@@ -25,6 +25,13 @@ const nonactive = {
 
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(true);
+  const date = new Date();
+  const [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
+  const [dateFilter, setDateFilter] = useState({
+    startDate: `${year}-${month+1}-${day}`,
+    endDate: `${year}-${month+1}-${day}`,
+  });
+  const filterDate = `?tgl_awal=${dateFilter.startDate}&tgl_akhir=${dateFilter.endDate}`;
   return (
     <div className="Sidebar bg-white h-96 sticky top-0 z-30">
 			{!isOpen ? 
@@ -42,7 +49,7 @@ const Sidebar = () => {
 				<div className="items text-gray-700 ">
           <ul>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/live-reports" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/live-reports"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <div>
                   <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 ml-1.5 hover:bg-[#42a7b3]">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -51,32 +58,32 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/kunjungan" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/kunjungan"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <FaHospitalUser className="text-[23px]" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/pelayanan"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <RiStethoscopeLine className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/pendapatan" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/pendapatan"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <AiOutlineDownload className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/pengeluaran" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/pengeluaran"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <AiOutlineUpload className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/inventory" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/inventory"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <MdOutlineInventory2 className="text-2xl" />
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3] pl-0.5" >
-               <NavLink to="/kepegawaian" style={({ isActive }) => (isActive ? active : nonactive)}>
+               <NavLink to={"/kepegawaian"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <BsFileEarmarkPerson className="text-xl" />
               </NavLink>
             </li>
@@ -108,7 +115,7 @@ const Sidebar = () => {
 				<div className="items text-gray-700 ">
           <ul>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/live-reports" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/live-reports"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <div>
                   <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 ml-1.5 mr-1">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -118,37 +125,37 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/kunjungan" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/kunjungan"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <FaHospitalUser className="text-[23px]" />
                 <span className="pl-2">Kunjungan Pasien</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/pelayanan"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <RiStethoscopeLine className="text-2xl" />
                 <span className="pl-2">Pelayanan Pasien</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/pendapatan" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/pendapatan"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <AiOutlineDownload className="text-2xl" />
                 <span className="pl-2">Pendapatan</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/pengeluaran" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/pengeluaran"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <AiOutlineUpload className="text-2xl" />
                 <span className="pl-2">Pengeluaran</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3]" >
-              <NavLink to="/inventory" style={({ isActive }) => (isActive ? active : nonactive)}>
+              <NavLink to={"/inventory"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <MdOutlineInventory2 className="text-2xl" />
                 <span className="pl-2">Inventory</span>
               </NavLink>
             </li>
             <li className="item-center hover:text-[#42a7b3] pl-0.5" >
-               <NavLink to="/kepegawaian" style={({ isActive }) => (isActive ? active : nonactive)}>
+               <NavLink to={"/kepegawaian"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}>
                 <BsFileEarmarkPerson className="text-xl" />
                 <span className="pl-2.5">Kepegawaian</span>
               </NavLink>

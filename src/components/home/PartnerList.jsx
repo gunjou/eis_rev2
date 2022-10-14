@@ -1,33 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
 
 const PartnerList = ({type}) => {
-    let hospital;
+  let hospital;
+
+  const date = new Date();
+  const [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
+  const [dateFilter, setDateFilter] = useState({
+    startDate: `${year}-${month+1}-${day}`,
+    endDate: `${year}-${month+1}-${day}`,
+  });
+  const filterDate = `?tgl_awal=${dateFilter.startDate}&tgl_akhir=${dateFilter.endDate}`;
 
 	switch (type) {
 		case "partnerBaru":
 			hospital = [
-                { src: "logo_hospital/hospital09.png", alt: "hospital01", nama: "Rumah Sakit 01", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital02.png", alt: "hospital02", nama: "Rumah Sakit 02", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital03.png", alt: "hospital03", nama: "Rumah Sakit 03", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital04.png", alt: "hospital04", nama: "Rumah Sakit 04", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital05.png", alt: "hospital05", nama: "Rumah Sakit 05", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital06.png", alt: "hospital06", nama: "Rumah Sakit 06", url: "/#/live-reports" },
+                { src: "logo_hospital/hospital09.png", alt: "hospital01", nama: "Rumah Sakit 01", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital02.png", alt: "hospital02", nama: "Rumah Sakit 02", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital03.png", alt: "hospital03", nama: "Rumah Sakit 03", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital04.png", alt: "hospital04", nama: "Rumah Sakit 04", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital05.png", alt: "hospital05", nama: "Rumah Sakit 05", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital06.png", alt: "hospital06", nama: "Rumah Sakit 06", url: `/#/live-reports${filterDate}` },
               ]; break;
 		case "partnerLama":
 			hospital = [
-                { src: "logo_hospital/hospital36.png", alt: "hospital01", nama: "Rumah Sakit 07", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital08.png", alt: "hospital02", nama: "Rumah Sakit 08", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital10.png", alt: "hospital03", nama: "Rumah Sakit 09", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital11.png", alt: "hospital03", nama: "Rumah Sakit 10", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital12.png", alt: "hospital03", nama: "Rumah Sakit 11", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital13.png", alt: "hospital03", nama: "Rumah Sakit 12", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital14.png", alt: "hospital03", nama: "Rumah Sakit 13", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital15.png", alt: "hospital03", nama: "Rumah Sakit 14", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital16.png", alt: "hospital03", nama: "Rumah Sakit 15", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital17.png", alt: "hospital03", nama: "Rumah Sakit 16", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital18.png", alt: "hospital03", nama: "Rumah Sakit 17", url: "/#/live-reports" },
-                { src: "logo_hospital/hospital19.png", alt: "hospital03", nama: "Rumah Sakit 18", url: "/#/live-reports" },
+                { src: "logo_hospital/hospital36.png", alt: "hospital01", nama: "Rumah Sakit 07", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital08.png", alt: "hospital02", nama: "Rumah Sakit 08", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital10.png", alt: "hospital03", nama: "Rumah Sakit 09", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital11.png", alt: "hospital03", nama: "Rumah Sakit 10", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital12.png", alt: "hospital03", nama: "Rumah Sakit 11", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital13.png", alt: "hospital03", nama: "Rumah Sakit 12", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital14.png", alt: "hospital03", nama: "Rumah Sakit 13", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital15.png", alt: "hospital03", nama: "Rumah Sakit 14", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital16.png", alt: "hospital03", nama: "Rumah Sakit 15", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital17.png", alt: "hospital03", nama: "Rumah Sakit 16", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital18.png", alt: "hospital03", nama: "Rumah Sakit 17", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/hospital19.png", alt: "hospital03", nama: "Rumah Sakit 18", url: `/#/live-reports${filterDate}` },
               ]; break;
 		case "partnerGroup":
 			hospital = [

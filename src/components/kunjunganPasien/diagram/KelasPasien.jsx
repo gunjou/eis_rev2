@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Tooltip as Tlp } from '@mui/material';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
@@ -28,6 +29,25 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const KelasPasien = () => {
+  const [data2, setdata] = useState({
+    judul: "",
+    label: "",
+    kelas: "",
+  });
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/kunjungan/kelas_perawatan?tgl_awal=2017-01-01&tgl_akhir=2018-06-02").then((res) =>
+      res.json().then((data2) => {
+        setdata({
+          judul: data2.judul,
+          label: data2.label,
+          kelas: data2.data,
+        });
+      })
+    );
+  }, []);
+  console.log(data2.kelas)
+  console.log(data)
   return (
     <div className='KelasPasien'>
       {/* <label className="text-sm">

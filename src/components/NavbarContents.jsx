@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { IoMdSearch, IoMdCalendar } from 'react-icons/io'
 import { BiCurrentLocation } from 'react-icons/bi'
 import { BsPersonCircle, } from 'react-icons/bs'
@@ -22,13 +23,23 @@ function getFullscreenElement() {
 }
 
 function toggleFullscreen() {
-
 	if(getFullscreenElement()) {
 		 document.exitFullscreen();
 	}else {
 		document.documentElement.requestFullscreen().catch(console.log);
 	}
 }
+
+function expandDate(date) {
+  var date = new Date(date);
+  var [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
+  var extractDate = `${year}-${month+1}-${day}`
+
+  return extractDate;
+}
+
+export var a = expandDate(new Date());
+export var b = expandDate(new Date());
 
 
 const NavbarContents = () => {
@@ -37,9 +48,13 @@ const NavbarContents = () => {
 	const [isFull, setIsFull] = useState(false);
 	// Date Picker
 	const [dateRange, setDateRange] = useState([null, null]);
-  	const [startDate, endDate] = dateRange;
-	
-	
+  const [dateStart, dateEnd] = dateRange;
+  // const [dateStart, setDateStart] = useState(null);
+  // const [dateEnd, setDateEnd] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+
 	function useOutsideAlerter(ref) {
 		useEffect(() => {
 			/**
@@ -67,6 +82,7 @@ useOutsideAlerter(wrapperRef);
 		setIsFull(!isFull);
 	}
 
+
   return (
 	<div className="NavbarContents bg-white flex sticky top-0 z-30">
 		{/* Search */}
@@ -87,10 +103,29 @@ useOutsideAlerter(wrapperRef);
 					<ReactDatePicker
 						locale="id"
 						selectsRange={true}
-						startDate={startDate}
-						endDate={endDate}
+						startDate={dateStart}
+						endDate={dateEnd}
 						onChange={(update) => {
-							setDateRange(update);
+              setDateRange(update);
+              // console.log(update[0])
+              if (update[0] == null) {
+                navigate({
+                  pathname: location.pathname,
+                  search: `?tgl_awal=${expandDate(new Date())}&tgl_akhir=${expandDate(new Date())}`
+                });
+                a = new Date()
+                b = new Date()
+              }
+              else {
+                navigate({
+                  pathname: location.pathname,
+                  search: `?tgl_awal=${expandDate(update[0])}&tgl_akhir=${expandDate(update[1])}`
+                });
+                a = update[0]
+                b = update[1]
+                console.log(a)
+                console.log(b)
+              }
 						}}
 						withPortal
 						isClearable={true}
@@ -99,6 +134,7 @@ useOutsideAlerter(wrapperRef);
 						className="block w-42 pl-1 py-2 border-2 rounded-lg bg-[#eeeff1] border-[#eeeff1] focus:outline-none sm:text-sm transition duration-150 ease-in-out"
 						/>
 				</div>
+        
 				{/* Filter Wilayah */}
 				<div className="flex bg-[#eeeff1] rounded-lg pr-2">
 					<BiCurrentLocation className="text-xl m-auto ml-3 mr-1 "/>
