@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -36,6 +37,25 @@ const rows = [
 	{ id: 10, type: 'BHP', name:'kertas ekg 145mm x 150mm x 400 lembar', supplier: 'Ambumax', qty: 0, price: 391000, totalCost: 0, status: 'optimal' },
 ];
 
+function expandDate(date) {
+  var date = new Date(date);
+  var [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
+  var extractDate = `${year}-${month+1}-${day}`;
+
+  return extractDate;
+};
+
+function GetSortOrder(prop) {    
+  return function(a, b) {    
+      if (a[prop] < b[prop]) {    
+          return 1;    
+      } else if (a[prop] > b[prop]) {    
+          return -1;    
+      }    
+      return 0;    
+  }    
+} 
+
 const TableStock = () => {
 	const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -48,6 +68,47 @@ const TableStock = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const [data, setData] = useState({
+    judul: "",
+    label: "",
+    dokter: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/inventory/detail_stok?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setData({
+          judul: data.judul,
+          label: data.label,
+          dokter: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  var new_data = []
+  try {
+    data.dokter.sort(GetSortOrder("value"))
+    data.dokter.map((row, idx) => 
+      new_data.push({
+        id: idx+1,
+        type: row.jenis,
+        name:row.name,
+        supplier: null,
+        qty: row.stok,
+        price: row.harga,
+        totalCost: row.total_harga,
+        status: row.status,
+      }))
+  }
+  catch(err) {
+    
+  }
+  // console.log(new_data)
   return (
     <div className='TableStock grow'>
 			<Paper sx={{ width: "100%", overflow: "hidden" }}>

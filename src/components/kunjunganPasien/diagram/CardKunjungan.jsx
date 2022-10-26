@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { tgl_awal, tgl_akhir } from "../../NavbarContents";
 import { Tooltip } from "@mui/material";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -29,54 +30,83 @@ function GetPredict(value) {
   }
 }
 
+function expandDate(date) {
+  var date = new Date(date);
+  var [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
+  var extractDate = `${year}-${month+1}-${day}`;
+
+  return extractDate;
+};
+
 const CardKunjungan = ({type}) => {
-  let data;
+  let card;
   const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
   // temporary
   const value = [59, 89, 76, 50, 2, 3, 12, 6, 19, 21, 76, 50, 2, 3];
+  const [data, setdata] = useState({
+    judul: "",
+    label: "",
+    value: 0,
+    trend: 0,
+    predict: 0,
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/kunjungan/card_pasien?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setdata({
+          judul: data.judul,
+          label: data.label,
+          value: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
 
   switch (type) {
     case "pasien-rawat-inap":
-    data = { img: "images/icon-pasien-rawat-inap.png", trend: -16.8, predict: 18.4, title: "Pasien Rawat Inap", value: value[2], fill: "bg-[#6e9ffe]/90" }; break;
+      card = { img: "images/icon-pasien-rawat-inap.png", trend: -16.8, predict: 18.4, title: "Pasien Rawat Inap", value: value[2], fill: "bg-[#6e9ffe]/90" }; break;
     case "pasien-igd":
-      data = { img: "images/icon-pasien-emergency.png", trend: 28.8, predict: 36, title: "Pasien IGD", value: value[1], fill: "bg-[#ffba94]/90" }; break;
+      card = { img: "images/icon-pasien-emergency.png", trend: 28.8, predict: 36, title: "Pasien IGD", value: value[1], fill: "bg-[#ffba94]/90" }; break;
     case "pasien-rawat-jalan":
-      data = { img: "images/icon-pasien-rawat-jalan.png", trend: 17.3, predict: 9.4, title: "Pasien Rawat Jalan", value: value[0], fill: "bg-[#b494ff]/90" }; break;
+      card = { img: "images/icon-pasien-rawat-jalan.png", trend: 17.3, predict: 9.4, title: "Pasien Rawat Jalan", value: value[0], fill: "bg-[#b494ff]/90" }; break;
     case "pasien-radiologi":
-      data = { img: "images/icon-radiologi.png", trend: 26, predict: -4.7, title: "Pasien Radiologi", value: value[3], fill: "bg-[#94d9ff]/90" }; break;
+      card = { img: "images/icon-radiologi.png", trend: 26, predict: -4.7, title: "Pasien Radiologi", value: value[3], fill: "bg-[#94d9ff]/90" }; break;
     case "pasien-laboratorium":
-      data = { img: "images/icon-laboratorium.png", trend: 33.4, predict: 7.8, title: "Pasien Laboratorium", value: value[4], fill: "bg-[#aaca55]/90" }; break;
+      card = { img: "images/icon-laboratorium.png", trend: 33.4, predict: 7.8, title: "Pasien Laboratorium", value: value[4], fill: "bg-[#aaca55]/90" }; break;
     case "pasien-rehabilitasi":
-      data = { img: "images/icon-pasien.png", trend: 32.6, predict: -19.2, title: "Pasien Rehabilitasi", value: value[5], fill: "bg-[#55caaf]/90" }; break;
+      card = { img: "images/icon-pasien.png", trend: 32.6, predict: -19.2, title: "Pasien Rehabilitasi", value: value[5], fill: "bg-[#55caaf]/90" }; break;
     case "pasien-bedah":
-      data = { img: "images/icon-bedah.png", trend: 5.6, predict: 9.6, title: "Pasien Bedah", value: value[6], fill: "bg-[#ff94aa]/90" }; break;
+      card = { img: "images/icon-bedah.png", trend: 5.6, predict: 9.6, title: "Pasien Bedah", value: value[6], fill: "bg-[#ff94aa]/90" }; break;
     case "farmasi":
-      data = { img: "images/icon-farmasi.png", trend: -0.2, predict: 12.4, title: "Pasien Farmasi", value: value[7], fill: "bg-[#38b497]/90" }; break;
+      card = { img: "images/icon-farmasi.png", trend: -0.2, predict: 12.4, title: "Pasien Farmasi", value: value[7], fill: "bg-[#38b497]/90" }; break;
     default:
       break;
   }
   return (
     <div className="CardKunjungan grow">
-      <div className={data.fill + " grid-cols-2 flex p-2 bg-white rounded-lg text-[#eeeff1] drop-shadow-lg"}>
+      <div className={card.fill + " grid-cols-2 flex p-2 bg-white rounded-lg text-[#eeeff1] drop-shadow-lg"}>
         <div className="col-span-1 text-left ">
-          <p className="title text-sm pb-2.5 font-semibold">{data.title}</p>
+          <p className="title text-sm pb-2.5 font-semibold">{card.title}</p>
           <div className="value text-3xl pb-1.5 font-semibold flex">
-						{data.value}
+						{card.value}
             <Tooltip title="Trend" placement="right">
               <sup className="flex text-base font-normal cursor-default">
-                {GetTrend(data.trend)}
+                {GetTrend(card.trend)}
               </sup>
             </Tooltip>
 					</div>
           <p onClick={handleOpen} className="text-xs text-left cursor-pointer">details ⟶</p>
-					<img className="w-16 pb-2.5 absolute top-2 right-2" src={process.env.PUBLIC_URL + data.img} alt="icon" />
+					<img className="w-16 pb-2.5 absolute top-2 right-2" src={process.env.PUBLIC_URL + card.img} alt="icon" />
 					<p className="padding w-20"></p>
           <Tooltip title="Predict" placement="left">
 		  			<p className="flex text-xs absolute bottom-2 right-5 cursor-default">
-	  					{GetPredict(data.predict)}
+	  					{GetPredict(card.predict)}
   					</p>
           </Tooltip>
         </div>
@@ -91,12 +121,12 @@ const CardKunjungan = ({type}) => {
       >
         <div className="modal rounded-lg ml-[10%] mr-[10%] mt-10 bg-[#eeeff1] p-5">
           <div className="header text-2xl pb-2 flex">
-            {data.title}
+            {card.title}
             <p onClick={handleClose} className="close absolute right-6 mr-[10%] text-3xl cursor-pointer">x</p>
           </div>
           {/* Data Table */}
           <div className="body">
-            {data.title === "Pasien Rawat Jalan"
+            {card.title === "Pasien Rawat Jalan"
               ? 
               <div className="table-detail">
               <Box sx={{ width: '100%', height: 420 }}>

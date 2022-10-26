@@ -4,9 +4,9 @@ import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator"
 
 
 const data = [
-  { name: "Puas", value: 1870, trend: 21.1, pred: 21.4 },
-  { name: "Cukup", value: 660, trend: 12.7, pred: 15 },
-  { name: "Buruk", value: 300, trend: 11, pred: 6.9 },
+  { name: "Buruk", value: 0, trend: 0, pred: 0 },
+  { name: "Cukup", value: 0, trend: 0, pred: 0 },
+  { name: "Puas", value: 0, trend: 0, pred: 0 },
 ];
 const COLORS = ["#b494ff", "#6e9ffe", "#ffba94", "#55caaf"];
 
@@ -23,19 +23,36 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
+function GetSortOrder(prop) {    
+  return function(a, b) {    
+      if (a[prop] < b[prop]) {    
+          return 1;    
+      } else if (a[prop] > b[prop]) {    
+          return -1;    
+      }    
+      return 0;    
+  }    
+} 
+
 const KepuasanPasien = () => {
+  try {
+    data.sort(GetSortOrder("value"))
+  }
+  catch(err) {
+    
+  }
   return (
     <div className="KepuasanPasien">
       <div className="title">
         <p className='pb-2'>Kepuasan Terhadap Pelayanan</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pl-2 cursor-default">
-            Trend : {GetTrend(-22.3)}
+            Trend : {GetTrend(0)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : {GetPredict(5.1)}
+        Predict : {GetPredict(0)}
       </sup>
 			<ResponsiveContainer width="99%" height={200}>
         <PieChart width={300} height={300}>
@@ -46,9 +63,11 @@ const KepuasanPasien = () => {
             innerRadius={40}
             outerRadius={70}
             fill="#8884d8"
-            stroke="#eeeff1"
+            stroke="#94b8a3"
             paddingAngle={5}
             dataKey="value"
+            startAngle={90}
+            endAngle={-270}
           >
             {data.map((entry, index) => (
               <Cell

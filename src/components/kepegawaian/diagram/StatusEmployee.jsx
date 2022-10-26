@@ -1,9 +1,12 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { expandDate, GetSortOrder } from '../../CommonTools';
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-
-const data = [
+// Remove later
+const data_tmp = [
   { name: "Aktif", value: 364, trend: 2.4, pred: -1.5 },
   { name: "Cuti", value: 10, trend: 0.3, pred: 1.5 },
   { name: "Non Aktif", value: 17, trend: -0.9, pred: -2.8 },
@@ -24,20 +27,49 @@ const COLORS = [
   "#94d9ff",
 ];
 
-  const CustomTooltip = ({ active, payload, label }) => {
-	if (active && payload && payload.length) {
-	  return (
-		<div className="custom-tooltip bg-gray-100 border p-3">
-		  {TlpTittle(payload[0].payload.trend, payload[0].payload.name)}
-		  {TlpPredict(payload[0].payload.pred)}
-		  <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
-		</div>
-	  );
-	}
-	return null;
-  };
-  
+const CustomTooltip = ({ active, payload, label }) => {
+if (active && payload && payload.length) {
+  return (
+  <div className="custom-tooltip bg-gray-100 border p-3">
+    {TlpTittle(payload[0].payload.trend, payload[0].payload.name)}
+    {TlpPredict(payload[0].payload.pred)}
+    <p className="intro text-sm">{`Jumlah : ${payload[0].value}`}</p>
+  </div>
+  );
+}
+return null;
+};
+
 const StatusEmployee = () => {
+  const [data2, setdata] = useState({
+    judul: "",
+    label: "",
+    status: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/kepegawaian/status_pegawai?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data2) => {
+        setdata({
+          judul: data2.judul,
+          label: data2.label,
+          status: data2.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  try {
+    data2.status.sort(GetSortOrder("value"))
+  }
+  catch(err) {
+    
+  }
+  // console.log(data2.status)
+
   return (
     <div className="StatusEmployee">
       <div className="title flex">
@@ -54,17 +86,19 @@ const StatusEmployee = () => {
 			<ResponsiveContainer width="99%" height={230}>
         <PieChart width={100} height={210}>
         <Pie
-          data={data}
+          data={data2.status}
           // cx={150}
           cy={85}
           innerRadius={50}
           outerRadius={80}
           fill="#8884d8"
-          stroke="#eeeff1"
+          stroke="#94b8a3"
           paddingAngle={3}
           dataKey="value"
+          startAngle={90}
+          endAngle={-270}
         >
-          {data.map((entry, index) => (
+          {COLORS.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
         </Pie>

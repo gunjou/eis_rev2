@@ -1,18 +1,9 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { expandDate, GetSortOrder } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpTittle } from '../../GetIndicator';
-  
-const data = [
-    { name: "< 5", laki_laki: 65, perempuan: 143, total: 208, trend: 3.5, pred: 6.7 },
-    { name: "5-11", laki_laki: 57, perempuan: 64, total: 111, trend: 6.9, pred: 9.8 },
-    { name: "12-16", laki_laki: 117, perempuan: 35, total: 142, trend: -1.9, pred: 6 },
-    { name: "17-25", laki_laki: 60, perempuan: 137, total: 197, trend: 5.9, pred: 11.5 },
-    { name: "26-35", laki_laki: 56, perempuan: 74, total: 130, trend: 7, pred: 10.9 },
-    { name: "36-45", laki_laki: 119, perempuan: 154, total: 273, trend: 0.3, pred: -5.8 },
-    { name: "46-55", laki_laki: 97, perempuan: 97, total: 194, trend: 4.4, pred: 3.7 },
-    { name: "56-65", laki_laki: 166, perempuan: 79, total: 245, trend: 7.1, pred: -2.4 },
-    { name: "65 >", laki_laki: 134, perempuan: 62, total: 196, trend: 9 , pred: 6.1 },
-  ];
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -32,6 +23,36 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const AgeGender = () => {
+  const [data, setData] = useState({
+    judul: "",
+    label: "",
+    value: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/kunjungan/umur_jenis_kelamin?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setData({
+          judul: data.judul,
+          label: data.label,
+          value: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  // console.log(data.value)
+  try {
+    data.value.sort(GetSortOrder("value")).reverse();
+  }
+  catch(err) {
+    
+  }
+  const new_data = data.value;
+
   return (
     <div className="AgeGender">
       <div className="title flex">
@@ -49,7 +70,7 @@ const AgeGender = () => {
         <BarChart
           width={500}
           height={300}
-          data={data}
+          data={new_data}
           margin={{ top: 0, right: 0, left: 0, bottom: -10, }}
         >
           <CartesianGrid strokeDasharray="3 3" />

@@ -1,9 +1,12 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { expandDate } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-
-const data = [
+// Remove later
+const data_tmp = [
   { name: "Pulang Paksa", value: 187, trend: 4.1, pred: 2.1 },
   { name: "Dipulangkan", value: 285, trend: 7.4, pred: -4.9 },
   { name: "Dirujuk", value: 79, trend: 14.9, pred: 8.7 },
@@ -28,6 +31,29 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const StatusPulang = () => {
+  const [data, setdata] = useState({
+    judul: "",
+    label: "",
+    status: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/kunjungan/status_pulang?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setdata({
+          judul: data.judul,
+          label: data.label,
+          status: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  const new_data = data.status
+
   return (
     <div className="StatusPulang">
       <div className="title flex">
@@ -45,7 +71,7 @@ const StatusPulang = () => {
       <BarChart
         width={500}
         height={300}
-        data={data}
+        data={new_data}
         margin={{ top: 0, right: 10, left: 10, bottom: -10, }}
       >
         <CartesianGrid strokeDasharray="1 5" />

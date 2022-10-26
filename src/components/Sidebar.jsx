@@ -1,6 +1,7 @@
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { tgl_awal, tgl_akhir } from "./NavbarContents";
 // icons
 import { AiOutlineDownload, AiOutlineUpload } from "react-icons/ai";
 import { BsFileEarmarkPerson } from "react-icons/bs";
@@ -23,15 +24,27 @@ const nonactive = {
   padding: '8px',
 }
 
+function expandDate(date) {
+  var date = new Date(date);
+  var [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
+  var extractDate = `${year}-${month+1}-${day}`;
+
+  return extractDate;
+};
+
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(true);
-  const date = new Date();
-  const [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
-  const [dateFilter, setDateFilter] = useState({
-    startDate: `${year}-${month+1}-${day}`,
-    endDate: `${year}-${month+1}-${day}`,
-  });
-  const filterDate = `?tgl_awal=${dateFilter.startDate}&tgl_akhir=${dateFilter.endDate}`;
+
+  if (tgl_awal != null && tgl_akhir != null) {
+    var startDate = expandDate(tgl_awal);
+    var endDate = expandDate(tgl_akhir);
+  }
+  else {
+    var startDate = expandDate(new Date());
+    var endDate = expandDate(new Date());
+  }
+  
+  const filterDate = `?tgl_awal=${startDate}&tgl_akhir=${endDate}`;
   return (
     <div className="Sidebar bg-white h-96 sticky top-0 z-30">
 			{!isOpen ? 

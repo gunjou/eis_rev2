@@ -1,9 +1,13 @@
 import { Tooltip as Tlp } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { expandDate } from '../../CommonTools';
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-const data = [
+// Remove later
+const data_tmp = [
 	{ name: 'Rawat Inap', total: 80, trend: 0.5, pred: 0.0 },
 	{ name: 'IGD', total: 60, trend: 0.0, pred: 0.0 },
 	{ name: 'Rawat Jalan', total: 64, trend: 0.0, pred: 0.0 },
@@ -45,16 +49,39 @@ const CustomTooltip = ({ active, payload, label }) => {
 	  );
 	}
 	return null;
-  };
+};
   
 const InstalasiPegawai = () => {
+	const [data, setData] = useState({
+	  judul: "",
+	  label: "",
+	  instalasi: "",
+	  trend: "",
+	  predict: "",
+	});
+  
+	useEffect(() => {
+	  fetch(`http://192.168.1.174/kepegawaian/instalasi_pegawai?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+		res.json().then((data) => {
+		  setData({
+			judul: data.judul,
+			label: data.label,
+			instalasi: data.data,
+			trend: null,
+			predict: null,
+		  });
+		})
+	  );
+	}, []);
+	// console.log(data2.instalasi)
+
   return (
     <div className="InstalasiPegawai">
 			<div className="title flex">
         <p className='pb-2'>Pegawai Berdasarkan Instalasi</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-						{GetTrend(1.5)}
+						{GetTrend(0.0)}
           </sup>
         </Tlp>
       </div>
@@ -65,13 +92,13 @@ const InstalasiPegawai = () => {
 				<BarChart
 					width={500}
 					height={300}
-					data={data}
+					data={data.instalasi}
 					margin={{ top: 0, right: 10, left: 10, bottom: 0, }}
 					className='text-[10px]'
 				>
 					<XAxis dataKey="name" interval={0} />
 					<Tooltip wrapperStyle={{fontSize: "15px"}} content={<CustomTooltip />} />
-					<Bar dataKey="total" name='Total' barSize={30} fill="#38b497" radius={[9, 9, 0, 0]} label={<CustomBarLabel />}/>
+					<Bar dataKey="value" name='Total' barSize={30} fill="#38b497" radius={[9, 9, 0, 0]} label={<CustomBarLabel />}/>
 				</BarChart>
 			</ResponsiveContainer>
 		</div>

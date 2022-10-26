@@ -1,8 +1,11 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { expandDate, GetSortOrder } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-const data = [
+const data_tmp = [
   { name: "Semeru Perkasa Permai Pt.", value: 20319, trend: 5.5, pred: 4.3 },
   { name: "Berkembang Selaras Daya. Pt", value: 27473, trend: 3.3, pred: -0.7 },
   { name: "Sinergi Tridaya Medical. Pt", value: 19400, trend: 2.2, pred: 15.7 },
@@ -39,6 +42,35 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const Supplier = () => {
+  const [data2, setdata] = useState({
+    judul: "",
+    label: "",
+    supplier: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/inventory/stok_supplier?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data2) => {
+        setdata({
+          judul: data2.judul,
+          label: data2.label,
+          supplier: data2.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  // console.log(data2.supplier)
+  try {
+    data2.supplier.sort(GetSortOrder("value"))
+  }
+  catch(err) {
+    
+  }
+
   return (
     <div className='Supplier'>
       <div className="title flex">
@@ -55,17 +87,19 @@ const Supplier = () => {
 			<ResponsiveContainer width="99%" height={250}>
         <PieChart width={100} height={210}>
         <Pie
-          data={data}
+          data={data2.supplier}
           // cx={150}
           cy={85}
           innerRadius={50}
           outerRadius={80}
           fill="#8884d8"
-          stroke="#eeeff1"
+          stroke="#94b8a3"
           paddingAngle={2}
           dataKey="value"
+          startAngle={90}
+          endAngle={-270}
         >
-          {data.map((entry, index) => (
+          {COLORS.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
         </Pie>

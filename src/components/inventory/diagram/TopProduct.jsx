@@ -1,12 +1,15 @@
-import * as React from "react";
-import TablePagination from "@mui/material/TablePagination";
+// import *, { useEffect, useState } as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import React, { useEffect, useState } from "react";
+import { expandDate, GetSortOrder } from "../../CommonTools";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
 const rows = [
   {id: 1, name: 'TAMOFEN 10 MG TAB (EC)', in: 30, out: 11, sisa: 19, },
@@ -21,7 +24,6 @@ const rows = [
   {id: 10, name: 'ONDANSETRON IV/IM 4 MG*', in: 32, out: 10, sisa: 22, },
 ];
 
-
 const TopProduct = () => {
 	const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -34,6 +36,38 @@ const TopProduct = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  
+  const [data, setData] = useState({
+    judul: "",
+    label: "",
+    produk: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/inventory/top_produk?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setData({
+          judul: data.judul,
+          label: data.label,
+          produk: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  var new_data = []
+  try {
+    data.produk.sort(GetSortOrder("stock"))
+    data.produk.map((row, idx) => new_data.push({index: idx+1, name: row.name, sisa: row.stock}))
+  }
+  catch(err) {
+    
+  }
+  // console.log(new_data)
+
   return (
     <div className='TopProduct'>
 			<Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -49,14 +83,16 @@ const TopProduct = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {new_data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell className="tableCell">{row.id} </TableCell>
+                  <TableRow key={row.index}>
+                    <TableCell className="tableCell">{row.index} </TableCell>
                     <TableCell className="tableCell text-sm">{row.name}</TableCell>
-                    <TableCell className="tableCell text-sm" align="right">{row.in}</TableCell>
-                    <TableCell className="tableCell text-sm" align="right">{row.out}</TableCell>
+                    <TableCell className="tableCell text-sm" align="right">{0}</TableCell>
+                    <TableCell className="tableCell text-sm" align="right">{0}</TableCell>
+                    {/* <TableCell className="tableCell text-sm" align="right">{row.in}</TableCell>
+                    <TableCell className="tableCell text-sm" align="right">{row.out}</TableCell> */}
                     <TableCell className="tableCell text-sm" align="right">{row.sisa}</TableCell>
                   </TableRow>
                 ))}

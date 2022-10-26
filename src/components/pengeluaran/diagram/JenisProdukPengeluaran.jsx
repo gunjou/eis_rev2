@@ -2,6 +2,15 @@ import { Tooltip as Tlp } from '@mui/material';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
 
+const data = [
+  { name: "Obat-obatan", value: 0, trend: 0, pred: 0 },
+  { name: "Gas Medis", value: 0, trend: 0, pred: 0 },
+  { name: "Radiologi", value: 0, trend: 0, pred: 0 },
+  { name: "Laboratorium", value: 0, trend: 0, pred: 0 },
+  { name: "Injeksi", value: 0, trend: 0, pred: 0 },
+  { name: "Lainnya", value: 0, trend: 0, pred: 0 },
+];
+
 const DataFormater = (number) => {
   if(number > 1000000000){
     return (number/1000000000).toString() + 'M';
@@ -13,15 +22,6 @@ const DataFormater = (number) => {
     return number.toString();
   }
 }
-
-const data = [
-  { name: "Obat-obatan", value: 800000, trend: 3.6, pred: 4.2 },
-  { name: "Gas Medis", value: 1200000, trend: 3.1, pred: 13 },
-  { name: "Radiologi", value: 2500000, trend: 18.3, pred: 9.9 },
-  { name: "Laboratorium", value: 1300000, trend: 14, pred: -1.1 },
-  { name: "Injeksi", value: 500000, trend: 17.9, pred: -7.7 },
-  { name: "Lainnya", value: 2300000, trend: 10.9, pred: -1.8 },
-];
 
 var formatter = new Intl.NumberFormat("id-ID", {
 	style: "currency",
@@ -48,12 +48,12 @@ const JenisProdukPengeluaran = () => {
         <p className='pb-2'>Pengeluaran Berdasarkan Jenis Produk</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-            {GetTrend(-25.9)}
+            {GetTrend(0)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : {GetPredict(-29.1)}
+        Predict : {GetPredict(0)}
       </sup>
 			<ResponsiveContainer width="99%" height={260}>
 			<BarChart

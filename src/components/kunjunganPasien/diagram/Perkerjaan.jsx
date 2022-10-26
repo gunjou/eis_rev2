@@ -3,19 +3,34 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
 
 
+// const data = [
+//   { name: "Tidak Bekerja", value: 81, trend: -3.1, pred: -11.5, },
+//   { name: "Pelajar/ Mahasiswa", value: 126, trend: 4.1, pred: 10.9, },
+//   { name: "Pensiunan", value: 105, trend: -10.7, pred: -12.8, },
+//   { name: "PNS", value: 84, trend: -7.6, pred: -20.1, },
+//   { name: "TNI", value: 76, trend: -13.5, pred: -11.4, },
+//   { name: "POLRI", value: 110, trend: -11.1, pred: -15.1, },
+//   { name: "Pedagang", value: 115, trend: -15.4, pred: -14.6, },
+//   { name: "Petani", value: 23, trend: -12.7, pred: -7.1, },
+//   { name: "Peternak", value: 93, trend: -14.6, pred: -9, },
+//   { name: "Karyawan", value: 63, trend: -8.8, pred:- 3.8, },
+//   { name: "Buruh", value: 119, trend: -12.8, pred: -14.3, },
+//   { name: "Wiraswasta", value: 188, trend: -8.7, pred:- 5.7, },
+// ];
+
 const data = [
-  { name: "Tidak Bekerja", value: 81, trend: -3.1, pred: -11.5, },
-  { name: "Pelajar/ Mahasiswa", value: 126, trend: 4.1, pred: 10.9, },
-  { name: "Pensiunan", value: 105, trend: -10.7, pred: -12.8, },
-  { name: "PNS", value: 84, trend: -7.6, pred: -20.1, },
-  { name: "TNI", value: 76, trend: -13.5, pred: -11.4, },
-  { name: "POLRI", value: 110, trend: -11.1, pred: -15.1, },
-  { name: "Pedagang", value: 115, trend: -15.4, pred: -14.6, },
-  { name: "Petani", value: 23, trend: -12.7, pred: -7.1, },
-  { name: "Peternak", value: 93, trend: -14.6, pred: -9, },
-  { name: "Karyawan", value: 63, trend: -8.8, pred:- 3.8, },
-  { name: "Buruh", value: 119, trend: -12.8, pred: -14.3, },
-  { name: "Wiraswasta", value: 188, trend: -8.7, pred:- 5.7, },
+  { name: "Tidak Bekerja", value: 0, trend: 0, pred: 0, },
+  { name: "Pelajar/ Mahasiswa", value: 0, trend: 0, pred: 0, },
+  { name: "Pensiunan", value: 0, trend: 0, pred: 0, },
+  { name: "PNS", value: 0, trend: 0, pred: 0, },
+  { name: "TNI", value: 0, trend: 0, pred: 0, },
+  { name: "POLRI", value: 0, trend: 0, pred: 0, },
+  { name: "Pedagang", value: 0, trend: 0, pred: 0, },
+  { name: "Petani", value: 0, trend: 0, pred: 0, },
+  { name: "Peternak", value: 0, trend: 0, pred: 0},
+  { name: "Karyawan", value: 0, trend: 0, pred:-0, },
+  { name: "Buruh", value: 0, trend: 0, pred: 0, },
+  { name: "Wiraswasta", value: 0, trend: 0, pred:-0, },
 ];
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -38,12 +53,12 @@ const Perkerjaan = () => {
         <p className='pb-2'>Kunjungan Berdasarkan Perkerjaan</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-            {GetTrend(-1.9)}
+            {GetTrend(0)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : {GetPredict(-2.2)}
+        Predict : {GetPredict(0)}
       </sup>
       <ResponsiveContainer width="99%" height={250}>
 			  <BarChart

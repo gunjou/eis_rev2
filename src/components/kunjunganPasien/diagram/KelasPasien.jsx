@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { expandDate } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-
-const data = [
+// Remove later
+const data_tmp = [
   { name: "Kelas III", value: 2290, trend: 9.9, pred: 11.5, },
   { name: "Kelas II", value: 1955, trend: -11.9, pred: 7.4, },
   { name: "Kelas I", value: 1526, trend: 14.6, pred: 17.9, },
@@ -29,25 +31,29 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const KelasPasien = () => {
-  const [data2, setdata] = useState({
+  const [data, setdata] = useState({
     judul: "",
     label: "",
     kelas: "",
+    trend: "",
+    predict: "",
   });
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/kunjungan/kelas_perawatan?tgl_awal=2017-01-01&tgl_akhir=2018-06-02").then((res) =>
-      res.json().then((data2) => {
+    fetch(`http://192.168.1.174/kunjungan/kelas_perawatan?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`, {mode:'cors'}).then((res) =>
+      res.json().then((data) => {
         setdata({
-          judul: data2.judul,
-          label: data2.label,
-          kelas: data2.data,
+          judul: data.judul,
+          label: data.label,
+          kelas: data.data,
+          trend: null,
+          predict: null,
         });
       })
     );
   }, []);
-  console.log(data2.kelas)
-  console.log(data)
+  const new_data = data.kelas
+
   return (
     <div className='KelasPasien'>
       {/* <label className="text-sm">
@@ -74,7 +80,7 @@ const KelasPasien = () => {
         <BarChart
           width={500}
           height={300}
-          data={data}
+          data={new_data}
           margin={{ top: 0, right: 10, left: 10, bottom: 0, }}
         >
           <CartesianGrid strokeDasharray="1 5" />

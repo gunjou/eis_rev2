@@ -38,8 +38,8 @@ function expandDate(date) {
   return extractDate;
 }
 
-export var a = expandDate(new Date());
-export var b = expandDate(new Date());
+export var tgl_awal = expandDate(new Date());
+export var tgl_akhir = expandDate(new Date());
 
 
 const NavbarContents = () => {
@@ -49,8 +49,6 @@ const NavbarContents = () => {
 	// Date Picker
 	const [dateRange, setDateRange] = useState([null, null]);
   const [dateStart, dateEnd] = dateRange;
-  // const [dateStart, setDateStart] = useState(null);
-  // const [dateEnd, setDateEnd] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -107,24 +105,23 @@ useOutsideAlerter(wrapperRef);
 						endDate={dateEnd}
 						onChange={(update) => {
               setDateRange(update);
-              // console.log(update[0])
               if (update[0] == null) {
                 navigate({
                   pathname: location.pathname,
                   search: `?tgl_awal=${expandDate(new Date())}&tgl_akhir=${expandDate(new Date())}`
                 });
-                a = new Date()
-                b = new Date()
+                tgl_awal = new Date()
+                tgl_akhir = new Date()
               }
               else {
                 navigate({
                   pathname: location.pathname,
                   search: `?tgl_awal=${expandDate(update[0])}&tgl_akhir=${expandDate(update[1])}`
                 });
-                a = update[0]
-                b = update[1]
-                console.log(a)
-                console.log(b)
+                tgl_awal = update[0]
+                tgl_akhir = update[1]
+                // console.log(tgl_awal)
+                // console.log(tgl_akhir)
               }
 						}}
 						withPortal

@@ -1,20 +1,9 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { expandDate, GetSortOrder } from '../../CommonTools';
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
-
-
-const dataTopDiagnosa = [
-	{ name: 'Pulpitis', total: 30611, trend: -22.5, pred: -21.1, },
-	{ name: 'Necrosis of pulp', total: 26969, trend: -23.4, pred: -12.1, },
-	{ name: 'Chronic gingivitis', total: 13194, trend: -5.8, pred: -10.8, },
-	{ name: 'Ispa', total: 12608, trend: -4.2, pred: -10.2, },
-	{ name: 'perangkat ortodensi', total: 12273, trend: -12.5, pred: 0.1, },
-	{ name: 'Periapical abscess', total: 7788, trend: -7.2, pred: 8.5, },
-	{ name: 'Chronic periodontitis', total: 4813, trend: -23.8, pred: -27.4, },
-	{ name: 'Impacted teeth', total: 4371, trend: -12.2, pred: -25.1, },
-	{ name: 'Chronic apical periodontitis', total: 4365, trend: -9, pred: -15.2, },
-	{ name: 'Hipertensi Esensial', total: 4363, trend: -3.3, pred: -23.5, },
-];
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -30,6 +19,35 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const TopDiagnosa = () => {
+  const [data, setData] = useState({
+    judul: "",
+    label: "",
+    diagnosa: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/pelayanan/top_diagnosa?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setData({
+          judul: data.judul,
+          label: data.label,
+          diagnosa: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+
+  try {
+    data.diagnosa.sort(GetSortOrder("value"))
+  }
+  catch(err) {
+    
+  }
+
   return (
     <div className='TopDiagnosa'>
       <div className="title flex">
@@ -48,7 +66,7 @@ const TopDiagnosa = () => {
           layout="vertical"
           width={500}
           height={400}
-          data={dataTopDiagnosa}
+          data={data.diagnosa}
           margin={{top: 0, right: 10, bottom: 0, left: 10, }}
           className='text-[10px]'
         >
@@ -56,7 +74,7 @@ const TopDiagnosa = () => {
           <XAxis type="number" />
           <YAxis dataKey="name" type="category" interval={0} />
           <Tooltip wrapperStyle={{fontSize: "15px"}} content={<CustomTooltip />} />
-          <Bar dataKey="total" name='Total' barSize={15} radius={[0, 6, 6, 0]} fill="#b494ff" />
+          <Bar dataKey="value" name='Total' barSize={15} radius={[0, 6, 6, 0]} fill="#b494ff" />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -1,8 +1,11 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { expandDate } from '../../CommonTools';
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-const data = [
+const data_tmp = [
   { name: "Rawat Inap", value: 2900000, trend: 0.1, pred: 16.4, },
   { name: "IGD", value: 3000000, trend: -6, pred: 16.5, },
   { name: "Rawat Jalan", value: 2770000, trend: 12.5, pred: 5, },
@@ -32,6 +35,44 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const InstalasiPengeluaran = () => {
+  const [data, setData] = useState({
+    judul: "",
+    label: "",
+    instalasi: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/pengeluaran/pengeluaran_instalasi?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setData({
+          judul: data.judul,
+          label: data.label,
+          instalasi: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+
+  var new_data = []
+  try {
+    // data.tren.sort(GetSortOrder("value"))
+    data.instalasi.map((row) => 
+      new_data.push({
+        name: row.name, 
+        value: row.value,
+        trend: row.trend,
+        pred: row.predict,
+      }))
+  }
+  catch(err) {
+    
+  }
+  // console.log(new_data)
+
   return (
     <div className='InstalasiPengeluaran'>
       <div className="title flex">
@@ -49,7 +90,7 @@ const InstalasiPengeluaran = () => {
         <BarChart
           width={500}
           height={300}
-          data={data}
+          data={new_data}
           margin={{ top: 5, right: 10, left: 10, bottom: 5, }}
         >
           <CartesianGrid strokeDasharray="1 5" />

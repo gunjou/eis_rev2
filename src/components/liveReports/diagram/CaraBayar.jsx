@@ -20,7 +20,19 @@ const data = [
     "#aaca55",
   ];
 
+  function GetSortOrder(prop) {    
+    return function(a, b) {    
+        if (a[prop] < b[prop]) {    
+            return 1;    
+        } else if (a[prop] > b[prop]) {    
+            return -1;    
+        }    
+        return 0;    
+    }    
+  } 
+
 const CaraBayar = () => {
+  data.sort(GetSortOrder("value"))
   return (
     <div className="CaraBayar">
       <ResponsiveContainer width="99%" height={270}>
@@ -32,9 +44,11 @@ const CaraBayar = () => {
           innerRadius={50}
           outerRadius={80}
           fill="#8884d8"
-          stroke="#eeeff1"
+          stroke="#94b8a3"
           paddingAngle={5}
           dataKey="value"
+          startAngle={90}
+          endAngle={-270}
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

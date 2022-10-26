@@ -1,9 +1,12 @@
+import React, { useState, useEffect } from "react";
+import { tgl_awal, tgl_akhir } from "../../NavbarContents";
 import { Tooltip as Tlp } from '@mui/material';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
+import { expandDate, GetSortOrder } from "../../CommonTools";
 
-
-const data = [
+// Remove later
+const data_tmp = [
   { name: "Datang Sendiri", value: 465, trend: 16.8, pred: -12.3, },
   { name: "Puskesmas", value: 588, trend: 9.6, pred: 13, },
   { name: "RS Pemerintah", value: 479, trend: -10.2, pred: 18.8, },
@@ -41,6 +44,36 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const Rujukan = () => {
+  const [data, setdata] = useState({
+    judul: "",
+    label: "",
+    rujukan: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/kunjungan/rujukan?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setdata({
+          judul: data.judul,
+          label: data.label,
+          rujukan: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  // console.log(data.rujukan)
+  try {
+    data.rujukan.sort(GetSortOrder("value"))
+  }
+  catch(err) {
+    
+  }
+  const new_data = data.rujukan
+  
   return (
     <div className="Rujukan">
       <div className="title flex">
@@ -57,17 +90,19 @@ const Rujukan = () => {
       <ResponsiveContainer width="99%" height={240}>
         <PieChart width={100} height={210}>
         <Pie
-          data={data}
+          data={new_data}
           // cx={150}
           cy={85}
           innerRadius={50}
           outerRadius={80}
           fill="#8884d8"
-          stroke="#eeeff1"
+          stroke="#94b8a3"
           paddingAngle={5}
           dataKey="value"
+          startAngle={90}
+          endAngle={-270}
         >
-          {data.map((entry, index) => (
+          {COLORS.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
         </Pie>
@@ -77,7 +112,7 @@ const Rujukan = () => {
           // verticalAlign="middle"
           // align="right"
           iconType="circle"
-          wrapperStyle={{fontSize: "12px"}}
+          wrapperStyle={{fontSize: "10.5px"}}
           />
       </PieChart>
      </ResponsiveContainer>

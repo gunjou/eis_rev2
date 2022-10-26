@@ -1,7 +1,11 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { expandDate } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
+// Temporary data (Remove later)
 const dataTopDiagnosa = [
 	{ name: 'Medis', total: 479, trend: 14.8, pred: 2.2, },
 	{ name: 'Non Medis', total: 473, trend: 5.9, pred: 0.1, },
@@ -26,6 +30,28 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const TypeAset = () => {
+  const [data, setData] = useState({
+    judul: "",
+    label: "",
+    jenis_aset: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/inventory/jenis_aset?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setData({
+          judul: data.judul,
+          label: data.label,
+          jenis_aset: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+
   return (
     <div className='TypeAset'>
       <div className="title flex">
@@ -44,7 +70,7 @@ const TypeAset = () => {
           layout="vertical"
           width={500}
           height={400}
-          data={dataTopDiagnosa}
+          data={data.jenis_aset}
           margin={{top: 10, right: 10, bottom: 10, left: 10, }}
           className='text-[12px]'
         >
@@ -52,7 +78,7 @@ const TypeAset = () => {
           <XAxis type="number" />
           <YAxis dataKey="name" type="category" interval={0} />
           <Tooltip wrapperStyle={{fontSize: "15px"}} content={<CustomTooltip />} />
-          <Bar dataKey="total" name='Total' barSize={15} radius={[0, 6, 6, 0]} fill="#6e9ffe" />
+          <Bar dataKey="value" name='Total' barSize={15} radius={[0, 6, 6, 0]} fill="#6e9ffe" />
         </BarChart>
       </ResponsiveContainer>
 		</div>

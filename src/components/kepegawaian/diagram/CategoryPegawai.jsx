@@ -1,10 +1,13 @@
 import { Tooltip as Tlp } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { expandDate } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-
-const data = [
+// Remove later
+const data_tmp = [
 	{ name: 'Apoteker', total: 35, trend: 0.3, pred: 0.0, },
 	{ name: 'BIDAN', total: 49, trend: 0.0, pred: 0.0, },
 	{ name: 'DOKTER', total: 96, trend: 0.0, pred: 0.0, },
@@ -32,7 +35,7 @@ CustomBarLabel.propTypes = {
   payload: PropTypes.object,
 };
 
-  const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label }) => {
 	if (active && payload && payload.length) {
 	  return (
 		<div className="custom-tooltip bg-gray-100 border p-3">
@@ -43,9 +46,32 @@ CustomBarLabel.propTypes = {
 	  );
 	}
 	return null;
-  };
+};
   
 const CategoryPegawai = () => {
+	const [data, setData] = useState({
+	  judul: "",
+	  label: "",
+	  kategori: "",
+	  trend: "",
+	  predict: "",
+	});
+  
+	useEffect(() => {
+	  fetch(`http://192.168.1.174/kepegawaian/kategori_pegawai?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+		res.json().then((data) => {
+		  setData({
+			judul: data.judul,
+			label: data.label,
+			kategori: data.data,
+			trend: null,
+			predict: null,
+		  });
+		})
+	  );
+	}, []);
+	// console.log(data2.kategori)
+
   return (
     <div className="CategoryPegawai">
 			<div className="title flex">
@@ -63,13 +89,13 @@ const CategoryPegawai = () => {
 				<BarChart
 					width={500}
 					height={300}
-					data={data}
+					data={data.kategori}
 					margin={{ top: 0, right: 10, left: 10, bottom: 0, }}
 					className='text-[10px]'
 				>
 					<XAxis dataKey="name" interval={0} />
 					<Tooltip wrapperStyle={{fontSize: "15px"}} content={<CustomTooltip />} />
-					<Bar dataKey="total" name='Total' barSize={30} fill="#6e9ffe" radius={[9, 9, 0, 0]} label={<CustomBarLabel />}/>
+					<Bar dataKey="value" name='Total' barSize={30} fill="#6e9ffe" radius={[9, 9, 0, 0]} label={<CustomBarLabel />}/>
 				</BarChart>
 			</ResponsiveContainer>
 		</div>

@@ -1,14 +1,15 @@
 import { Tooltip as Tlp } from '@mui/material';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { GetSortOrder } from '../../CommonTools';
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from '../../GetIndicator';
 
 const data = [
-  { name: "Alkes", value: 20319, trend: 10.2, pred: -14.6 },
-  { name: "Obat", value: 27473, trend: 7.1, pred: 24 },
-  { name: "Gas Medis", value: 19400, trend: 14.6, pred: 10.9 },
-  { name: "Askes", value: 23255, trend: -7.4, pred: -5.2 },
-  { name: "BHP", value: 15175, trend: 26.8, pred: 6.6 },
-  { name: "Injeksi", value: 21465, trend: -8.3, pred: 15.7 },
+  { name: "Alkes", value: 0, trend: 0, pred: 0 },
+  { name: "Obat", value: 0, trend: 0, pred: 0 },
+  { name: "Gas Medis", value: 0, trend: 0, pred: 0 },
+  { name: "Askes", value: 0, trend: 0, pred: 0 },
+  { name: "BHP", value: 0, trend: 0, pred: 0 },
+  { name: "Injeksi", value: 0, trend: 0, pred: 0 },
 ];
 const COLORS = [
   "#94d9ff",
@@ -36,6 +37,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const TypeProduct = () => {
+  data.sort(GetSortOrder("value"))
   return (
     <div className='TypeProduct'>
       <div className="title flex">
@@ -58,9 +60,11 @@ const TypeProduct = () => {
           innerRadius={50}
           outerRadius={80}
           fill="#8884d8"
-          stroke="#eeeff1"
+          stroke="#94b8a3"
           paddingAngle={2}
           dataKey="value"
+          startAngle={90}
+          endAngle={-270}
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

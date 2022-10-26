@@ -1,16 +1,10 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { expandDate } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-const data = [
-  { name: "UMUM", value: 2290, trend: -2.9, pred: 7, },
-  { name: "JKN", value: 1955, trend: 6.4, pred: 8.9, },
-  { name: "BPJS", value: 1526, trend: 5.1, pred: -1.1, },
-  { name: "PERUSAHAAN", value: 410, trend: 7.9, pred: 4.4, },
-  { name: "JAMKESDA", value: 820, trend: 12, pred: 9.2, },
-  { name: "JAMKESMAS", value: 1189, trend: 9.8, pred: 5.8, },
-  { name: "JASA RAHARJA", value: 669, trend: -3.7, pred: -2.4, },
-];
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -26,6 +20,29 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const KelompokPasien = () => {
+  const [data, setData] = useState({
+    judul: "",
+    label: "",
+    kelompok: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/pelayanan/kelompok_pasien?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setData({
+          judul: data.judul,
+          label: data.label,
+          kelompok: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  // console.log(data2.kelas)
+
   return (
     <div className="KelompokPasien">
       <div className="title flex">
@@ -44,7 +61,7 @@ const KelompokPasien = () => {
           layout="vertical"
           width={600}
           height={400}
-          data={data}
+          data={data.kelompok}
           margin={{top: 0, right: 10, bottom: 0, left: 10, }}
           className='text-[10px]'
         >

@@ -1,6 +1,24 @@
 import { Tooltip as Tlp } from '@mui/material';
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { expandDate } from '../../CommonTools';
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
+
+// Remove later
+const data_tmp = [
+  { name: "Obat-obatan", value: 0, trend: 0, pred: 0, },
+  { name: "Gas Medis", value: 0, trend: 0, pred: 0, },
+  { name: "Radiologi", value: 0, trend: 0, pred: 0, },
+  { name: "Laboratorium", value: 0, trend: 0, pred: 0, },
+  { name: "Injeksi", value: 0, trend: 0, pred: 0, },
+  { name: "Lainnya", value: 0, trend: 0, pred: 0, },
+];
+
+var formatter = new Intl.NumberFormat("id-ID", {
+  style: "currency",
+  currency: "IDR",
+});
 
 const DataFormater = (number) => {
   if(number > 1000000000){
@@ -13,20 +31,6 @@ const DataFormater = (number) => {
     return number.toString();
   }
 }
-
-const data = [
-  { name: "Obat-obatan", value: 2290000, trend: 20.2, pred: 22.4, },
-  { name: "Gas Medis", value: 1955000, trend: 16.4, pred: 12.5, },
-  { name: "Radiologi", value: 1526000, trend: 18.3, pred: -0.2, },
-  { name: "Laboratorium", value: 410000, trend: 18, pred: -5.1, },
-  { name: "Injeksi", value: 820000, trend: 11.2, pred: 24, },
-  { name: "Lainnya", value: 669000, trend: 22.2, pred: 5.3, },
-];
-
-var formatter = new Intl.NumberFormat("id-ID", {
-	style: "currency",
-	currency: "IDR",
-});
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -42,25 +46,61 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const JenisProdukPendapatan = () => {
+  const [data, setData] = useState({
+    judul: "",
+    label: "",
+    produk: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/pendapatan/pendapatan_produk?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setData({
+          judul: data.judul,
+          label: data.label,
+          produk: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  var new_data = []
+  try {
+    // data.tren.sort(GetSortOrder("value"))
+    data.produk.map((row) => 
+      new_data.push({
+        name: row.name,
+        value: row.value,
+        trend: row.trend,
+        pred: row.predict,
+      }))
+  }
+  catch(err) {
+    
+  }
+  // console.log(new_data)
   return (
     <div className='JenisProdukPendapatan'>
       <div className="title flex">
         <p className='pb-2'>Pendapatan Berdasarkan Jenis Produk</p>
         <Tlp title="Trend" placement="right">
           <sup className="flex text-sm pt-1 cursor-default">
-            {GetTrend(12.3)}
+            {GetTrend(0)}
           </sup>
         </Tlp>
       </div>
       <sup className="flex text-sm pl-2 cursor-default">
-        Predict : {GetPredict(15.1)}
+        Predict : {GetPredict(0)}
       </sup>
 			<ResponsiveContainer width="99%" height={280}>
 			<BarChart
           layout="vertical"
           width={600}
           height={400}
-          data={data}
+          data={data_tmp}
           margin={{top: 0, right: 10, bottom: 0, left: 10, }}
           className='text-[10px]'
         >
