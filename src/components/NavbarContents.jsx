@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { IoMdSearch, IoMdCalendar } from 'react-icons/io'
-import { BiCurrentLocation } from 'react-icons/bi'
-import { BsPersonCircle, } from 'react-icons/bs'
-import { BiFullscreen, BiExitFullscreen } from 'react-icons/bi'
-import { FiBell } from 'react-icons/fi'
-import { RiArrowDownSLine } from 'react-icons/ri'
-import { Tooltip } from "@mui/material";
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import "./navbarContents.css";
-import { registerLocale } from  "react-datepicker";
+import { TextField, Tooltip } from "@mui/material";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import id from 'date-fns/locale/id';
+import React, { useEffect, useRef, useState } from "react";
+import { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { BiCurrentLocation, BiExitFullscreen, BiFullscreen } from 'react-icons/bi';
+import { BsPersonCircle } from 'react-icons/bs';
+import { FiBell } from 'react-icons/fi';
+import { IoMdSearch } from 'react-icons/io';
+import { RiArrowDownSLine } from 'react-icons/ri';
+import { useLocation, useNavigate } from "react-router-dom";
+import "./navbarContents.css";
 registerLocale('id', id)
 
 
@@ -47,11 +47,14 @@ const NavbarContents = () => {
 	const [isDropdown2, setisDropdown2] = useState(false);
 	const [isFull, setIsFull] = useState(false);
 	// Date Picker
-	const [dateRange, setDateRange] = useState([null, null]);
-  const [dateStart, dateEnd] = dateRange;
+	const [startDate, setStartDate] = React.useState(null);
+	const [endDate, setEndDate] = React.useState(null);
+	// Apply date filter and navigate
   const navigate = useNavigate();
   const location = useLocation();
   
+	// console.log(expandDate(startDate))
+	// console.log(expandDate(endDate))
 
 	function useOutsideAlerter(ref) {
 		useEffect(() => {
@@ -89,53 +92,71 @@ useOutsideAlerter(wrapperRef);
 				<label for="search" class="sr-only">Search </label>
 				<form methode="get" action="#" class="relative z-50">
 					<button type="submit" id="searchsubmit" class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-cursor text-xl text-gray-700">
-						<IoMdSearch />
+						<IoMdSearch className="text-gray-600" />
 					</button>
-					<input type="text" name="s" id="s" class="block w-full pl-10 py-2 border-2 border-[#eeeff1] rounded-md leading-5 bg-[#eeeff1] text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-700 sm:text-sm transition duration-150 ease-in-out" placeholder="Search"/>
+					<input type="text" name="s" id="s" class="block w-full pl-10 py-[6.5px] border-[1px] border-[#cdcece] rounded-[4px] leading-5 bg-[#eeeff1] text-gray-300 placeholder-gray-400 hover:border-[1px] hover:border-gray-900 focus:py-[5.5px] focus:outline-none focus:border-2 focus:border-blue-500 focus:text-gray-700 sm:text-base transition duration-150 ease-in-out" placeholder="Search"/>
 				</form>
 			</div>
 		{/* Date Range Picker */}
-			<div className="flex-1 flex justify-center px-2 lg:ml-2 lg:justify-start gap-4">
-				<div className="flex bg-[#eeeff1] rounded-lg text-gray-700 pr-2">
-					<IoMdCalendar className="text-xl m-auto ml-3 mr-1"/>
-					<ReactDatePicker
-						locale="id"
-						selectsRange={true}
-						startDate={dateStart}
-						endDate={dateEnd}
-						onChange={(update) => {
-              setDateRange(update);
-              if (update[0] == null) {
-                navigate({
-                  pathname: location.pathname,
-                  search: `?tgl_awal=${expandDate(new Date())}&tgl_akhir=${expandDate(new Date())}`
-                });
-                tgl_awal = new Date()
-                tgl_akhir = new Date()
-              }
-              else {
-                navigate({
-                  pathname: location.pathname,
-                  search: `?tgl_awal=${expandDate(update[0])}&tgl_akhir=${expandDate(update[1])}`
-                });
-                tgl_awal = update[0]
-                tgl_akhir = update[1]
-                // console.log(tgl_awal)
-                // console.log(tgl_akhir)
-              }
-						}}
-						withPortal
-						isClearable={true}
-						placeholderText="Masukkan rentang tanggal"
-						dateFormat="dd/MM/yyyy"
-						className="block w-42 pl-1 py-2 border-2 rounded-lg bg-[#eeeff1] border-[#eeeff1] focus:outline-none sm:text-sm transition duration-150 ease-in-out"
-						/>
+			<div className="flex-1 flex justify-center px-1 lg:ml-2 lg:justify-start gap-4">
+				<div className="flex w-[325px] gap-2 rounded-lg text-gray-700">
+					{/* Tgl awal */}
+					<div className="flex bg-[#eeeff1] rounded-lg">
+						<LocalizationProvider dateAdapter={AdapterDayjs}>
+							<DatePicker
+								label="tgl awal"
+								inputFormat="DD/MM/YYYY"
+								value={startDate}
+								onChange={(newDate) => {
+									// setStartDate(newDate)
+									if (newDate == null) {
+										setStartDate(new Date())
+										tgl_awal = new Date()
+									}
+									else {
+										setStartDate(newDate)
+										tgl_awal = newDate
+									}
+								}}
+								renderInput={(params) => <TextField size="small" fullWidth {...params } />}
+								InputAdornmentProps={{ position: 'start' }}
+								/>
+						</LocalizationProvider>
+					</div>
+					<div className="mt-2">-</div>
+					{/* Tgl akhir */}
+					<div className="flex bg-[#eeeff1] rounded-lg">
+						<LocalizationProvider dateAdapter={AdapterDayjs}>
+							<DatePicker
+								label="tgl akhir"
+								inputFormat="DD/MM/YYYY"
+								value={endDate}
+								onChange={(newDate) => {
+									// setStartDate(newDate)
+									if (newDate == null) {
+										setEndDate(new Date())
+										tgl_akhir = new Date()
+									}
+									else {
+										setEndDate(newDate)
+										navigate({
+											pathname: location.pathname,
+											search: `?tgl_awal=${expandDate(startDate)}&tgl_akhir=${expandDate(newDate)}`
+										});
+										tgl_akhir = newDate
+									}
+								}}
+								renderInput={(params) => <TextField size="small" fullWidth {...params } />}
+								InputAdornmentProps={{ position: 'start' }}
+								/>
+						</LocalizationProvider>
+					</div>
 				</div>
         
 				{/* Filter Wilayah */}
-				<div className="flex bg-[#eeeff1] rounded-lg pr-2">
-					<BiCurrentLocation className="text-xl m-auto ml-3 mr-1 "/>
-					<select required className="text-sm focus:outline-none text-gray-700 bg-[#eeeff1]">
+				<div className="flex bg-[#eeeff1] rounded-md pr-2 border-[1px] border-[#cdcece] hover:border-[1px] hover:border-gray-900 ">
+					<BiCurrentLocation className="text-xl m-auto ml-3 mr-1 text-gray-600 "/>
+					<select required className="text-sm focus:outline-none text-gray-700 bg-[#eeeff1] ">
 						<option value="semua" selected>Semua Wilayah</option>
 						<option value="balikpapan">Balikpapan</option>
 						<option value="samarinda">Samarinda</option>
