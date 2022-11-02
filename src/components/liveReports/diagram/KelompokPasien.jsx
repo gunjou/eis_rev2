@@ -1,7 +1,11 @@
-import React from "react";
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, YAxis, } from "recharts";
+import { useEffect, useState } from "react";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { expandDate } from "../../CommonTools";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-const data = [
+
+// remove later
+const data_tmp = [
   { name: "UMUM", value: 2290 },
   { name: "JKN", value: 1955 },
   { name: "BPJS", value: 1526 },
@@ -12,14 +16,37 @@ const data = [
 ];
 
 const KelompokPasien = () => {
+  const [data, setdata] = useState({
+    judul: "",
+    label: "",
+    kelompok: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/realtime/kelompok_pasien?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`, {mode:'cors'}).then((res) =>
+      res.json().then((data) => {
+        setdata({
+          judul: data.judul,
+          label: data.label,
+          kelompok: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  const new_data = data.kelompok
+
   return (
     <div className="KelompokPasien">
 			<ResponsiveContainer width="99%" height={260}>
-			<BarChart
+			  <BarChart
           layout="vertical"
           width={600}
           height={400}
-          data={data}
+          data={new_data}
           margin={{top: 10, right: 10, bottom: 10, left: 10, }}
           className='text-[10px]'
         >

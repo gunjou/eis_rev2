@@ -36,7 +36,7 @@ const LiveReports = () => {
           <PresensiPegawai />
         </div>
         <div className="grow basis-3/5 rounded-lg bg-[#eeeff1] p-2">
-          <p className='pb-2'>Pegawai Berdasarkan Instalasi</p>       
+          <p className='pb-2'>Pasien Berdasarkan Instalasi</p>       
           <KunjunganInstalasi />
         </div>
         <div className="grow basis-1/5 rounded-lg bg-[#eeeff1] p-2">

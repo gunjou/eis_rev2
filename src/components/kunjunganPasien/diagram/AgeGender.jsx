@@ -1,7 +1,7 @@
 import { Tooltip as Tlp } from '@mui/material';
 import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
-import { expandDate, GetSortOrder } from "../../CommonTools";
+import { expandDate, GetSortAge } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpTittle } from '../../GetIndicator';
 import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
@@ -46,12 +46,13 @@ const AgeGender = () => {
   }, []);
   // console.log(data.value)
   try {
-    data.value.sort(GetSortOrder("value")).reverse();
+    // data.value.sort(GetSortOrder("value")).reverse();
+    var new_data = GetSortAge(data.value);
   }
   catch(err) {
     
   }
-  const new_data = data.value;
+  // const new_data = data.value;
 
   return (
     <div className="AgeGender">
@@ -74,7 +75,7 @@ const AgeGender = () => {
           margin={{ top: 0, right: 0, left: 0, bottom: -10, }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" interval={0} />
           <Tooltip content={<CustomTooltip />} />
           <Bar dataKey="laki_laki" stackId="a" fill="#3AB0FF" barSize={20} radius={[9, 9, 0, 0]} />
           <Bar dataKey="perempuan" fill="#F57CAC" barSize={20} radius={[9, 9, 0, 0]} />

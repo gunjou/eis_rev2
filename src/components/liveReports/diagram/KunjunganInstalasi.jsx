@@ -1,8 +1,12 @@
-import React from 'react'
 import PropTypes from 'prop-types';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useEffect, useState } from "react";
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { expandDate } from "../../CommonTools";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-const data = [
+
+// remove later
+const data_tmp = [
   { name: 'Rawat Inap', service: 30, notService: 9, },
   { name: 'IGD', service: 40, notService: 3, },
   { name: 'Rawat Jalan', service: 45, notService: 6, },
@@ -38,6 +42,29 @@ CustomBarLabel.propTypes = {
 };
 
 const KunjunganInstalasi = () => {
+  const [data, setdata] = useState({
+    judul: "",
+    label: "",
+    instalasi: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/realtime/pelayanan_instalasi?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`, {mode:'cors'}).then((res) =>
+      res.json().then((data) => {
+        setdata({
+          judul: data.judul,
+          label: data.label,
+          instalasi: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  const new_data = data.instalasi
+  
   return (
     <div className="KunjunganInstalasi">
 			<ResponsiveContainer width="99%" height={270}>
@@ -45,7 +72,7 @@ const KunjunganInstalasi = () => {
           layout="vertical"
           width={500}
           height={400}
-          data={data}
+          data={new_data}
           margin={{top: 10, right: 10, bottom: 0, left: 20, }}
           className='text-[12px]'
         >
@@ -54,8 +81,8 @@ const KunjunganInstalasi = () => {
           <YAxis dataKey="name" type="category" interval={0} />
           <Tooltip content={<CustomTooltip />} />
           <Legend verticalAlign='top' />
-          <Bar dataKey="service" name='Terlayani' stackId="a" barSize={15} radius={[0, 0, 0, 0]} fill="#55caaf" label={<CustomBarLabel />} />
-          <Bar dataKey="notService" name='Kunjungan' stackId="a" barSize={15} radius={[0, 6, 6, 0]} fill="#aaca55" label={<CustomBarLabel />} />
+          <Bar dataKey="value" name='Terlayani' stackId="a" barSize={15} radius={[0, 0, 0, 0]} fill="#55caaf" label={<CustomBarLabel />} />
+          <Bar dataKey="value" name='Kunjungan' stackId="a" barSize={15} radius={[0, 6, 6, 0]} fill="#aaca55" label={<CustomBarLabel />} />
         </BarChart>
       </ResponsiveContainer>
 		</div>

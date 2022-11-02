@@ -1,44 +1,67 @@
-import React from 'react'
-import { PieChart, Pie, Tooltip, Cell, Legend, ResponsiveContainer } from "recharts";
+import { useEffect, useState } from "react";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { expandDate, GetSortOrder } from "../../CommonTools";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-const data = [
-    { name: "Tunai", value: 9300000 },
-    { name: "Kartu Kredit", value: 4300000 },
-    { name: "Transfer Bank", value: 9500000 },
-    { name: "Penjamin", value: 2200000 },
-    { name: "Piutang", value: 960000 },
-    { name: "Donasi", value: 1200000 },
-    { name: "Mix", value: 800000 },
-  ];
-  const COLORS = [
-    "#ffba94",
-    "#6e9ffe",
-    "#38b497",
-    "#94d9ff",
-    "#ca5570",
-    "#b494ff",
-    "#aaca55",
-  ];
 
-  function GetSortOrder(prop) {    
-    return function(a, b) {    
-        if (a[prop] < b[prop]) {    
-            return 1;    
-        } else if (a[prop] > b[prop]) {    
-            return -1;    
-        }    
-        return 0;    
-    }    
-  } 
+// remove later
+const data_tmp = [
+  { name: "Tunai", value: 9300000 },
+  { name: "Kartu Kredit", value: 4300000 },
+  { name: "Transfer Bank", value: 9500000 },
+  { name: "Penjamin", value: 2200000 },
+  { name: "Piutang", value: 960000 },
+  { name: "Donasi", value: 1200000 },
+  { name: "Mix", value: 800000 },
+];
+
+const COLORS = [
+  "#ffba94",
+  "#6e9ffe",
+  "#38b497",
+  "#94d9ff",
+  "#ca5570",
+  "#b494ff",
+  "#aaca55",
+];
 
 const CaraBayar = () => {
-  data.sort(GetSortOrder("value"))
+  const [data, setdata] = useState({
+    judul: "",
+    label: "",
+    cara_bayar: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/realtime/pendapatan_cara_bayar?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+      res.json().then((data) => {
+        setdata({
+          judul: data.judul,
+          label: data.label,
+          cara_bayar: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  // console.log(data.cara_bayar)
+  try {
+    data.cara_bayar.sort(GetSortOrder("value"))
+  }
+  catch(err) {
+    
+  }
+  const new_data = data.cara_bayar
+
   return (
     <div className="CaraBayar">
       <ResponsiveContainer width="99%" height={270}>
         <PieChart width={100} height={210}>
         <Pie
-          data={data}
+          data={new_data}
           // cx={150}
           // cy={110}
           innerRadius={50}
@@ -50,11 +73,11 @@ const CaraBayar = () => {
           startAngle={90}
           endAngle={-270}
         >
-          {data.map((entry, index) => (
+          {COLORS.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip formatter={(value) => "Rp"+new Intl.NumberFormat('id').format(value)+",00"} />
+        <Tooltip formatter={(value) => "Rp"+new Intl.NumberFormat('id').format(value)} />
         <Legend
           // layout="vertical"
           // verticalAlign="middle"

@@ -1,7 +1,11 @@
-import React from 'react'
-import { PieChart, Pie, Tooltip, Cell, Legend, ResponsiveContainer } from "recharts";
+import { useEffect, useState } from "react";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { expandDate, GetSortOrder } from "../../CommonTools";
+import { tgl_akhir, tgl_awal } from "../../NavbarContents";
 
-const data = [
+
+// remove later
+const data_tmp = [
   { name: "Datang Sendiri", value: 465 },
   { name: "Puskesmas", value: 588 },
   { name: "RS Pemerintah", value: 479 },
@@ -24,25 +28,42 @@ const COLORS = [
   "#ca5570",
 ];
 
-function GetSortOrder(prop) {    
-  return function(a, b) {    
-      if (a[prop] < b[prop]) {    
-          return 1;    
-      } else if (a[prop] > b[prop]) {    
-          return -1;    
-      }    
-      return 0;    
-  }    
-} 
-
 const Rujukan = () => {
-  data.sort(GetSortOrder("value"))
+  const [data, setdata] = useState({
+    judul: "",
+    label: "",
+    rujukan: "",
+    trend: "",
+    predict: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://192.168.1.174/realtime/asal_rujukan?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`, {mode:'cors'}).then((res) =>
+      res.json().then((data) => {
+        setdata({
+          judul: data.judul,
+          label: data.label,
+          rujukan: data.data,
+          trend: null,
+          predict: null,
+        });
+      })
+    );
+  }, []);
+  try {
+    data.rujukan.sort(GetSortOrder("value"));
+  }
+  catch(err) {
+    
+  }
+  const new_data = data.rujukan
+
   return (
     <div className="Rujukan">
 			<ResponsiveContainer width="99%" height={260}>
         <PieChart width={100} height={210}>
         <Pie
-          data={data}
+          data={new_data}
           // cx={150}
           cy={80}
           innerRadius={50}
@@ -54,7 +75,7 @@ const Rujukan = () => {
           startAngle={90}
           endAngle={-270}
         >
-          {data.map((entry, index) => (
+          {COLORS.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
         </Pie>
