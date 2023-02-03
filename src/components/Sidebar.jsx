@@ -34,6 +34,8 @@ function expandDate(date) {
 
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(true);
+  const nameHospital = localStorage.getItem("rs_name");
+  const logoHospitalUrl = localStorage.getItem("rs_logo");
 
   if (tgl_awal != null && tgl_akhir != null) {
     var startDate = expandDate(tgl_awal);
@@ -100,6 +102,11 @@ const Sidebar = () => {
                 <BsFileEarmarkPerson className="text-xl" />
               </NavLink>
             </li>
+            <div>
+              <div className="mt-7 ml-1">
+                <img src={process.env.PUBLIC_URL + "logo_hospital/" + logoHospitalUrl} alt={nameHospital} width="29" height="30" />
+              </div>
+            </div>
             {/* <li className="item-center hover:text-[#42a7b3] pl-0.5" >
               <NavLink to="/indikator-pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <GoDashboard className="text-[20px]" />
@@ -173,6 +180,16 @@ const Sidebar = () => {
                 <span className="pl-2.5">Kepegawaian</span>
               </NavLink>
             </li>
+            <div>
+              <div className="grid justify-items-center pt-7">
+                <img src={process.env.PUBLIC_URL + "logo_hospital/" + logoHospitalUrl} alt="Jasamedika" width="100" height="99" />
+              </div>
+              <li className="font-bold pt-1" >
+                  {/* <NavLink to={"/kepegawaian"+filterDate} style={({ isActive }) => (isActive ? active : nonactive)}> */}
+                  <span className="m-auto">{nameHospital}</span>
+                {/* </NavLink> */}
+              </li>
+            </div>
             {/* <li className="item-center hover:text-[#42a7b3] pl-0.5" >
               <NavLink to="/indikator-pelayanan" style={({ isActive }) => (isActive ? active : nonactive)}>
                 <GoDashboard className="text-[20px]" />

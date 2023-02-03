@@ -55,7 +55,7 @@ const Footer = () => {
 
       {/* Footer */}
       <div className="Copyright pb-4 pt-4 text-white bg-teal-800">
-        © Copyright 2022 PT. Jasamedika Saranatama | All Rights Reserved
+        © Copyright 2023 PT. Jasamedika Saranatama | All Rights Reserved
       </div>
     </div>
   );

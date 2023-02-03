@@ -1,4 +1,4 @@
-import React from 'react'
+import { Navigate } from 'react-router-dom';
 import NavbarContents from '../components/NavbarContents';
 import Sidebar from '../components/Sidebar';
 import ToTop from '../ToTop';
@@ -11,9 +11,14 @@ import Inventory from './Inventory';
 import Kepegawaian from './Kepegawaian';
 import IndikatorPelayanan from './IndikatorPelayanan';
 import Kepustakaan from './Kepustakaan';
+import UseToken from '../UseToken';
 
 const Contents = ({type}) => {
     let page;
+		const {token} = UseToken();
+
+	// remove later
+		// console.log({"nama":token});
 
 	switch (type) {
 		case "live-reports":
@@ -47,16 +52,20 @@ const Contents = ({type}) => {
 			break;
 	}
 
-  return (
-    <div className='Contents flex'>
-        <Sidebar className='sticky'/>
-        <div className="container">
-            <NavbarContents />
-            {page.src}
-        </div>
-		<ToTop />
-    </div>
-  )
-}
+	if (token) {
+		return (
+		  <div className='Contents flex'>
+			  <Sidebar className='sticky'/>
+			  <div className="container">
+				  <NavbarContents />
+				  {page.src}
+			  </div>
+			  <ToTop />
+		  </div>
+		);
+	} else {
+		return <Navigate replace to="/login" />
+	}
+};
 
 export default Contents
