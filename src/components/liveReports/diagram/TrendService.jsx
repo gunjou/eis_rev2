@@ -5,13 +5,13 @@ import {
 
 // remove later
 const data_tmp = [
-  { day: '30/10', total: 101, diperiksa: 78, belum: 9, batal: 14, },
-	{ day: '31/10', total: 187, diperiksa: 159, belum: 11, batal: 17, },
-	{ day: '01/11', total: 88, diperiksa: 81, belum: 2, batal: 5, },
-	{ day: '02/11', total: 233, diperiksa: 194, belum: 21, batal: 18, },
-	{ day: '03/11', total: 128, diperiksa: 113, belum: 5, batal: 10, },
-	{ day: '04/11', total: 150, diperiksa: 148, belum: 5, batal: 5, },
-	{ day: '05/11', total: 190, diperiksa: 148, belum: 17, batal: 25, },
+  { day: '01/06', total: 88, diperiksa: 81, belum: 2, batal: 5, },
+	{ day: '02/06', total: 233, diperiksa: 194, belum: 21, batal: 18, },
+	{ day: '03/06', total: 128, diperiksa: 113, belum: 5, batal: 10, },
+	{ day: '04/06', total: 150, diperiksa: 148, belum: 5, batal: 5, },
+	{ day: '05/06', total: 190, diperiksa: 148, belum: 17, batal: 25, },
+	{ day: '06/06', total: 187, diperiksa: 159, belum: 11, batal: 17, },
+  { day: '07/06', total: 101, diperiksa: 78, belum: 9, batal: 14, },
 	// { day: '08/08', total: 701, diperiksa: 680, belum: 11, batal: 10, },
 	// { day: '09/08', total: 676, diperiksa: 648, belum: 16, batal: 12, },
 	// { day: '10/08', total: 800, diperiksa: 793, belum: 3, batal: 4, },

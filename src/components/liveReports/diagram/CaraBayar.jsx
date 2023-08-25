@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { expandDate, GetSortOrder } from "../../CommonTools";
 import { tgl_akhir, tgl_awal } from "../../NavbarContents";
+import { BASE_URL } from "../../../App";
+import { REALTIME_PORT } from "../../../pages/LiveReports";
 
 
 // remove later
@@ -35,7 +37,7 @@ const CaraBayar = () => {
   });
 
   useEffect(() => {
-    fetch(`http://192.168.1.174/realtime/pendapatan_cara_bayar?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+    fetch(BASE_URL + `:` + REALTIME_PORT + `/realtime/pendapatan_cara_bayar?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
       res.json().then((data) => {
         setdata({
           judul: data.judul,

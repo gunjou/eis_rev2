@@ -15,27 +15,29 @@ const PartnerList = ({type}) => {
 	switch (type) {
 		case "partnerBaru":
 			hospital = [
-                { src: "logo_hospital/hospital09.png", alt: "hospital01", nama: "Rumah Sakit 01", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital02.png", alt: "hospital02", nama: "Rumah Sakit 02", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital03.png", alt: "hospital03", nama: "Rumah Sakit 03", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital04.png", alt: "hospital04", nama: "Rumah Sakit 04", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital05.png", alt: "hospital05", nama: "Rumah Sakit 05", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital06.png", alt: "hospital06", nama: "Rumah Sakit 06", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rs_grandmed.png", alt: "rs_grandmed", nama: "RS Grandmed", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rshbak.png", alt: "rshbak", nama: "RSAB Harapan Kita", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rs_kbp.png", alt: "rs_kbp", nama: "RS Karya Bhakti Pratiwi", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rskim.png", alt: "rskim", nama: "RSIA KIM", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_kendal.png", alt: "rsud_kendal", nama: "RSUD dr. H. Soewondo Kendal", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_doris.png", alt: "rsud_doris", nama: "RSUD dr. Doris Sylvanus", url: `/#/live-reports${filterDate}` },
               ]; break;
 		case "partnerLama":
 			hospital = [
-                { src: "logo_hospital/hospital36.png", alt: "hospital01", nama: "Rumah Sakit 07", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital08.png", alt: "hospital02", nama: "Rumah Sakit 08", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital10.png", alt: "hospital03", nama: "Rumah Sakit 09", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital11.png", alt: "hospital03", nama: "Rumah Sakit 10", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital12.png", alt: "hospital03", nama: "Rumah Sakit 11", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital13.png", alt: "hospital03", nama: "Rumah Sakit 12", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital14.png", alt: "hospital03", nama: "Rumah Sakit 13", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital15.png", alt: "hospital03", nama: "Rumah Sakit 14", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital16.png", alt: "hospital03", nama: "Rumah Sakit 15", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital17.png", alt: "hospital03", nama: "Rumah Sakit 16", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital18.png", alt: "hospital03", nama: "Rumah Sakit 17", url: `/#/live-reports${filterDate}` },
-                { src: "logo_hospital/hospital19.png", alt: "hospital03", nama: "Rumah Sakit 18", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsjp_paramartha.png", alt: "rsjp_paramartha", nama: "RSJP Paramartha", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsgm_maranatha.png", alt: "rsgm_maranatha", nama: "RSGM Maranatha", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rskd_durensawit.png", alt: "rskd_durensawit", nama: "RSKD Duren Sawit", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_kota_mataram.png", alt: "rsud_kota_mataram", nama: "RSUD Kota Mataram", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_cibinong.png", alt: "rsud_cibinong", nama: "RSUD Cibinong", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rskp_karawang.png", alt: "rskp_karawang", nama: "RSKP Karawang", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_sintang.png", alt: "rsud_sintang", nama: "RSUD Sintang", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_soedarso.png", alt: "rsud_soedarso", nama: "RSUD dr. Soedarso", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_tasikmalaya.png", alt: "rsud_tasikmalaya", nama: "RSUD Tasikmalaya", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsu_prima.png", alt: "rsu_prima", nama: "RSU Royal Prima", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_trenggalek.png", alt: "rsud_trenggalek", nama: "RSUD dr. Soedomo Trenggalek", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_sungai_dareh.png", alt: "rsud_sungai_dareh", nama: "RSUD Sungai Dareh", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_malinau.png", alt: "rsud_malinau", nama: "RSUD Malinau", url: `/#/live-reports${filterDate}` },
+                { src: "logo_hospital/rsud_kanujoso.png", alt: "rsud_kanujoso", nama: "RSUD Kanujoso", url: `/#/live-reports${filterDate}` },
               ]; break;
 		case "partnerGroup":
 			hospital = [
@@ -57,9 +59,9 @@ const PartnerList = ({type}) => {
           <div className="cardHospital pb-6 ">
             {/* <Link to={img.url}> */}
             <a href={img.url}>
-            <div className="rounded-xl hover:rounded-2xl transform transition duration-500 hover:scale-110 hover:bg-teal-700 flex text-black/0 hover:text-white ">
+            <div className="rounded-xl hover:rounded-2xl transform transition duration-500 hover:scale-110 hover:bg-gradient-to-t hover:from-teal-700 flex text-black/0 hover:text-white ">
               <p className="block absolute ml-4 mb-3 font-semibold self-end ">{img.nama}
-                <p className="text-xs font-normal ">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                {/* <p className="text-xs font-normal ">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> */}
               </p>
               <img src={process.env.PUBLIC_URL + img.src} alt={img.alt} className="rounded-xl hover:gradient-mask-b-0 z-30"/>
             </div>

@@ -4,6 +4,8 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } fro
 import { expandDate } from "../../CommonTools";
 import { GetPredict, GetTrend, TlpPredict, TlpTittle } from "../../GetIndicator";
 import { tgl_akhir, tgl_awal } from "../../NavbarContents";
+import { BASE_URL } from '../../../App';
+import { KUNJUNGAN_PORT } from '../../../pages/KunjunganPasien';
 
 // Remove later
 const data_tmp = [
@@ -40,7 +42,7 @@ const KelasPasien = () => {
   });
 
   useEffect(() => {
-    fetch(`http://192.168.1.174/kunjungan/kelas_perawatan?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`, {mode:'cors'}).then((res) =>
+    fetch(BASE_URL + `:` + KUNJUNGAN_PORT + `/kunjungan/kelas_perawatan?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`, {mode:'cors'}).then((res) =>
       res.json().then((data) => {
         setdata({
           judul: data.judul,

@@ -4,6 +4,7 @@ import axios from "axios";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import UseToken from "../UseToken";
+import { BASE_URL } from "../App";
 
 
 const Login = () => {
@@ -11,12 +12,21 @@ const Login = () => {
   const {setToken} = UseToken();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+	const [isMessage, setIsMessage] = useState(false);
+
     
   function handleLogin(event) {
-    event.preventDefault();
+    // localStorage.setItem("token", "1234");
+    // localStorage.setItem("rs_name", "rsud mataram");
+    // localStorage.setItem("rs_logo", "rsud mataram");
+    // setToken("1234");
+    // navigate("/live-reports");
+    // event.preventDefault();
+    setIsMessage(true)
     axios({
       method: "POST",
-      url: "http://127.0.0.1:5000/login",
+      url: BASE_URL + ":8008/users/login",
       data: {
         username: username,
         password: password,
@@ -27,19 +37,27 @@ const Login = () => {
         localStorage.setItem("rs_name", response.data.current_user.rs_name);
         localStorage.setItem("rs_logo", response.data.current_user.rs_logo);
         setToken(response.data.access_token);
+        setMessage(response.data.message);
         navigate("/live-reports");
-        // console.log(response)
       })
       .catch((error) => {
         if (error.response) {
           console.log(error.response);
+          setMessage(error.response.data.message);
           console.log(error.response.status);
           console.log(error.response.headers);
         }
       });
     }
-    
-  return (
+
+    const handleKeyPress = (event) => {
+      // look for the `Enter` keyCode
+      if (event.keyCode === 13 || event.which === 13) {
+        handleLogin()
+      }
+    }
+
+    return (
     <div className="Login flex m-10 mt-36 grid-col-3 gap-4 bg-white">
       <div className="form m-auto ml-56">
         <div className="w-80 mb-12 h-[24rem] pl-5 pr-5 justify-center border border-white bg-gray-50 rounded drop-shadow-2xl">
@@ -65,6 +83,7 @@ const Login = () => {
                 name="username"
                 placeholder="username"
                 value={username}
+                onKeyDown={handleKeyPress}
               />
             </label>
           </div>
@@ -82,10 +101,11 @@ const Login = () => {
                 name="password"
                 placeholder="password"
                 value={password}
+                onKeyDown={handleKeyPress}
               />
             </label>
           </div>
-          <div className="flex item-start mb-6 ">
+          <div className="flex item-start mb-4 ">
             <div className="flex item-center h5">
               <input
                 id="remember"
@@ -97,8 +117,15 @@ const Login = () => {
               Remember Me
             </label>
           </div>
-            <div className="submit h-8 mb-3 rounded w-full pt-1 text-white bg-[#04ac49] hover:bg-[#026e2e] text-md">
-              <input type="submit" value="Login" onClick={handleLogin} />
+          {isMessage ?
+          <div className="statusLogin pb-2 text-sm text-red-700">
+            {message}
+          </div>
+          :
+          <div className="pb-7"></div>
+          }
+            <div className="submit h-8 mb-3 rounded w-full pt-1 text-white bg-[#04ac49] hover:bg-[#026e2e] text-md cursor-pointer" onClick={handleLogin}>
+              <input className="cursor-pointer" type="submit" value="Login" />
             </div>
         </div>
         <span className="text-xs">© 2023, PT. Jasamedika Saranatama</span>

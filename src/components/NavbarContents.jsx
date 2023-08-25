@@ -1,7 +1,6 @@
 import { TextField, Tooltip } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import axios from "axios";
 import id from 'date-fns/locale/id';
 import React, { useEffect, useRef, useState } from "react";
 import { registerLocale } from "react-datepicker";
@@ -13,6 +12,7 @@ import { IoMdSearch } from 'react-icons/io';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { useLocation, useNavigate } from "react-router-dom";
 import "./navbarContents.css";
+import Logout from "../pages/Logout";
 registerLocale('id', id)
 
 
@@ -83,15 +83,6 @@ const NavbarContents = (props) => {
 		toggleFullscreen();
 		setIsFull(!isFull);
 	}
-    
-  function handleLogout(event) {
-    event.preventDefault();
-		localStorage.removeItem("token");
-		localStorage.removeItem("rs_name");
-		localStorage.removeItem("rs_logo");
-		navigate("/login");
-	}
-
 
   return (
 		<div className="NavbarContents bg-white flex sticky top-0 z-30">
@@ -108,7 +99,7 @@ const NavbarContents = (props) => {
 				</div>
 			{/* Date Range Picker */}
 				<div className="flex-1 flex justify-center px-1 lg:ml-2 lg:justify-start gap-4">
-					<div className="flex w-[325px] gap-2 rounded-lg text-gray-700">
+					<div className="flex w-[390px] gap-2 rounded-lg text-gray-700">
 						{/* Tgl awal */}
 						<div className="flex bg-[#eeeff1] rounded-lg">
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -163,7 +154,7 @@ const NavbarContents = (props) => {
 					</div>
 					
 					{/* Filter Wilayah */}
-					<div className="flex bg-[#eeeff1] rounded-md pr-2 border-[1px] border-[#cdcece] hover:border-[1px] hover:border-gray-900 ">
+					{/* <div className="flex bg-[#eeeff1] rounded-md pr-2 border-[1px] border-[#cdcece] hover:border-[1px] hover:border-gray-900 ">
 						<BiCurrentLocation className="text-xl m-auto ml-3 mr-1 text-gray-600 "/>
 						<select required className="text-sm focus:outline-none text-gray-700 bg-[#eeeff1] ">
 							<option value="semua" selected>Semua Wilayah</option>
@@ -171,7 +162,7 @@ const NavbarContents = (props) => {
 							<option value="samarinda">Samarinda</option>
 							<option value="kutai-barat">Kutai Barat</option>
 						</select>
-					</div>
+					</div> */}
 				</div>
 
 			</div>
@@ -239,7 +230,8 @@ const NavbarContents = (props) => {
 					<div ref={wrapperRef} className="dropdown text-left p-2 absolute z-10 text-base text-gray-700 mt-7 bg-white rounded-lg drop-shadow-xl">
 						<ul>
 							<li className='p-1 cursor-pointer'>Edit Profile</li>
-							<li className='submit p-1 cursor-pointer' onClick={handleLogout}>Logout</li>
+							{/* <li className='submit p-1 cursor-pointer' onClick={handleLogout}>Logout</li> */}
+							<Logout />
 						</ul>
 					</div>
 					</>

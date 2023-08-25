@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { expandDate } from "../../CommonTools";
 import { tgl_akhir, tgl_awal } from "../../NavbarContents";
+import { BASE_URL } from "../../../App";
+import { REALTIME_PORT } from "../../../pages/LiveReports";
 
 
 // remove later
@@ -36,7 +38,7 @@ const PendapanJenisProduk = () => {
   });
 
   useEffect(() => {
-    fetch(`http://192.168.1.174/realtime/pendapatan_jenis_produk?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
+    fetch(BASE_URL + `:` + REALTIME_PORT + `/realtime/pendapatan_jenis_produk?tgl_awal=${expandDate(tgl_awal)}&tgl_akhir=${expandDate(tgl_akhir)}`).then((res) =>
       res.json().then((data) => {
         setData({
           judul: data.judul,

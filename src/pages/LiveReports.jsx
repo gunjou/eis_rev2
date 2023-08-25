@@ -11,6 +11,8 @@ import PresensiPegawai from '../components/liveReports/diagram/PresensiPegawai'
 import Rujukan from '../components/liveReports/diagram/Rujukan'
 import TrendService from '../components/liveReports/diagram/TrendService'
 
+export const REALTIME_PORT = "8007"
+
 const LiveReports = () => {
   return (
     <div className="LiveReports text-left m-2 text-gray-700 pr-1">

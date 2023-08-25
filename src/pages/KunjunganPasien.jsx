@@ -8,6 +8,8 @@ import Perkerjaan from '../components/kunjunganPasien/diagram/Perkerjaan'
 import Rujukan from '../components/kunjunganPasien/diagram/Rujukan'
 import StatusPulang from '../components/kunjunganPasien/diagram/StatusPulang'
 
+export const KUNJUNGAN_PORT = "8001"
+
 const KunjunganPasien = () => {
   return (
     <div className='KunjunganPasien text-left m-2 text-gray-700 pr-1'>

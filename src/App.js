@@ -8,6 +8,10 @@ import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
 
 
+// export const BASE_URL = "http://192.168.1.174"
+// export const BASE_URL = "http://127.0.0.1"
+export const BASE_URL = "http://192.168.0.109"
+
 function App() {
   return (
     <div className="App">
